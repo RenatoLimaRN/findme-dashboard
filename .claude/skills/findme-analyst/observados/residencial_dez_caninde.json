@@ -6,8 +6,8 @@
       "_label": "Ronda Geral (Torres)",
       "dias": {
         "Sex": {
-          "qtd": 1,
-          "ultima": "2026-05-15"
+          "qtd": 2,
+          "ultima": "2026-05-22"
         }
       }
     },
@@ -15,8 +15,8 @@
       "_label": "RONDA - ÁREA COMUM",
       "dias": {
         "Sex": {
-          "qtd": 1,
-          "ultima": "2026-05-15"
+          "qtd": 2,
+          "ultima": "2026-05-22"
         }
       }
     },
@@ -24,8 +24,8 @@
       "_label": "RONDA - BARRILETES",
       "dias": {
         "Sex": {
-          "qtd": 1,
-          "ultima": "2026-05-15"
+          "qtd": 2,
+          "ultima": "2026-05-22"
         }
       }
     }

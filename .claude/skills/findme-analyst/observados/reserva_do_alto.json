@@ -6,8 +6,8 @@
       "_label": "RONDA - TORRE  01",
       "dias": {
         "Sex": {
-          "qtd": 1,
-          "ultima": "2026-05-15"
+          "qtd": 2,
+          "ultima": "2026-05-22"
         }
       }
     },
@@ -15,8 +15,8 @@
       "_label": "RONDA - DIURNO - AREAS COMUM",
       "dias": {
         "Sex": {
-          "qtd": 1,
-          "ultima": "2026-05-15"
+          "qtd": 2,
+          "ultima": "2026-05-22"
         }
       }
     },
@@ -24,8 +24,8 @@
       "_label": "RONDA -  NAS RUAS RUAS",
       "dias": {
         "Sex": {
-          "qtd": 1,
-          "ultima": "2026-05-15"
+          "qtd": 2,
+          "ultima": "2026-05-22"
         }
       }
     },
@@ -33,8 +33,8 @@
       "_label": "RONDA - TORRE 02",
       "dias": {
         "Sex": {
-          "qtd": 1,
-          "ultima": "2026-05-15"
+          "qtd": 2,
+          "ultima": "2026-05-22"
         }
       }
     },
@@ -42,8 +42,17 @@
       "_label": "RONDA - TORRE 04",
       "dias": {
         "Sex": {
+          "qtd": 2,
+          "ultima": "2026-05-22"
+        }
+      }
+    },
+    "RONDA - TORRE 3": {
+      "_label": "RONDA - TORRE 3",
+      "dias": {
+        "Sex": {
           "qtd": 1,
-          "ultima": "2026-05-15"
+          "ultima": "2026-05-22"
         }
       }
     }

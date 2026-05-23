@@ -1,0 +1,15 @@
+{
+  "local": "CONDOMÍNIO VIVAZ PRIME",
+  "slug": "vivaz_prime",
+  "observados": {
+    "TAREFA - PISCINA": {
+      "_label": "TAREFA - PISCINA",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-22"
+        }
+      }
+    }
+  }
+}

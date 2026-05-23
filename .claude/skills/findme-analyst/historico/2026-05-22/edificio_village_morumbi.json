@@ -1,6 +1,6 @@
 {
   "data": "2026-05-22",
-  "local": "HAUS MITRE BROOKLIN",
+  "local": "CONDOMÍNIO EDIFÍCIO VILLAGE MORUMBI",
   "ok": 6,
   "parcial": 2,
   "nao_feita": 0,
@@ -8,5 +8,5 @@
   "top_falhas_modelos": [],
   "pct_cumprimento": 75.0,
   "dados_inconclusivos": false,
-  "slug": "haus_mitre_brooklin"
+  "slug": "edificio_village_morumbi"
 }

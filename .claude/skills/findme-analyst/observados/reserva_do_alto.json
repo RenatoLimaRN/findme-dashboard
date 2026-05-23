@@ -51,17 +51,8 @@
       "_label": "RONDA - TORRE 3",
       "dias": {
         "Sex": {
-          "qtd": 1,
+          "qtd": 2,
           "ultima": "2026-05-22"
-        }
-      }
-    },
-    "RONDA - TORRE 3": {
-      "_label": "RONDA - TORRE 3",
-      "dias": {
-        "Sex": {
-          "qtd": 1,
-          "ultima": "2026-05-15"
         }
       }
     }

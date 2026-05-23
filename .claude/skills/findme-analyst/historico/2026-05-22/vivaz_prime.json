@@ -1,9 +1,9 @@
 {
   "data": "2026-05-22",
   "local": "CONDOMÍNIO VIVAZ PRIME",
-  "ok": 0,
+  "ok": 1,
   "parcial": 0,
-  "nao_feita": 15,
+  "nao_feita": 14,
   "total": 15,
   "esperadas_total": 12,
   "feitas_das_esperadas": 0,
@@ -21,7 +21,7 @@
   "top_falhas_modelos": [
     {
       "modelo": "TAREFA - PISCINA",
-      "nao_feita": 3
+      "nao_feita": 2
     },
     {
       "modelo": "01 - ACADEMIA - LIMPEZA",
@@ -40,7 +40,7 @@
       "nao_feita": 1
     }
   ],
-  "pct_cumprimento": 0.0,
-  "dados_inconclusivos": true,
+  "pct_cumprimento": 6.7,
+  "dados_inconclusivos": false,
   "slug": "vivaz_prime"
 }

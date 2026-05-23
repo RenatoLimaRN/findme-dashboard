@@ -1,0 +1,15 @@
+{
+  "local": "CONDOMÍNIO ALTA VISTA",
+  "slug": "alta_vista",
+  "observados": {
+    "RONDA - AREAS COMUNS": {
+      "_label": "RONDA - Áreas Comuns",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

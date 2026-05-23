@@ -1,0 +1,15 @@
+{
+  "local": "OUTLET ATIBAIA",
+  "slug": "outlet_atibaia",
+  "observados": {
+    "RONDA - PREDIO GAVIOES": {
+      "_label": "RONDA - PRÉDIO GAVIÕES",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

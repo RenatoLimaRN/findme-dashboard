@@ -1,0 +1,15 @@
+{
+  "local": "EDIFICIO GUADELUPE",
+  "slug": "edificio_guadelupe",
+  "observados": {
+    "ALERTA - GUADELUPE": {
+      "_label": "ALERTA - GUADELUPE",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

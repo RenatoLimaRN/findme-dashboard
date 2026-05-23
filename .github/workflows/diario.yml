@@ -46,16 +46,18 @@ jobs:
           export PYTHONUTF8=1
           python analise_diaria.py
 
-      - name: Commitar snapshots novos no histórico
+      - name: Commitar mudanças (historico + aprendizado)
         if: always()
         run: |
           git config --local user.name  "github-actions[bot]"
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/skills/findme-analyst/historico
+          git add .claude/skills/findme-analyst/historico  || true
+          git add .claude/skills/findme-analyst/observados || true
+          git add postos                                   || true
           if git diff --cached --quiet; then
-            echo "nada novo no historico"
+            echo "nada novo a commitar"
           else
-            git commit -m "historico: snapshot $(date -u +%Y-%m-%d)"
+            git commit -m "diario: snapshot + aprendizado $(date -u +%Y-%m-%d)"
             git push
           fi
 

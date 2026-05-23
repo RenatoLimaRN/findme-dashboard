@@ -1,0 +1,24 @@
+{
+  "local": "CONDOMÍNIO ACQUA VITA NOVA MOOCA",
+  "slug": "acqua_vita_nova_mooca",
+  "observados": {
+    "RONDA GERAL": {
+      "_label": "RONDA GERAL",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    },
+    "RONDA - SEM O BARRILETE": {
+      "_label": "RONDA - SEM O BARRILETE",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

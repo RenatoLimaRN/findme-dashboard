@@ -249,6 +249,33 @@ def montar_html(data_alvo: str, dados: dict) -> str:
     if avisos:
         avisos_html = '<div class="muted" style="border-top:none;color:#B45309">⚠ ' + " · ".join(avisos) + "</div>"
 
+    # Aprendizado automático — resumo no rodapé
+    aprend = dados.get("aprendizado") or {}
+    aprend_html = ""
+    n_novos = aprend.get("modelos_novos_promovidos", 0)
+    n_dias = aprend.get("dias_expandidos", 0)
+    if n_novos or n_dias:
+        bits = []
+        if n_novos:
+            bits.append(f"<b>{n_novos}</b> atividade(s) nova(s) inclusa(s) no registro")
+        if n_dias:
+            bits.append(f"<b>{n_dias}</b> dia(s) da semana expandido(s)")
+        det = aprend.get("detalhe") or []
+        lista = ""
+        if det:
+            itens = []
+            for d_ in det[:10]:
+                if d_.get("acao") == "modelo_novo":
+                    itens.append(f"<li>{d_['local']} → <b>{d_['modelo']}</b> ({d_['dia']}, em <i>{d_.get('posto','?')}</i>)</li>")
+                elif d_.get("acao") == "dia_expandido":
+                    itens.append(f"<li>{d_['local']} · {d_['modelo']} → +{d_['dia']}</li>")
+            if itens:
+                lista = "<ul style='margin:6px 0;padding-left:22px;font-size:12px'>" + "".join(itens) + "</ul>"
+        threshold = aprend.get("threshold", 3)
+        aprend_html = (f'<div class="muted" style="color:#1B5E20">🎓 <b>Aprendizado automático</b> '
+                       f'(após {threshold}+ aparições): ' + " · ".join(bits) + ".</div>"
+                       + lista)
+
     return f"""<!DOCTYPE html>
 <html><head><meta charset="utf-8"><style>{CSS}</style></head><body>
 <h1>FindMe — Fechamento Operacional</h1>
@@ -274,6 +301,7 @@ def montar_html(data_alvo: str, dados: dict) -> str:
 <p>Detalhe linha-a-linha na aba <b>Atividades</b> do arquivo anexado: cores por status (verde=Completa, amarelo=Parcial, vermelho=Não Feita, vermelho-escuro=Esperada não registrada). Cabeçalho de cada local mostra cumprimento % e avulsas esperadas feitas.</p>
 </div>
 {avisos_html}
+{aprend_html}
 </body></html>"""
 
 
@@ -357,6 +385,10 @@ def main():
                    help="Gera e enriquece, mas não envia e-mail.")
     p.add_argument("--pular-gerar", action="store_true",
                    help="Pula a geração (usa o relatorio que já existe).")
+    p.add_argument("--sem-aprender", action="store_true",
+                   help="Desativa o auto-aprendizado de atividades novas.")
+    p.add_argument("--threshold-aprender", type=int, default=3,
+                   help="Quantas vezes uma atividade precisa aparecer pra ser promovida (default: 3).")
     args = p.parse_args()
 
     data_alvo = args.data or (date.today() - timedelta(days=1)).isoformat()
@@ -379,6 +411,29 @@ def main():
 
         log("[2/3] Enriquecendo + snapshots...")
         dados = enriquecer_e_snapshot(xlsx, data_alvo)
+
+        # Aprendizado automático (após enriquecer, antes do email)
+        if not args.sem_aprender:
+            log("  aprendendo atividades novas...")
+            try:
+                dados_path = WORKSPACE / f"dia-{data_alvo}" / "dados.json"
+                obs_dir = SKILL_DIR / "observados"
+                r = subprocess.run(
+                    [sys.executable, str(SKILL_DIR / "scripts" / "aprender_postos.py"),
+                     str(dados_path), str(SCRIPT_DIR / "postos"), str(obs_dir),
+                     "--threshold", str(args.threshold_aprender)],
+                    capture_output=True, text=True, env=ENV_UTF8,
+                )
+                if r.returncode == 0:
+                    aprend = json.loads(r.stdout.strip() or "{}")
+                    dados["aprendizado"] = aprend
+                    n_novos = aprend.get("modelos_novos_promovidos", 0)
+                    n_dias = aprend.get("dias_expandidos", 0)
+                    log(f"  aprendi: {n_novos} modelo(s) novo(s), {n_dias} dia(s) expandido(s)")
+                else:
+                    log(f"  WARNING: aprender_postos falhou: {r.stderr.strip()[:200]}")
+            except Exception as e:
+                log(f"  WARNING: aprender_postos exception: {e}")
 
         if args.sem_email:
             log("OK (--sem-email, pulando envio)")

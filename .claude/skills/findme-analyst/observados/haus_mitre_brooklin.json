@@ -1,0 +1,24 @@
+{
+  "local": "HAUS MITRE BROOKLIN",
+  "slug": "haus_mitre_brooklin",
+  "observados": {
+    "RONDA 2 - GERAL - HAUS MITRE": {
+      "_label": "Ronda 2 - GERAL - Haus Mitre",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    },
+    "RONDA - BARRILETE - HAUS MITRE": {
+      "_label": "RONDA - BARRILETE - Haus Mitre",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "local": "PLATINA PATRIANI",
+  "slug": "platina_patriani",
+  "observados": {
+    "RONDA PATRIANI GERAL": {
+      "_label": "Ronda Patriani Geral",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

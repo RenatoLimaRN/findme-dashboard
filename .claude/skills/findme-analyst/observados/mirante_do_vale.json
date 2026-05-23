@@ -1,0 +1,15 @@
+{
+  "local": "MIRANTE DO VALE",
+  "slug": "mirante_do_vale",
+  "observados": {
+    "RONDA NOTURNA - MIRANTE": {
+      "_label": "RONDA NOTURNA - MIRANTE",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

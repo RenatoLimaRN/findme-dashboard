@@ -1,0 +1,15 @@
+{
+  "local": "MAURIZIO",
+  "slug": "maurizio",
+  "observados": {
+    "RONDA": {
+      "_label": "RONDA",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

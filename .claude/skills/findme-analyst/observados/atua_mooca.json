@@ -1,0 +1,24 @@
+{
+  "local": "CONDOMÍNIO ATUA MOOCA",
+  "slug": "atua_mooca",
+  "observados": {
+    "RONDA - AREAS COMUNS /GARAGEM": {
+      "_label": "RONDA - AREAS COMUNS /GARAGEM",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    },
+    "AREAS COMUNS": {
+      "_label": "AREAS COMUNS",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "local": "CONDOMINIO RESIDENCIAL DEZ CANINDÉ",
+  "slug": "residencial_dez_caninde",
+  "observados": {
+    "RONDA GERAL (TORRES)": {
+      "_label": "Ronda Geral (Torres)",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    },
+    "RONDA - AREA COMUM": {
+      "_label": "RONDA - ÁREA COMUM",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    },
+    "RONDA - BARRILETES": {
+      "_label": "RONDA - BARRILETES",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

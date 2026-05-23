@@ -1,0 +1,15 @@
+{
+  "local": "PANAMBY",
+  "slug": "panamby",
+  "observados": {
+    "RONDA - NOVO": {
+      "_label": "RONDA - NOVO",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

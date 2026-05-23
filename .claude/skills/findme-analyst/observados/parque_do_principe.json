@@ -1,0 +1,42 @@
+{
+  "local": "CONDOMÍNIO PARQUE DO PRÍNCIPE",
+  "slug": "parque_do_principe",
+  "observados": {
+    "RONDA - NOTURONO": {
+      "_label": "RONDA - NOTURONO",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    },
+    "RONDA SETORIAL B": {
+      "_label": "RONDA SETORIAL B",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    },
+    "RONDA SETORIAL A": {
+      "_label": "RONDA SETORIAL A",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    },
+    "ESTACIONAMENTOS": {
+      "_label": "ESTACIONAMENTOS",
+      "dias": {
+        "Sex": {
+          "qtd": 1,
+          "ultima": "2026-05-15"
+        }
+      }
+    }
+  }
+}

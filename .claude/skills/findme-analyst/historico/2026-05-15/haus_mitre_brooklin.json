@@ -1,0 +1,25 @@
+{
+  "data": "2026-05-15",
+  "local": "HAUS MITRE BROOKLIN",
+  "ok": 2,
+  "parcial": 0,
+  "nao_feita": 6,
+  "total": 8,
+  "top_falhas_modelos": [
+    {
+      "modelo": "(sem modelo)",
+      "nao_feita": 3
+    },
+    {
+      "modelo": "Ronda 2 - GERAL - Haus Mitre",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "RONDA - BARRILETE - Haus Mitre",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 25.0,
+  "dados_inconclusivos": false,
+  "slug": "haus_mitre_brooklin"
+}

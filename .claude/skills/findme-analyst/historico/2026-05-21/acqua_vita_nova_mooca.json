@@ -1,0 +1,21 @@
+{
+  "data": "2026-05-21",
+  "local": "CONDOMÍNIO ACQUA VITA NOVA MOOCA",
+  "ok": 8,
+  "parcial": 0,
+  "nao_feita": 6,
+  "total": 14,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA GERAL",
+      "nao_feita": 4
+    },
+    {
+      "modelo": "RONDA - SEM O BARRILETE",
+      "nao_feita": 2
+    }
+  ],
+  "pct_cumprimento": 57.1,
+  "dados_inconclusivos": false,
+  "slug": "acqua_vita_nova_mooca"
+}

@@ -1,0 +1,10 @@
+{
+  "_instrucao": "Copie este arquivo para 'email_config.json' (mesma pasta) e preencha. NÃO commite o email_config.json com a senha em repositório público.",
+  "smtp_host": "smtp.gmail.com",
+  "smtp_port": 587,
+  "user": "seu_email@gmail.com",
+  "password": "abcd efgh ijkl mnop",
+  "_password_help": "Use uma APP PASSWORD do Google, não a senha normal. Gerar em: https://myaccount.google.com/apppasswords (precisa ter 2FA ativo na conta).",
+  "from_name": "FindMe Analyst",
+  "to": ["destinatario1@gmail.com", "destinatario2@gmail.com"]
+}

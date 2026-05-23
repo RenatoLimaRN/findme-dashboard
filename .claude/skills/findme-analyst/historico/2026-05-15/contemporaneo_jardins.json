@@ -1,0 +1,30 @@
+{
+  "data": "2026-05-15",
+  "local": "CONDOMÍNIO CONTEMPORÂNEO JARDINS",
+  "ok": 0,
+  "parcial": 0,
+  "nao_feita": 1,
+  "total": 1,
+  "esperadas_total": 10,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 10,
+  "modelos_perdidos_hoje": [
+    "ACADEMIA",
+    "ÁREAS EXTERNAS (CALÇADAS)",
+    "BRINQUEDOTECA",
+    "COPA",
+    "ELEVADORES",
+    "HALLS - LIMPEZA DOS HALLS",
+    "PISCINA",
+    "SALÃO DE FESTA"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "(sem modelo)",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "contemporaneo_jardins"
+}

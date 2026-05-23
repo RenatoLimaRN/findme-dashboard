@@ -1,0 +1,46 @@
+{
+  "data": "2026-05-15",
+  "local": "MANSÃO DO BUTANTÃ",
+  "ok": 0,
+  "parcial": 0,
+  "nao_feita": 31,
+  "total": 31,
+  "esperadas_total": 30,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 30,
+  "modelos_perdidos_hoje": [
+    "01 - CHURRASQUEIRA",
+    "02 - PISCINA",
+    "03 - CACHORRODROMO",
+    "04 - PARQUINHO",
+    "05 - QUIOSQUE CENTRAL",
+    "A01 - LIMPEZA DOS HALLS SERVIÇO - TORRE A",
+    "A02 - LIMPEZA DOS HALLS SOCIAL - TORRE A",
+    "A01 - LIMPEZA DOS HALLS SERVIÇO - TORRE A"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "A01 - LIMPEZA DOS HALLS SERVIÇO - TORRE A",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "B07 - SALAS DE JOGOS - TORRE B",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "01 - CHURRASQUEIRA",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "02 - PISCINA",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "03 - CACHORRODROMO",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": true,
+  "slug": "mansao_do_butanta"
+}

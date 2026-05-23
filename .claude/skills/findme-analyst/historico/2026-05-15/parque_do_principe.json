@@ -1,0 +1,33 @@
+{
+  "data": "2026-05-15",
+  "local": "CONDOMÍNIO PARQUE DO PRÍNCIPE",
+  "ok": 0,
+  "parcial": 2,
+  "nao_feita": 7,
+  "total": 9,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA - NOTURONO",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "RONDA SETORIAL B",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "RONDA SETORIAL A",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "(sem modelo)",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "ESTACIONAMENTOS",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "parque_do_principe"
+}

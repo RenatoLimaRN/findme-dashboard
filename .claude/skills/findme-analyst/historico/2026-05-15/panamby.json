@@ -1,0 +1,17 @@
+{
+  "data": "2026-05-15",
+  "local": "PANAMBY",
+  "ok": 3,
+  "parcial": 0,
+  "nao_feita": 1,
+  "total": 4,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA - NOVO",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 75.0,
+  "dados_inconclusivos": false,
+  "slug": "panamby"
+}

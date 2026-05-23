@@ -1,0 +1,38 @@
+# Credenciais — NUNCA commitar
+config.json
+email_config.json
+
+# Logs e auditoria do Claude
+audit.jsonl
+.audit-key
+logs/
+
+# Estado do Claude / sessões locais
+.claude/projects/
+.claude/sessions/
+.claude/tasks/
+.claude/backups/
+.claude/.claude.json
+.claude/settings.local.json
+
+# Workspaces temporários (regenerados a cada análise)
+.claude/skills/findme-analyst-workspace/
+
+# Relatórios gerados (cada execução regenera; histórico de snapshots fica)
+relatorios/
+
+# Pacotes do skill (gerados sob demanda)
+findme-analyst.skill
+*.skill
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

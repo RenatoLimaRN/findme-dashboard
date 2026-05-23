@@ -1,0 +1,17 @@
+{
+  "data": "2026-05-21",
+  "local": "CONDOMÍNIO SPLENDOR",
+  "ok": 22,
+  "parcial": 0,
+  "nao_feita": 21,
+  "total": 43,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA GERAL",
+      "nao_feita": 21
+    }
+  ],
+  "pct_cumprimento": 51.2,
+  "dados_inconclusivos": false,
+  "slug": "splendor"
+}

@@ -1,0 +1,272 @@
+{
+  "_local": "VARANDA POMPÉIA",
+  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo, dias e vezes.",
+  "local": "VARANDA POMPÉIA",
+  "postos": [
+    {
+      "posto": "Limpeza - Areas Comuns",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "HALLS - TORRE A",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "HALLS - TORRE B",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "Limpeza - Lixeiras",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "LIXEIRAS",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "Limpeza - Torres A",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "ACADEMIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "ADMINISTRAÇÃO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "ATIVIDADES EXTRA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "BRINQUEDOTECA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "CHURRASQUEIRA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "COPA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPAÇO GOURMET",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPAÇO MULHER",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "HALL TÉRREO - TORRE A",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PLAYGROUND",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PORTARIA P1 - CIMA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PORTARIA P2 - BAIXO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALA DO ZELADOR",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALÃO DE FESTA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALÃO DE JOGOS",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "SAUNA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        }
+      ]
+    }
+  ]
+}

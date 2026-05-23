@@ -1,0 +1,69 @@
+name: FindMe — Análise Diária
+
+# Roda todo dia às 10:00 UTC = 07:00 horário de Brasília (UTC-3)
+# Pode rodar manualmente também via Actions → "Run workflow"
+on:
+  schedule:
+    - cron: '0 10 * * *'
+  workflow_dispatch: {}
+
+# Permissão de escrita no repo (pra commitar snapshots de volta)
+permissions:
+  contents: write
+
+jobs:
+  analise:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout do repositório
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+          pip install openpyxl matplotlib
+
+      - name: Materializar credenciais (config.json + email_config.json)
+        env:
+          FINDME_PASSWORD: ${{ secrets.FINDME_PASSWORD }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python ci_setup.py
+
+      - name: Rodar análise diária
+        run: |
+          export PYTHONUTF8=1
+          python analise_diaria.py
+
+      - name: Commitar snapshots novos no histórico
+        if: always()
+        run: |
+          git config --local user.name  "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/skills/findme-analyst/historico
+          if git diff --cached --quiet; then
+            echo "nada novo no historico"
+          else
+            git commit -m "historico: snapshot $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      - name: Upload do log (em caso de falha)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: log-falha
+          path: logs/
+          if-no-files-found: ignore
+          retention-days: 14

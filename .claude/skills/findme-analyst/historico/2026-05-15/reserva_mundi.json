@@ -1,0 +1,25 @@
+{
+  "data": "2026-05-15",
+  "local": "CONDOMÍNIO RESERVA MUNDI",
+  "ok": 0,
+  "parcial": 2,
+  "nao_feita": 5,
+  "total": 7,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA - AREAS COMUM",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "RONDA GERAL",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "(sem modelo)",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "reserva_mundi"
+}

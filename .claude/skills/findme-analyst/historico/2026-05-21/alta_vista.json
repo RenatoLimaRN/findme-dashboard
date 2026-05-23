@@ -1,0 +1,17 @@
+{
+  "data": "2026-05-21",
+  "local": "CONDOMÍNIO ALTA VISTA",
+  "ok": 0,
+  "parcial": 4,
+  "nao_feita": 2,
+  "total": 6,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA - Áreas Comuns",
+      "nao_feita": 2
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "alta_vista"
+}

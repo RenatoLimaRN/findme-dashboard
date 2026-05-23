@@ -1,0 +1,26 @@
+{
+  "skill_name": "findme-analyst",
+  "evals": [
+    {
+      "id": 0,
+      "name": "geral-com-artefato-de-dados",
+      "prompt": "analisa esse relatório do findme pra mim e já deixa a análise dentro do próprio arquivo: GERAL_messy.xlsx",
+      "expected_output": "Aba 'Análise' escrita no arquivo. A análise deve perceber que 4 dos 5 locais (Vivaz Prime, Contemporâneo Jardins, Mansão do Butantã, Varanda Pompéia) estão com 0 OK / 0 Parcial e milhares de 'Não Feita' = artefato de dados/configuração, NÃO falha operacional real, e tratá-los num grupo à parte ('dados inconclusivos'). Deve diagnosticar de verdade o único posto com dados reais (CONDOMÍNIO CONTEMPORÂNEO JARDINS — 344 atividades, 45,8% de cumprimento) detalhando o que falha por modelo/turno. Não deve afirmar 'a operação cumpriu 1,9%' como se fosse desempenho real da equipe.",
+      "files": ["fixtures/GERAL_messy.xlsx"]
+    },
+    {
+      "id": 1,
+      "name": "geral-publico-sindico",
+      "prompt": "preciso mandar uma análise desse relatório pro síndico do condomínio. escreve a aba de análise no próprio arquivo: GERAL_curto.xlsx",
+      "expected_output": "Aba 'Análise' escrita no arquivo. O tom deve estar adaptado ao público cliente/síndico — cuidadoso, foco no serviço entregue, sem expor a equipe de forma crua. O diagnóstico operacional posto a posto deve estar presente, na estrutura padrão: veredito, ranking de postos, postos críticos em detalhe, causas-raiz, prioridades de ação.",
+      "files": ["fixtures/GERAL_curto.xlsx"]
+    },
+    {
+      "id": 2,
+      "name": "kpi-causa-raiz-e-armadilhas",
+      "prompt": "o que tá errado na operação esse mês? dá uma olhada no findme_kpis.xlsx e me devolve a análise no arquivo",
+      "expected_output": "Aba 'Análise' escrita no arquivo. A análise deve: (1) NÃO somar 'Com Eventos' (95) e 'Não-Conformidades' (30) ao total de 1200 — são recortes sobrepostos, não fatias do total; (2) distinguir a taxa de cumprimento (780/1200 = 65%) da eficiência de check-in (5760/9600 = 60%), sem confundir as duas; (3) identificar '09 - EMPENHO NO LOCAL' como a causa-raiz dominante das perdas (110 de 220 justificadas) e ligar isso a dimensionamento de efetivo; (4) trazer prioridades de ação com o porquê de cada uma.",
+      "files": ["fixtures/findme_kpis.xlsx"]
+    }
+  ]
+}

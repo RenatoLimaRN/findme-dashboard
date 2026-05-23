@@ -1,0 +1,23 @@
+[
+  {"query": "fecha o dia de ontem pra mim, o relatório tá em relatorios/2026-05-15_2026-05-15/GERAL_2026-05-15_2026-05-15.xlsx", "should_trigger": true, "expected_keywords": ["fechar", "ontem", "GERAL_*.xlsx"]},
+  {"query": "olha esse aqui que veio do FindMe ontem: GERAL_2026-05-15.xlsx, me conta o que rolou", "should_trigger": true, "expected_keywords": ["FindMe", "ontem", "GERAL_"]},
+  {"query": "consegue ver quais postos ficaram em zero hoje?", "should_trigger": true, "expected_keywords": ["postos críticos"]},
+  {"query": "preciso fechar o operacional. relatório em relatorios/2026-05-14/", "should_trigger": true, "expected_keywords": ["fechar operacional"]},
+  {"query": "por que o Mansão Butantã tá tão ruim?", "should_trigger": true, "expected_keywords": ["o que está errado", "posto crítico"]},
+  {"query": "compara o que foi feito com o que tava programado pro Vivaz hoje", "should_trigger": true, "expected_keywords": ["cruzamento esperado × feito"]},
+  {"query": "o que precisa virar prioridade essa semana no FindMe? abre o relatório do mês", "should_trigger": true, "expected_keywords": ["conclusões acionáveis", "FindMe"]},
+  {"query": "tem o GERAL_2026-05-14_2026-05-14.xlsx aqui, abre e me dá um diagnóstico", "should_trigger": true, "expected_keywords": ["GERAL_*.xlsx", "diagnosticar"]},
+  {"query": "queria entender se o Contemporâneo Jardins tá melhorando ou piorando nos últimos dias", "should_trigger": true, "expected_keywords": ["se repetindo no tempo", "padrões persistentes"]},
+  {"query": "as avulsas de ontem do Edifício Beta foram feitas mesmo? o relatório tá no findme_2026-05-15.xlsx", "should_trigger": true, "expected_keywords": ["avulsas", "ontem", "findme_*.xlsx"]},
+
+  {"query": "qual a diferença entre o findme_dashboard.py e o findme_programacao.py?", "should_trigger": false, "motivo_nao_disparar": "Pergunta meta sobre o código, não pede análise de relatório."},
+  {"query": "edita o config.json e adiciona o UUID de mais um local na lista", "should_trigger": false, "motivo_nao_disparar": "Edição de arquivo de configuração, fora de escopo."},
+  {"query": "como rodar o findme_programacao.py? que argumentos ele aceita?", "should_trigger": false, "motivo_nao_disparar": "Pergunta de uso/howto do script, não análise."},
+  {"query": "preciso gerar um relatório novo do FindMe pro mês passado, como faço?", "should_trigger": false, "motivo_nao_disparar": "Geração de relatório (rodar o script de extração), não análise."},
+  {"query": "atualiza o postos/contemporaneo_jardins.json adicionando PISCINA na lista de atividades", "should_trigger": false, "motivo_nao_disparar": "Edição manual do registro de postos, fora de escopo."},
+  {"query": "o token da API do FindMe tá expirando direto, como configuro pra renovar?", "should_trigger": false, "motivo_nao_disparar": "Problema de autenticação/integração, não análise de dados."},
+  {"query": "tem como exportar os dados do FindMe pra CSV?", "should_trigger": false, "motivo_nao_disparar": "Conversão de formato, não análise."},
+  {"query": "o que é uma 'atividade incompleta' no FindMe? como diferencia de 'perdida'?", "should_trigger": false, "motivo_nao_disparar": "Pergunta definicional/educacional, sem relatório."},
+  {"query": "qual seria uma boa taxa de eficiência pra monitoramento de rondas em condomínio?", "should_trigger": false, "motivo_nao_disparar": "Pergunta geral de mercado, sem dados específicos."},
+  {"query": "monta um dashboard HTML interativo pra eu visualizar os relatórios do FindMe num navegador", "should_trigger": false, "motivo_nao_disparar": "Construção de UI/visualização, não análise."}
+]

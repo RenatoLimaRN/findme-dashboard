@@ -1,0 +1,166 @@
+{
+  "_local": "CONDOMÍNIO VIVAZ PRIME - RIO BONITO",
+  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo, dias e vezes.",
+  "local": "CONDOMÍNIO VIVAZ PRIME - RIO BONITO",
+  "postos": [
+    {
+      "posto": "Vivaz - Limpeza - Lider",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "01 - ACADEMIA - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "02 - BRINQUEDOTECA - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "03 - BANHEIROS - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "04 - CHURRASQUEIRA - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "05 - COWORKING - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "06 - COPA - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "07 - HALL DA TORRE 1 - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "08 - HALL DA TORRE 2 - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "09 - ESPAÇO BELEZA - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "10 - PORTARIA - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "11 - GARAGEM - LIMPEZA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "12 - PÁTIO E QUADRA - LIMPEZA",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "13 - SALA DA ADMINISTRAÇÃO - LIMPEZA",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "14 - PISCINA - LIMPEZA",
+          "dias": [
+            "Qui"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "15 - SALÃO DE FESTA - LIMPEZA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "data": "2026-05-22",
+  "local": "CONDOMÍNIO ATUA MOOCA",
+  "ok": 0,
+  "parcial": 4,
+  "nao_feita": 3,
+  "total": 7,
+  "top_falhas_modelos": [
+    {
+      "modelo": "AREAS COMUNS",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "RONDA - AREAS COMUNS /GARAGEM",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "RONDA NO HALLS",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "atua_mooca"
+}

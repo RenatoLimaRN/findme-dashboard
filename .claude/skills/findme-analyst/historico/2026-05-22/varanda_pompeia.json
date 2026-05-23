@@ -1,0 +1,46 @@
+{
+  "data": "2026-05-22",
+  "local": "VARANDA POMPÉIA",
+  "ok": 0,
+  "parcial": 0,
+  "nao_feita": 19,
+  "total": 19,
+  "esperadas_total": 19,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 19,
+  "modelos_perdidos_hoje": [
+    "HALLS - TORRE A",
+    "HALLS - TORRE B",
+    "LIXEIRAS",
+    "ACADEMIA",
+    "ADMINISTRAÇÃO",
+    "ATIVIDADES EXTRA",
+    "BRINQUEDOTECA",
+    "CHURRASQUEIRA"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "HALLS - TORRE A",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "HALLS - TORRE B",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "LIXEIRAS",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "ACADEMIA",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "ADMINISTRAÇÃO",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": true,
+  "slug": "varanda_pompeia"
+}

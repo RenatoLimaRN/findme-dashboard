@@ -1,17 +1,12 @@
 {
   "data": "2026-05-15",
   "local": "EDIFICIO GUADELUPE",
-  "ok": 15,
+  "ok": 16,
   "parcial": 3,
-  "nao_feita": 1,
+  "nao_feita": 0,
   "total": 19,
-  "top_falhas_modelos": [
-    {
-      "modelo": "(sem modelo)",
-      "nao_feita": 1
-    }
-  ],
-  "pct_cumprimento": 78.9,
+  "top_falhas_modelos": [],
+  "pct_cumprimento": 84.2,
   "dados_inconclusivos": false,
   "slug": "edificio_guadelupe"
 }

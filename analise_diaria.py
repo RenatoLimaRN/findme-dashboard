@@ -221,6 +221,45 @@ def montar_html(data_alvo: str, dados: dict) -> str:
     crit = [l for l in locais if l["cat"] == "crit"]
     incon = [l for l in locais if l["cat"] == "incon"]
 
+    # Nova seção: Top justificativas do dia
+    just_top = dados.get("justificativas_top") or []
+    just_html = ""
+    if just_top:
+        linhas_just = []
+        for j in just_top[:8]:
+            cat = j["categoria"]
+            qtd = j["qtd"]
+            linhas_just.append(f'<tr><td>{cat}</td><td style="text-align:right;width:60px"><b>{qtd}x</b></td></tr>')
+        # Pega amostras de texto livre nas justificativas dos postos críticos
+        amostras = []
+        for slug in [l["slug"] for l in crit + medio][:5]:
+            agg = next((a for a in dados.get("atividades_agg", []) if a.get("slug") == slug), None)
+            if not agg:
+                continue
+            for j in (agg.get("justificativas") or [])[:2]:
+                texto = j.get("texto", "")
+                # remove o "Categoria — " do começo se for redundante; mantém só descrição
+                if " — " in texto:
+                    desc = texto.split(" — ", 1)[1].strip()
+                else:
+                    desc = texto
+                if desc and desc != "-" and len(desc) > 3:
+                    amostras.append(f'<li><b>{agg["nome"][:35]}</b> · {j["modelo"][:25]}: <i>"{desc[:90]}"</i></li>')
+                    if len(amostras) >= 8:
+                        break
+            if len(amostras) >= 8:
+                break
+        amostras_html = ""
+        if amostras:
+            amostras_html = (
+                '<p class="sub" style="margin-top:10px"><b>Frases reais da equipe:</b></p>'
+                '<ul style="font-size:12px;margin:4px 0;padding-left:22px">'
+                + "".join(amostras) + "</ul>")
+        just_html = (
+            '<h2>Por que falhou (justificativas)</h2>'
+            '<table><tr><th>Categoria</th><th style="text-align:right">Ocorrências</th></tr>'
+            + "".join(linhas_just) + "</table>" + amostras_html)
+
     historico = dados.get("historico_por_local", {})
     padroes_html = ""
     if historico:
@@ -294,6 +333,8 @@ def montar_html(data_alvo: str, dados: dict) -> str:
 {f'<h2>Inconclusivos — provável artefato de coleta ({len(incon)})</h2><p class="sub">Locais sem nenhum OK/parcial em volume alto. Escalar pro suporte FindMe.</p><table><tr><th>Posto</th><th>Status</th><th>Cumprimento</th></tr>{"".join(linha(l) for l in incon)}</table>' if incon else ""}
 
 {f'<h2>Bom desempenho ({len(bom)})</h2><table><tr><th>Posto</th><th>Status</th><th>Cumprimento</th></tr>{"".join(linha(l) for l in bom)}</table>' if bom else ""}
+
+{just_html}
 
 {padroes_html}
 

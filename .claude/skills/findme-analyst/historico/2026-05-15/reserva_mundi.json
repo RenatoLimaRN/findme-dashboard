@@ -8,15 +8,11 @@
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - AREAS COMUM",
-      "nao_feita": 2
+      "nao_feita": 3
     },
     {
       "modelo": "RONDA GERAL",
       "nao_feita": 2
-    },
-    {
-      "modelo": "(sem modelo)",
-      "nao_feita": 1
     }
   ],
   "pct_cumprimento": 0.0,

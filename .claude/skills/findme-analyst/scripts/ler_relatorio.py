@@ -362,6 +362,9 @@ def parse_geral(wb, data_alvo=None):
             turno = _txt(r[2]) if len(r) > 2 else ""
             modelo_raw = _txt(r[3]) if len(r) > 3 else ""
             status = _txt(r[4]).lower() if len(r) > 4 else ""
+            justificativa = _txt(r[10]) if len(r) > 10 else ""  # col K
+            if justificativa == "-":
+                justificativa = ""
             balde = BALDE.get(status, "nao_feita")
             is_avulsa = modelo_raw.upper().startswith("[AVULSA]")
             modelo = re.sub(r"^\[AVULSA\]\s*", "", modelo_raw).strip() or "(sem modelo)"
@@ -369,11 +372,21 @@ def parse_geral(wb, data_alvo=None):
             d = agg.setdefault(local_atual, {
                 "nome": local_atual, "slug": _slug(local_atual),
                 "ok": 0, "parcial": 0, "nao_feita": 0,
-                "total": 0, "avulsas": 0, "por_modelo": {}, "por_turno": {}})
+                "total": 0, "avulsas": 0, "por_modelo": {}, "por_turno": {},
+                "justificativas": [], "justificativas_por_categoria": {}})
             d[balde] += 1
             d["total"] += 1
             if is_avulsa:
                 d["avulsas"] += 1
+            if justificativa:
+                d["justificativas"].append({
+                    "modelo": modelo, "status": status,
+                    "turno": turno, "texto": justificativa
+                })
+                # extrai categoria (parte antes de " — ")
+                cat = justificativa.split(" — ")[0].strip()
+                d["justificativas_por_categoria"][cat] = (
+                    d["justificativas_por_categoria"].get(cat, 0) + 1)
             pm = d["por_modelo"].setdefault(
                 modelo, {"modelo": modelo, "avulsa": is_avulsa,
                          "ok": 0, "parcial": 0, "nao_feita": 0, "total": 0})
@@ -492,6 +505,16 @@ def enriquecer(data, postos_dir, historico_dir, historico_dias, data_alvo):
                 locais_unicos[slug] = loc.get("nome", "")
 
     data["matches_fuzzy"] = []  # registros casados via fuzzy (pra transparência)
+
+    # Agregação global de justificativas (top categorias do dia)
+    just_global = {}
+    for agg in data.get("atividades_agg", []) or []:
+        for cat, n in (agg.get("justificativas_por_categoria") or {}).items():
+            just_global[cat] = just_global.get(cat, 0) + n
+    data["justificativas_top"] = sorted(
+        [{"categoria": k, "qtd": v} for k, v in just_global.items()],
+        key=lambda x: -x["qtd"]
+    )[:15]
 
     for slug, nome in locais_unicos.items():
         # Histórico

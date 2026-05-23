@@ -2,9 +2,9 @@
   "data": "2026-05-15",
   "local": "CONDOMÍNIO ACQUA VITA NOVA MOOCA",
   "ok": 11,
-  "parcial": 6,
-  "nao_feita": 6,
-  "total": 23,
+  "parcial": 7,
+  "nao_feita": 15,
+  "total": 33,
   "top_falhas_modelos": [
     {
       "modelo": "RONDA GERAL",
@@ -13,9 +13,21 @@
     {
       "modelo": "RONDA - SEM O BARRILETE",
       "nao_feita": 2
+    },
+    {
+      "modelo": "B06 - SALA DE JOGOS INFANTIL - TORRE 02",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "B04 - ACADEMIA - TORRE 02",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "B03 - HALL DO ESTACIONAMENTO - TORRE 02",
+      "nao_feita": 1
     }
   ],
-  "pct_cumprimento": 47.8,
+  "pct_cumprimento": 33.3,
   "dados_inconclusivos": false,
   "slug": "acqua_vita_nova_mooca"
 }

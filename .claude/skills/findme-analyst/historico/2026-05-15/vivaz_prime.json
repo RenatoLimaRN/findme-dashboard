@@ -1,9 +1,9 @@
 {
   "data": "2026-05-15",
   "local": "CONDOMÍNIO VIVAZ PRIME",
-  "ok": 9,
+  "ok": 11,
   "parcial": 6,
-  "nao_feita": 14,
+  "nao_feita": 12,
   "total": 29,
   "esperadas_total": 12,
   "feitas_das_esperadas": 0,
@@ -20,10 +20,6 @@
   ],
   "top_falhas_modelos": [
     {
-      "modelo": "(sem modelo)",
-      "nao_feita": 2
-    },
-    {
       "modelo": "01 - ACADEMIA - LIMPEZA",
       "nao_feita": 1
     },
@@ -38,9 +34,13 @@
     {
       "modelo": "04 - CHURRASQUEIRA - LIMPEZA",
       "nao_feita": 1
+    },
+    {
+      "modelo": "05 - COWORKING - LIMPEZA",
+      "nao_feita": 1
     }
   ],
-  "pct_cumprimento": 31.0,
+  "pct_cumprimento": 37.9,
   "dados_inconclusivos": false,
   "slug": "vivaz_prime"
 }

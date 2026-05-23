@@ -1,21 +1,17 @@
 {
   "data": "2026-05-15",
   "local": "RESERVA DO ALTO",
-  "ok": 4,
+  "ok": 5,
   "parcial": 2,
-  "nao_feita": 2,
+  "nao_feita": 1,
   "total": 8,
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - TORRE  01",
       "nao_feita": 1
-    },
-    {
-      "modelo": "(sem modelo)",
-      "nao_feita": 1
     }
   ],
-  "pct_cumprimento": 50.0,
+  "pct_cumprimento": 62.5,
   "dados_inconclusivos": false,
   "slug": "reserva_do_alto"
 }

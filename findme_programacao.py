@@ -338,17 +338,39 @@ def pct_eficiencia(ok: int, parcial: int, total: int) -> float:
 
 
 def extrair_justificativa(row: dict) -> str:
+    """Extrai texto da justificativa da atividade.
+
+    Estrutura real (API Dashboard v2.0, doc):
+      justifications: [
+        {id, justification_category_id, justification_category_name,
+         justification_description, created_at, user}
+      ]
+
+    Retorna o texto mais informativo. Se houver várias justificativas,
+    junta com " | ".
+    """
     just = row.get("justifications") or []
-    if isinstance(just, list):
-        for j in just:
-            if isinstance(j, dict):
-                txt = (j.get("description") or j.get("reason")
-                       or j.get("text") or j.get("name") or "")
-                if txt:
-                    return txt
-    elif isinstance(just, dict):
-        return just.get("description") or just.get("reason") or "-"
-    return "-"
+    if isinstance(just, dict):
+        just = [just]
+    if not isinstance(just, list):
+        return "-"
+    textos = []
+    for j in just:
+        if not isinstance(j, dict):
+            continue
+        # campos corretos da API + fallbacks pra resiliência
+        cat = (j.get("justification_category_name")
+               or j.get("category_name") or j.get("name") or "").strip()
+        desc = (j.get("justification_description")
+                or j.get("description") or j.get("reason")
+                or j.get("text") or "").strip()
+        if cat and desc:
+            textos.append(f"{cat} — {desc}")
+        elif cat:
+            textos.append(cat)
+        elif desc:
+            textos.append(desc)
+    return " | ".join(textos) if textos else "-"
 
 
 # ─── Injeção de avulsas configuradas ─────────────────────────────────────────

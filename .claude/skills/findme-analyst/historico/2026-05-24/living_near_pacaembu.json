@@ -1,0 +1,46 @@
+{
+  "data": "2026-05-24",
+  "local": "LIVING NEAR PACAEMBU",
+  "ok": 0,
+  "parcial": 0,
+  "nao_feita": 45,
+  "total": 45,
+  "esperadas_total": 45,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 45,
+  "modelos_perdidos_hoje": [
+    "ACADEMIA",
+    "BICICLETARIO",
+    "BRINQUEDOTECA",
+    "ESPACO GOURMET",
+    "ESPACO PET",
+    "LIMPEZA DOS HALLS - HALL GARAGEM",
+    "LIMPEZA DOS HALLS - LADO A",
+    "LIMPEZA DOS HALLS - LADO B"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "ACADEMIA",
+      "nao_feita": 3
+    },
+    {
+      "modelo": "BICICLETARIO",
+      "nao_feita": 3
+    },
+    {
+      "modelo": "BRINQUEDOTECA",
+      "nao_feita": 3
+    },
+    {
+      "modelo": "ESPACO GOURMET",
+      "nao_feita": 3
+    },
+    {
+      "modelo": "ESPACO PET",
+      "nao_feita": 3
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": true,
+  "slug": "living_near_pacaembu"
+}

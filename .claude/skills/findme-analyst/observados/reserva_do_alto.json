@@ -2,21 +2,16 @@
   "local": "RESERVA DO ALTO",
   "slug": "reserva_do_alto",
   "observados": {
-    "RONDA - TORRE 01": {
-      "_label": "RONDA - TORRE  01",
-      "dias": {
-        "Sex": {
-          "qtd": 2,
-          "ultima": "2026-05-22"
-        }
-      }
-    },
     "RONDA - DIURNO - AREAS COMUM": {
       "_label": "RONDA - DIURNO - AREAS COMUM",
       "dias": {
         "Sex": {
           "qtd": 2,
           "ultima": "2026-05-22"
+        },
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
         }
       }
     },
@@ -26,6 +21,23 @@
         "Sex": {
           "qtd": 2,
           "ultima": "2026-05-22"
+        },
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
+        }
+      }
+    },
+    "RONDA - TORRE 01": {
+      "_label": "RONDA - TORRE  01",
+      "dias": {
+        "Sex": {
+          "qtd": 2,
+          "ultima": "2026-05-22"
+        },
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
         }
       }
     },
@@ -35,6 +47,10 @@
         "Sex": {
           "qtd": 2,
           "ultima": "2026-05-22"
+        },
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
         }
       }
     },
@@ -44,6 +60,10 @@
         "Sex": {
           "qtd": 2,
           "ultima": "2026-05-22"
+        },
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
         }
       }
     },
@@ -53,6 +73,10 @@
         "Sex": {
           "qtd": 2,
           "ultima": "2026-05-22"
+        },
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
         }
       }
     }

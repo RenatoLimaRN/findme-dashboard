@@ -1,0 +1,21 @@
+{
+  "data": "2026-05-23",
+  "local": "CONDOMINIO RESIDENCIAL DEZ CANINDÉ",
+  "ok": 2,
+  "parcial": 0,
+  "nao_feita": 3,
+  "total": 5,
+  "top_falhas_modelos": [
+    {
+      "modelo": "Ronda Geral (Torres)",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "RONDA - ÁREA COMUM",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 40.0,
+  "dados_inconclusivos": false,
+  "slug": "residencial_dez_caninde"
+}

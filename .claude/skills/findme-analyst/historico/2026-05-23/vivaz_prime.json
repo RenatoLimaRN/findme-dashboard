@@ -1,0 +1,21 @@
+{
+  "data": "2026-05-23",
+  "local": "CONDOMÍNIO VIVAZ PRIME",
+  "ok": 1,
+  "parcial": 0,
+  "nao_feita": 2,
+  "total": 3,
+  "esperadas_total": 0,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 0,
+  "modelos_perdidos_hoje": [],
+  "top_falhas_modelos": [
+    {
+      "modelo": "TAREFA - PISCINA",
+      "nao_feita": 2
+    }
+  ],
+  "pct_cumprimento": 33.3,
+  "dados_inconclusivos": false,
+  "slug": "vivaz_prime"
+}

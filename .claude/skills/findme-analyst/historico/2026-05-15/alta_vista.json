@@ -5,6 +5,12 @@
   "parcial": 4,
   "nao_feita": 2,
   "total": 6,
+  "esperadas_total": 6,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 2,
+  "modelos_perdidos_hoje": [
+    "RONDA - Áreas Comuns"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - Áreas Comuns",

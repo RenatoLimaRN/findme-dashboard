@@ -5,6 +5,12 @@
   "parcial": 0,
   "nao_feita": 1,
   "total": 4,
+  "esperadas_total": 4,
+  "feitas_das_esperadas": 3,
+  "perdidas_das_esperadas": 1,
+  "modelos_perdidos_hoje": [
+    "RONDA - NOVO"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - NOVO",

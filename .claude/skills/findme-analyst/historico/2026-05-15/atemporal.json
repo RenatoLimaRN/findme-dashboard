@@ -5,6 +5,13 @@
   "parcial": 1,
   "nao_feita": 2,
   "total": 3,
+  "esperadas_total": 3,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 2,
+  "modelos_perdidos_hoje": [
+    "RONDA GERAL",
+    "RONDA PÉRIMETRO"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA PÉRIMETRO",

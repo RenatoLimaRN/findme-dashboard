@@ -5,6 +5,13 @@
   "parcial": 1,
   "nao_feita": 2,
   "total": 5,
+  "esperadas_total": 5,
+  "feitas_das_esperadas": 2,
+  "perdidas_das_esperadas": 2,
+  "modelos_perdidos_hoje": [
+    "RONDA - ÁREA COMUM",
+    "Ronda Geral (Torres)"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "Ronda Geral (Torres)",

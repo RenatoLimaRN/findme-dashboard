@@ -221,6 +221,73 @@ def montar_html(data_alvo: str, dados: dict) -> str:
     crit = [l for l in locais if l["cat"] == "crit"]
     incon = [l for l in locais if l["cat"] == "incon"]
 
+    # NOVA seção: Detalhe por posto (críticos/atenção) — atividade por atividade
+    detalhe_html = ""
+    postos_pra_detalhar = (crit + medio + incon)[:6]
+    blocos_det = []
+    for l in postos_pra_detalhar:
+        slug = l["slug"]
+        cruz = cruz_idx.get(slug, {})
+        agg = next((a for a in dados.get("atividades_agg", []) if a.get("slug") == slug), None)
+        if not agg:
+            continue
+        # index de justificativas por modelo
+        import unicodedata as _ud, re as _re
+        def _norm(m):
+            s = _ud.normalize("NFD", m or "")
+            s = "".join(c for c in s if _ud.category(c) != "Mn")
+            return _re.sub(r"\s+", " ", s.upper().strip())
+        just_idx = {}
+        for j in agg.get("justificativas", []) or []:
+            mn = _norm(j.get("modelo", ""))
+            just_idx.setdefault(mn, []).append(j.get("texto", ""))
+
+        problemas = []
+        # esperadas que não foram bem
+        for e in cruz.get("esperadas_detalhe", []) or []:
+            st = e.get("status")
+            if st == "feita":
+                continue
+            modelo = e.get("modelo", "")
+            justs = just_idx.get(_norm(modelo), [])
+            just_str = next((j for j in justs if j), "")
+            if st == "parcial":
+                icon = "⚠"
+            elif e.get("total_no_dia", 0) == 0:
+                icon = "❌ não registrada"
+            else:
+                icon = "✗"
+            problemas.append((icon, modelo, just_str))
+        # extras que falharam
+        for ex in cruz.get("extras", []) or []:
+            if ex.get("nao_feita", 0) > 0 or ex.get("parcial", 0) > 0:
+                modelo = ex.get("modelo", "")
+                justs = just_idx.get(_norm(modelo), [])
+                just_str = next((j for j in justs if j), "")
+                problemas.append(("✗", modelo + " (extra)", just_str))
+        # sem cadastro: pega modelos com nf>0
+        if not problemas and not cruz.get("esperadas_detalhe") and not cruz.get("extras"):
+            for m in agg.get("por_modelo", []) or []:
+                if m.get("nao_feita", 0) > 0 or m.get("parcial", 0) > 0:
+                    modelo = m.get("modelo", "")
+                    justs = just_idx.get(_norm(modelo), [])
+                    just_str = next((j for j in justs if j), "")
+                    icon = "⚠" if m.get("parcial", 0) > 0 and not m.get("nao_feita", 0) else "✗"
+                    problemas.append((icon, modelo, just_str))
+        if problemas:
+            blocos_det.append((l["nome"], problemas[:8]))
+
+    if blocos_det:
+        parts = ['<h2>Detalhe por posto — o que falhou</h2>']
+        for nome_loc, probs in blocos_det:
+            parts.append(f'<p style="margin:10px 0 4px;font-weight:bold;color:#1F4E79">📍 {nome_loc}</p>')
+            parts.append('<ul style="margin:0 0 8px;padding-left:24px;font-size:13px">')
+            for icon, modelo, just in probs:
+                j_html = f' — <i style="color:#6B7280">"{just[:110]}"</i>' if just else ''
+                parts.append(f'<li>{icon} <b>{modelo[:35]}</b>{j_html}</li>')
+            parts.append('</ul>')
+        detalhe_html = "".join(parts)
+
     # Nova seção: Top justificativas do dia
     just_top = dados.get("justificativas_top") or []
     just_html = ""
@@ -333,6 +400,8 @@ def montar_html(data_alvo: str, dados: dict) -> str:
 {f'<h2>Inconclusivos — provável artefato de coleta ({len(incon)})</h2><p class="sub">Locais sem nenhum OK/parcial em volume alto. Escalar pro suporte FindMe.</p><table><tr><th>Posto</th><th>Status</th><th>Cumprimento</th></tr>{"".join(linha(l) for l in incon)}</table>' if incon else ""}
 
 {f'<h2>Bom desempenho ({len(bom)})</h2><table><tr><th>Posto</th><th>Status</th><th>Cumprimento</th></tr>{"".join(linha(l) for l in bom)}</table>' if bom else ""}
+
+{detalhe_html}
 
 {just_html}
 

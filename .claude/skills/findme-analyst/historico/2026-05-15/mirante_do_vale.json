@@ -5,6 +5,12 @@
   "parcial": 1,
   "nao_feita": 1,
   "total": 2,
+  "esperadas_total": 2,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 1,
+  "modelos_perdidos_hoje": [
+    "RONDA NOTURNA - MIRANTE"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA NOTURNA - MIRANTE",

@@ -1,0 +1,17 @@
+{
+  "data": "2026-05-23",
+  "local": "CONDOMÍNIO PARQUE DO PRÍNCIPE",
+  "ok": 4,
+  "parcial": 4,
+  "nao_feita": 2,
+  "total": 10,
+  "top_falhas_modelos": [
+    {
+      "modelo": "ESTACIONAMENTOS",
+      "nao_feita": 2
+    }
+  ],
+  "pct_cumprimento": 40.0,
+  "dados_inconclusivos": false,
+  "slug": "parque_do_principe"
+}

@@ -37,7 +37,8 @@ except Exception:
 
 try:
     import openpyxl
-    from openpyxl.styles import PatternFill
+    from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
+    from openpyxl.utils import get_column_letter
 except ImportError:
     print("ERRO: openpyxl nao instalado. Rode: pip install openpyxl")
     sys.exit(1)
@@ -353,6 +354,23 @@ def enriquecer(xlsx_path, dados):
             novo += f"   |   📋 {ok_esp}/{esp} avulsas esperadas feitas"
         ws.cell(row=header_row, column=1, value=novo)
 
+    # 8) Melhorias visuais na aba Atividades — freeze + autofilter + wrap
+    ws.freeze_panes = "A2"
+    try:
+        ws.auto_filter.ref = f"A1:{get_column_letter(COL_FINAL)}1"
+    except Exception:
+        pass
+    # Aumentar largura da col Justificativa (col 11 = K) + wrap
+    ws.column_dimensions[get_column_letter(COL_FINAL)].width = 50
+    for ri in range(2, ws.max_row + 1):
+        v1 = str(ws.cell(row=ri, column=1).value or "").strip()
+        if DATE_RE.match(v1):
+            cell = ws.cell(row=ri, column=COL_FINAL)
+            cell.alignment = Alignment(wrap_text=True, vertical="top")
+
+    # 9) Criar/recriar aba "Resumo por Posto" — visão consolidada por local
+    _criar_aba_resumo_posto(wb, dados)
+
     wb.save(xlsx_path)
     return {
         "ok": True,
@@ -361,7 +379,209 @@ def enriquecer(xlsx_path, dados):
         "grupos_com_secao_configurada_nativa": sum(1 for g in grupos if g["tem_secao_configurada"]),
         "esperadas_faltantes_inseridas": n_inseridas,
         "linhas_finais": ws.max_row,
+        "aba_resumo_posto_criada": True,
     }
+
+
+# ─── Aba "Resumo por Posto" ──────────────────────────────────────────────────
+
+COR_BG_CABLOCAL = "2E75B6"
+COR_TXT_CABLOCAL = "FFFFFF"
+COR_BG_HEADER = "1F4E79"
+
+def _classificar_linhas_local(agg, cruz):
+    """Constrói lista de dicts unificados (uma linha por modelo) pra renderizar.
+    Cada linha tem: tipo, posto, modelo, esperado, ok, parc, nf, status, justifs."""
+    rows = []
+    esperadas = cruz.get("esperadas_detalhe", []) or []
+    extras = cruz.get("extras", []) or []
+
+    # Index justificativas por modelo normalizado
+    just_idx = {}
+    for j in agg.get("justificativas", []) or []:
+        mod = _norm_modelo(j.get("modelo", ""))
+        just_idx.setdefault(mod, []).append(j.get("texto", ""))
+
+    def _justifs(modelo):
+        textos = just_idx.get(_norm_modelo(modelo), [])
+        # dedup mantendo ordem
+        seen, uniq = set(), []
+        for t in textos:
+            if t and t not in seen:
+                seen.add(t); uniq.append(t)
+        return uniq
+
+    # Programadas (esperadas no postos/*.json)
+    for e in esperadas:
+        ok = e.get("feitas_ok", 0)
+        parc = e.get("parcial", 0)
+        vezes = e.get("vezes", 1)
+        total_dia = e.get("total_no_dia", 0)
+        nf = max(0, vezes - ok - parc) if e.get("status") != "feita" else 0
+        status_str = e.get("status", "nao_feita")
+        if total_dia == 0 and status_str == "nao_feita":
+            tag = "❌ Não registrada"
+        elif status_str == "feita":
+            tag = "✓ Feita"
+        elif status_str == "parcial":
+            tag = "⚠ Parcial"
+        else:
+            tag = "✗ Não feita"
+        rows.append({
+            "tipo": "Programada",
+            "posto": e.get("posto", "—"),
+            "modelo": e.get("modelo", ""),
+            "esperado": vezes,
+            "ok": ok, "parc": parc, "nf": nf,
+            "tag": tag, "status_key": status_str,
+            "justifs": _justifs(e.get("modelo", "")),
+            "total_no_dia": total_dia,
+        })
+
+    # Extras (apareceram mas não estavam cadastradas)
+    for ex in extras:
+        ok = ex.get("ok", 0); parc = ex.get("parcial", 0); nf = ex.get("nao_feita", 0)
+        if ok and not (parc or nf):
+            tag = "+ Extra OK"; status_key = "feita"
+        elif parc and not nf:
+            tag = "+ Extra parc"; status_key = "parcial"
+        else:
+            tag = "+ Extra falhou"; status_key = "nao_feita"
+        rows.append({
+            "tipo": "Extra (não cadastrada)",
+            "posto": "—",
+            "modelo": ex.get("modelo", ""),
+            "esperado": 0,
+            "ok": ok, "parc": parc, "nf": nf,
+            "tag": tag, "status_key": status_key,
+            "justifs": _justifs(ex.get("modelo", "")),
+            "total_no_dia": ex.get("total", ok + parc + nf),
+        })
+
+    # Sem cadastro (local sem postos/*.json mas com atividades no dia)
+    if not esperadas and not extras:
+        for m in agg.get("por_modelo", []) or []:
+            ok = m.get("ok", 0); parc = m.get("parcial", 0); nf = m.get("nao_feita", 0)
+            total = m.get("total", ok + parc + nf)
+            if total == 0:
+                continue
+            if ok and not (parc or nf):
+                tag = "✓ Feita"; status_key = "feita"
+            elif parc and not nf:
+                tag = "⚠ Parcial"; status_key = "parcial"
+            elif ok or parc:
+                tag = "⚠ Mista"; status_key = "parcial"
+            else:
+                tag = "✗ Não feita"; status_key = "nao_feita"
+            rows.append({
+                "tipo": "Sem cadastro",
+                "posto": "—",
+                "modelo": m.get("modelo", ""),
+                "esperado": "—",
+                "ok": ok, "parc": parc, "nf": nf,
+                "tag": tag, "status_key": status_key,
+                "justifs": _justifs(m.get("modelo", "")),
+                "total_no_dia": total,
+            })
+    return rows
+
+
+def _criar_aba_resumo_posto(wb, dados):
+    """Cria/recria aba 'Resumo por Posto' — visão linha-a-linha de cada local
+    com Modelo / Esperado / OK / Parc / NF / Status / Justificativa."""
+    name = "Resumo por Posto"
+    if name in wb.sheetnames:
+        del wb[name]
+    # Insere logo após Capa Executiva (índice 1)
+    pos = 1 if "Capa Executiva" in wb.sheetnames else 0
+    ws = wb.create_sheet(name, pos)
+
+    headers = ["Local", "Posto", "Tipo", "Modelo", "Esp.", "OK", "Parc", "NF", "Status", "Justificativa"]
+    widths = [32, 18, 22, 35, 6, 5, 5, 5, 16, 55]
+
+    # Header row
+    for ci, h in enumerate(headers, start=1):
+        c = ws.cell(row=1, column=ci, value=h)
+        c.font = Font(bold=True, color=COR_TXT_CABLOCAL, name="Calibri")
+        c.fill = PatternFill("solid", start_color=COR_BG_HEADER)
+        c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
+    for i, w in enumerate(widths, start=1):
+        ws.column_dimensions[get_column_letter(i)].width = w
+    ws.row_dimensions[1].height = 28
+    ws.freeze_panes = "A2"
+
+    thin = Side(style="thin", color="D6E4F0")
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+
+    cruz_idx = dados.get("cruzamento_por_local", {})
+    row = 2
+
+    # Ordena os locais: cumprimento ascendente (críticos primeiro)
+    locais = []
+    for agg in dados.get("atividades_agg", []) or []:
+        total = agg.get("total", 0)
+        ok = agg.get("ok", 0)
+        pct = (100.0 * ok / total) if total else 0
+        locais.append((pct, agg))
+    locais.sort(key=lambda x: x[0])
+
+    for pct, agg in locais:
+        slug = agg.get("slug", "")
+        nome = agg.get("nome", slug)
+        cruz = cruz_idx.get(slug, {})
+        linhas = _classificar_linhas_local(agg, cruz)
+        if not linhas:
+            continue
+
+        # Cabeçalho do local (mesclado)
+        cab_txt = f"📍 {nome}   —   {pct:.0f}% cumprimento   ({len(linhas)} atividade(s))"
+        cell = ws.cell(row=row, column=1, value=cab_txt)
+        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=len(headers))
+        cell.font = Font(bold=True, color=COR_TXT_CABLOCAL, size=11)
+        cell.fill = PatternFill("solid", start_color=COR_BG_CABLOCAL)
+        cell.alignment = Alignment(vertical="center", indent=1)
+        ws.row_dimensions[row].height = 22
+        row += 1
+
+        for r in linhas:
+            ws.cell(row=row, column=1, value="")  # local fica no cabeçalho mesclado
+            ws.cell(row=row, column=2, value=r["posto"])
+            ws.cell(row=row, column=3, value=r["tipo"])
+            ws.cell(row=row, column=4, value=r["modelo"])
+            ws.cell(row=row, column=5, value=r["esperado"])
+            ws.cell(row=row, column=6, value=r["ok"])
+            ws.cell(row=row, column=7, value=r["parc"])
+            ws.cell(row=row, column=8, value=r["nf"])
+            ws.cell(row=row, column=9, value=r["tag"])
+            ws.cell(row=row, column=10, value=" | ".join(r["justifs"][:3]) if r["justifs"] else "")
+
+            # Cor de fundo conforme status
+            sk = r["status_key"]
+            if sk == "feita":
+                fill_cor = COR_OK
+            elif sk == "parcial":
+                fill_cor = COR_PARCIAL
+            elif r["tag"].startswith("❌"):
+                fill_cor = COR_ESPERADA_FALTA
+            else:
+                fill_cor = COR_PERDIDA
+            fill = PatternFill("solid", start_color=fill_cor)
+            for ci in range(1, len(headers) + 1):
+                c = ws.cell(row=row, column=ci)
+                c.fill = fill
+                c.border = border
+                if ci == 10:
+                    c.alignment = Alignment(wrap_text=True, vertical="top")
+                elif ci in (5, 6, 7, 8):
+                    c.alignment = Alignment(horizontal="center", vertical="center")
+                else:
+                    c.alignment = Alignment(vertical="center")
+            row += 1
+        row += 1  # linha em branco entre locais
+
+    # Autofilter
+    if row > 2:
+        ws.auto_filter.ref = f"A1:{get_column_letter(len(headers))}{row-1}"
 
 
 def main():

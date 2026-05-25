@@ -5,6 +5,10 @@
   "parcial": 2,
   "nao_feita": 3,
   "total": 17,
+  "esperadas_total": 14,
+  "feitas_das_esperadas": 12,
+  "perdidas_das_esperadas": 0,
+  "modelos_perdidos_hoje": [],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - GREENFIELD",

@@ -1,0 +1,28 @@
+{
+  "data": "2026-05-23",
+  "local": "MANSÃO DO BUTANTÃ",
+  "ok": 0,
+  "parcial": 0,
+  "nao_feita": 2,
+  "total": 2,
+  "esperadas_total": 2,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 2,
+  "modelos_perdidos_hoje": [
+    "A01 - LIMPEZA DOS HALLS SERVIÇO - TORRE A",
+    "A02 - LIMPEZA DOS HALLS SOCIAL - TORRE A"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "A01 - LIMPEZA DOS HALLS SERVIÇO - TORRE A",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "A02 - LIMPEZA DOS HALLS SOCIAL - TORRE A",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "mansao_do_butanta"
+}

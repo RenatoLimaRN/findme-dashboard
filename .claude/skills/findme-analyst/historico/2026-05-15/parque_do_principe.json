@@ -5,6 +5,15 @@
   "parcial": 3,
   "nao_feita": 7,
   "total": 10,
+  "esperadas_total": 8,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 7,
+  "modelos_perdidos_hoje": [
+    "RONDA - NOTURONO",
+    "RONDA SETORIAL A",
+    "RONDA SETORIAL B",
+    "ESTACIONAMENTOS"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - NOTURONO",

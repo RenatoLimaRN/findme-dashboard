@@ -5,6 +5,13 @@
   "parcial": 4,
   "nao_feita": 4,
   "total": 8,
+  "esperadas_total": 7,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 4,
+  "modelos_perdidos_hoje": [
+    "AREAS COMUNS",
+    "RONDA - AREAS COMUNS /GARAGEM"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - AREAS COMUNS /GARAGEM",

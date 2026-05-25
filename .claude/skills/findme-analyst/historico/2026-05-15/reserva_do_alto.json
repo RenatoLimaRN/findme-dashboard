@@ -5,6 +5,12 @@
   "parcial": 2,
   "nao_feita": 1,
   "total": 8,
+  "esperadas_total": 8,
+  "feitas_das_esperadas": 5,
+  "perdidas_das_esperadas": 1,
+  "modelos_perdidos_hoje": [
+    "RONDA - TORRE  01"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - TORRE  01",

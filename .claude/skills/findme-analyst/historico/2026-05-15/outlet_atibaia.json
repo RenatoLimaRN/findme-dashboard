@@ -5,6 +5,10 @@
   "parcial": 0,
   "nao_feita": 1,
   "total": 10,
+  "esperadas_total": 9,
+  "feitas_das_esperadas": 9,
+  "perdidas_das_esperadas": 0,
+  "modelos_perdidos_hoje": [],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - PRÉDIO GAVIÕES",

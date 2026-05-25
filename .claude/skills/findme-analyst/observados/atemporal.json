@@ -2,30 +2,30 @@
   "local": "CONDOMINIO ATEMPORAL",
   "slug": "atemporal",
   "observados": {
+    "RONDA AREAS COMUNS": {
+      "_label": "RONDA AREAS COMUNS",
+      "dias": {
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
+        }
+      }
+    },
     "RONDA PERIMETRO": {
       "_label": "RONDA PÉRIMETRO",
       "dias": {
-        "Sex": {
-          "qtd": 2,
-          "ultima": "2026-05-22"
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
         }
       }
     },
     "RONDA GERAL": {
       "_label": "RONDA GERAL",
       "dias": {
-        "Sex": {
-          "qtd": 2,
-          "ultima": "2026-05-22"
-        }
-      }
-    },
-    "RONDA AREAS COMUNS": {
-      "_label": "RONDA AREAS COMUNS",
-      "dias": {
-        "Sex": {
-          "qtd": 2,
-          "ultima": "2026-05-22"
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
         }
       }
     }

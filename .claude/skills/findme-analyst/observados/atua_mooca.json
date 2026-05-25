@@ -5,27 +5,18 @@
     "RONDA - AREAS COMUNS /GARAGEM": {
       "_label": "RONDA - AREAS COMUNS /GARAGEM",
       "dias": {
-        "Sex": {
-          "qtd": 2,
-          "ultima": "2026-05-22"
+        "Sab": {
+          "qtd": 1,
+          "ultima": "2026-05-23"
         }
       }
     },
     "AREAS COMUNS": {
       "_label": "AREAS COMUNS",
       "dias": {
-        "Sex": {
-          "qtd": 2,
-          "ultima": "2026-05-22"
-        }
-      }
-    },
-    "RONDA NO HALLS": {
-      "_label": "RONDA NO HALLS",
-      "dias": {
-        "Sex": {
+        "Sab": {
           "qtd": 1,
-          "ultima": "2026-05-22"
+          "ultima": "2026-05-23"
         }
       }
     }

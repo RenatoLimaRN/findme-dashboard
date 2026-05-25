@@ -5,6 +5,13 @@
   "parcial": 7,
   "nao_feita": 15,
   "total": 33,
+  "esperadas_total": 5,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 5,
+  "modelos_perdidos_hoje": [
+    "RONDA - SEM O BARRILETE",
+    "RONDA GERAL"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA GERAL",

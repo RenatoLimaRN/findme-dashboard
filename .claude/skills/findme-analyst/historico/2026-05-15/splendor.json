@@ -5,6 +5,12 @@
   "parcial": 1,
   "nao_feita": 12,
   "total": 43,
+  "esperadas_total": 35,
+  "feitas_das_esperadas": 30,
+  "perdidas_das_esperadas": 4,
+  "modelos_perdidos_hoje": [
+    "RONDA GERAL"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA GERAL",

@@ -1,0 +1,250 @@
+{
+  "_local": "LIVING NEAR PACAEMBU",
+  "_instrucao": "Atividades convertidas do print de LIVING NEAR PACAEMBU - LIMPEZA - 01. Os postos 01, 02 e 03 usam as mesmas atividades. Cada entrada tem: modelo, dias e vezes.",
+  "local": "LIVING NEAR PACAEMBU",
+  "postos": [
+    {
+      "posto": "LIVING NEAR PACAEMBU - LIMPEZA - 01",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "ACADEMIA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BICICLETARIO",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BRINQUEDOTECA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPACO GOURMET",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPACO PET",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - HALL GARAGEM",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - LADO A",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - LADO B",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - TERREO LADO A",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - TERREO LADO B",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIXEIRAS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "PISCINA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "PORTARIA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO DE FESTA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO DE JOGOS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "LIVING NEAR PACAEMBU - LIMPEZA - 02",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "ACADEMIA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BICICLETARIO",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BRINQUEDOTECA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPACO GOURMET",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPACO PET",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - HALL GARAGEM",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - LADO A",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - LADO B",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - TERREO LADO A",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - TERREO LADO B",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIXEIRAS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "PISCINA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "PORTARIA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO DE FESTA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO DE JOGOS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "LIVING NEAR PACAEMBU - LIMPEZA - 03",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "ACADEMIA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BICICLETARIO",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BRINQUEDOTECA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPACO GOURMET",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPACO PET",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - HALL GARAGEM",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - LADO A",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - LADO B",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - TERREO LADO A",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - TERREO LADO B",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIXEIRAS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "PISCINA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "PORTARIA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO DE FESTA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO DE JOGOS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        }
+      ]
+    }
+  ]
+}

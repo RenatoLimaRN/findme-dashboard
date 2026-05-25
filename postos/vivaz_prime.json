@@ -1,11 +1,135 @@
 {
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
-  "local": "CONDOMÍNIO VIVAZ PRIME",
+  "_local": "CONDOMINIO VIVAZ PRIME",
+  "_instrucao": "Atividades convertidas dos prints de VIVAZ - LIMPEZA - LIDER e VIVAZ - RONDA. Cada entrada tem: modelo, dias e vezes.",
+  "local": "CONDOMINIO VIVAZ PRIME",
   "postos": [
     {
-      "posto": "Limpeza",
+      "posto": "Vivaz - Limpeza - Lider",
       "op_tipo": "Limpeza",
-      "atividades": []
+      "atividades": [
+        {
+          "modelo": "01 - ACADEMIA - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "02 - BRINQUEDOTECA - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "03 - BANHEIROS - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "04 - CHURRASQUEIRA - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "05 - COWORKING - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "06 - COPA - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "07 - HALL DA TORRE 1 - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "08 - HALL DA TORRE 2 - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "09 - ESPACO BELEZA - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "10 - PORTARIA - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "11 - GARAGEM - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "12 - PATIO E QUADRA - LIMPEZA",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "13 - SALA DA ADMINISTRACAO - LIMPEZA",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "14 - PISCINA - LIMPEZA",
+          "dias": [
+            "Qui"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "15 - SALAO DE FESTA - LIMPEZA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "Vivaz - Ronda",
+      "op_tipo": "Ronda",
+      "atividades": [
+        {
+          "modelo": "AREAS COMUNS - RONDA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "TAREFA - FILIPETA GARAGEM - RONDA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "TAREFA - PISCINA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "TORRE 1 - RONDA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "TORRE 2 - RONDA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "TORRE 3 - RONDA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "TORRE 4 - RONDA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        }
+      ]
     }
   ]
 }

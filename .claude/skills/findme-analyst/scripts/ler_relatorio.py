@@ -195,16 +195,36 @@ def _match_registro(group_slug, registros_by_slug, min_overlap=6):
 def _calcular_cruzamento(local_agg, registro, weekday):
     """Esperado × feito do dia. local_agg pode ser None (sem atividades no dia)."""
     esperadas = []
+    # vezes=0 (ou None que vire 0) significa "sob demanda": a atividade existe no
+    # posto, mas não é cobrada num número fixo por dia. Registramos o modelo aqui
+    # pra que execuções dela no relatório não caiam em "extras" (atividade que
+    # não estava cadastrada), mas não geramos linha de "esperada".
+    sob_demanda_norm = set()
     wkd_norm = _norm_dia(weekday) if weekday else ""
     for posto in registro.get("postos", []):
         for ativ in posto.get("atividades", []):
             dias_norm = [_norm_dia(d) for d in ativ.get("dias", [])]
-            if wkd_norm and wkd_norm in dias_norm:
-                esperadas.append({
-                    "modelo": ativ.get("modelo", ""),
-                    "vezes": int(ativ.get("vezes", 1) or 1),
-                    "posto": posto.get("posto", ""),
-                })
+            if not (wkd_norm and wkd_norm in dias_norm):
+                continue
+            modelo = ativ.get("modelo", "")
+            # periodo != "semanal" (ex.: "quinzena", "mensal") significa que a
+            # atividade não roda todo dia indicado em `dias`. Como ainda não
+            # temos paridade de semana, tratamos como sob demanda: não cobra,
+            # mas se aparecer no relatório aceita como conhecida.
+            periodo = (ativ.get("periodo") or "semanal").strip().lower()
+            v_raw = ativ.get("vezes", 1)
+            try:
+                vezes = int(v_raw) if v_raw is not None else 1
+            except (TypeError, ValueError):
+                vezes = 1
+            if vezes <= 0 or periodo not in ("", "semanal"):
+                sob_demanda_norm.add(_norm_modelo(modelo))
+                continue
+            esperadas.append({
+                "modelo": modelo,
+                "vezes": vezes,
+                "posto": posto.get("posto", ""),
+            })
 
     feito_idx = {}
     if local_agg:
@@ -245,12 +265,14 @@ def _calcular_cruzamento(local_agg, registro, weekday):
     extras = []
     if local_agg:
         for pm in local_agg.get("por_modelo", []):
-            if _norm_modelo(pm["modelo"]) not in modelos_esperados_norm:
-                extras.append({
-                    "modelo": pm["modelo"], "total": pm["total"],
-                    "ok": pm["ok"], "parcial": pm["parcial"],
-                    "nao_feita": pm["nao_feita"],
-                })
+            nm = _norm_modelo(pm["modelo"])
+            if nm in modelos_esperados_norm or nm in sob_demanda_norm:
+                continue
+            extras.append({
+                "modelo": pm["modelo"], "total": pm["total"],
+                "ok": pm["ok"], "parcial": pm["parcial"],
+                "nao_feita": pm["nao_feita"],
+            })
 
     return {
         "esperadas_total": esperadas_total,

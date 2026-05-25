@@ -1,11 +1,58 @@
 {
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
-  "local": "CONDOMÍNIO EDIFÍCIO VILLAGE MORUMBI",
+  "_local": "CONDOMINIO EDIFICIO VILLAGE MORUMBI",
+  "_instrucao": "Atividades convertidas do print de VILLAGE MORUMBI - LIMPEZA. Cada entrada tem: modelo, dias e vezes.",
+  "local": "CONDOMINIO EDIFICIO VILLAGE MORUMBI",
   "postos": [
     {
-      "posto": "Limpeza",
+      "posto": "VILLAGE MORUMBI - LIMPEZA",
       "op_tipo": "Limpeza",
-      "atividades": []
+      "atividades": [
+        {
+          "modelo": "ACADEMIA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "AREAS EXTERNAS",
+          "dias": ["Ter", "Qui"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ATIVIDADES EXTRA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "ELEVADORES",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPACO PET",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "HALL DE ENTRADA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA HALLS",
+          "dias": ["Seg", "Qua", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "PORTARIA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO SOCIAL",
+          "dias": ["Ter", "Sex", "Sab"],
+          "vezes": 1
+        }
+      ]
     }
   ]
 }

@@ -1,11 +1,108 @@
 {
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
+  "_local": "EDIFICIO GUADELUPE",
+  "_instrucao": "Atividades convertidas do print de Guadelupe Vistoria. Cada entrada tem: modelo, dias, vezes e, quando aplicavel, periodo.",
   "local": "EDIFICIO GUADELUPE",
   "postos": [
     {
-      "posto": "Limpeza",
+      "posto": "Guadelupe Vistoria",
       "op_tipo": "Limpeza",
-      "atividades": []
+      "atividades": [
+        {
+          "modelo": "BICICLETARIO / DEPOSITO DE MATERIAIS",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BARRILETE",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1,
+          "periodo": "quinzena"
+        },
+        {
+          "modelo": "BRIGADA DE GAS - LADO IMPAR",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BRIGADA DE GAS - LADO PAR",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "CASA DE BOMBAS DE AGUA",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1,
+          "periodo": "quinzena"
+        },
+        {
+          "modelo": "CASA DE MAQUINAS - IMPAR",
+          "dias": [
+            "Qua"
+          ],
+          "vezes": 1,
+          "periodo": "quinzena"
+        },
+        {
+          "modelo": "CASA DE MAQUINAS - PAR",
+          "dias": [
+            "Qua"
+          ],
+          "vezes": 1,
+          "periodo": "quinzena"
+        },
+        {
+          "modelo": "COPA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ELEVADORES",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "HALL - LADO IMPAR",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "HALL - LADO PAR",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "PATIO FUNDOS",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "PORTARIA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "QUADRO DE MEDIDOR DE ENERGIA DE APTOS",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1,
+          "periodo": "quinzena"
+        },
+        {
+          "modelo": "SALAO DE FESTA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SUBSOLO",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        }
+      ]
     }
   ]
 }

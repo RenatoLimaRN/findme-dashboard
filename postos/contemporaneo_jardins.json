@@ -1,140 +1,60 @@
 {
-  "_local": "CONTEMPORÂNEO JARDINS",
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo, dias e vezes.",
-  "local": "CONTEMPORÂNEO JARDINS",
+  "_local": "CONTEMPORANEO JARDINS",
+  "_instrucao": "Atividades convertidas do print de CONTEMPORANEO JARDINS - LIMPEZA. Cada entrada tem: modelo, dias e vezes.",
+  "local": "CONTEMPORANEO JARDINS",
   "postos": [
     {
-      "posto": "Limpeza",
+      "posto": "CONTEMPORANEO JARDINS - LIMPEZA",
       "op_tipo": "Limpeza",
       "atividades": [
         {
           "modelo": "ACADEMIA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
-          "modelo": "ÁREAS EXTERNAS (CALÇADAS)",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "modelo": "AREAS EXTERNAS (CALCADAS)",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
           "modelo": "BRINQUEDOTECA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
           "modelo": "COPA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
           "modelo": "ELEVADORES",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
           "modelo": "HALLS - LIMPEZA DOS HALLS",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
           "modelo": "PISCINA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
-          "modelo": "SALÃO DE FESTA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "modelo": "SALAO DE FESTA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
-          "modelo": "SALÃO DE JOGOS",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "modelo": "SALAO DE JOGOS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
           "modelo": "SUBSOLOS",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         }
       ]

@@ -1,11 +1,312 @@
 {
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
-  "local": "CONDOMÍNIO ACQUA VITA NOVA MOOCA",
+  "_local": "CONDOMINIO ACQUA VITA NOVA MOOCA",
+  "_instrucao": "Atividades convertidas do print de Atividades avulsas de Acqua Limpeza - lider. Cada entrada tem: modelo, dias e vezes.",
+  "local": "CONDOMINIO ACQUA VITA NOVA MOOCA",
   "postos": [
     {
-      "posto": "Limpeza",
+      "posto": "Limpeza - LIDER",
       "op_tipo": "Limpeza",
-      "atividades": []
+      "atividades": [
+        {
+          "modelo": "A01 - HALL DE ENTRADA - TORRE 1",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "A02 - LIMPEZA DOS HALLS - TORRE 1",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "A04 - BRINQUEDOTECA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "A05 - SALA DA ADMINISTRACAO - TORRE 1",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "B02 - LIMPEZA DOS HALLS - TORRE 2",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "B04 - ACADEMIA - TORRE 02",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "C02 - LIMPEZA DOS HALLS - TORRE 3",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "D02 - LIMPEZA DOS HALLS - TORRE 4",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "D03 - COPA/SALA DE MANUTENCAO - TORRE 4",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "D04 - HOME OFFICE - TORRE 4",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "L01 - CHURRASQUEIRA",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "L02 - PISCINA",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "L03 - QUADRA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "L04 - VARRICAO DA RUA EM GERAL",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "L05 - PISTA DE ATLETISMO",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA - LAVACAO GERAL DA AREA EXTERNA EM GERAL",
+          "dias": [
+            "Qui"
+          ],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "ACQUA LIMPEZA - TORRE 1",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "A01 - HALL DE ENTRADA - TORRE 1",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "A02 - LIMPEZA DOS HALLS - TORRE 1",
+          "dias": ["Seg", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "A03 - HALL DO ESTACIONAMENTO - TORRE 1",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "A04 - BRINQUEDOTECA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "A05 - SALA DA ADMINISTRACAO - TORRE 1",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "A06 - SALAO DE FESTA INFANTIL - TORRE 1",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "A07 - LIMPEZA DAS PORTAS DE ESCADAS - TORRE 1",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "ACQUA LIMPEZA - TORRE 2",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "B01 - HALL DE ENTRADA - TORRE 2",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "B02 - LIMPEZA DOS HALLS - TORRE 2",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "B03 - HALL DO ESTACIONAMENTO - TORRE 02",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "B04 - ACADEMIA - TORRE 02",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "B05 - SALA DE REUNIAO - TORRE 02",
+          "dias": ["Ter", "Qui"],
+          "vezes": 1
+        },
+        {
+          "modelo": "B06 - SALA DE JOGOS INFANTIL - TORRE 02",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "B07 - SALAO DE FESTA ADOLECENTE - TORRE 02",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "B08 - SALAO DE FESTA ADULTO - TORRE 02",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "B09 - LIMPEZA DAS PORTAS DE ESCADAS - TORRE 2",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "ACQUA LIMPEZA - TORRE 3",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "C01 - HALL DE ENTRADA - TORRE 3",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "C02 - LIMPEZA DOS HALLS - TORRE 3",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "C03 - HALL DO ESTACIONAMENTO - TORRE 03",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "C04 - SAUNA - TORRE 03",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "C05 - SALAO DE FESTA GOURMET - TORRE 03",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "C06 - ACADMIA - TORRE 03",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "C07 - SALAO DE FESTA PUB - TORRE 3",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "C08 - LIMPEZA DAS PORTAS DE ESCADAS - TORRE 3",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "ACQUA LIMPEZA - TORRE 4",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "D01 - HALL DE ENTRADA - TORRE 4",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "D02 - LIMPEZA DOS HALLS - TORRE 4",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "D03 - COPA/SALA DE MANUTENCAO - TORRE 4",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "D04 - HOME OFFICE - TORRE 4",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "D05 - SALAO DE JOGOS ADULTO - TORRE 4",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "D06 - HALL DO ESTACIONAMENTO - TORRE 4",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "D07 - LIMPEZA DAS PORTAS DE ESCADAS - TORRE 4",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        }
+      ]
     }
   ]
 }

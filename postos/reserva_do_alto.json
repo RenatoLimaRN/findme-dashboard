@@ -1,11 +1,144 @@
 {
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
+  "_local": "RESERVA DO ALTO",
+  "_instrucao": "Atividades convertidas dos prints de RESERVA DO ALTO. Cada entrada tem: modelo, dias e vezes.",
   "local": "RESERVA DO ALTO",
   "postos": [
     {
-      "posto": "Limpeza",
+      "posto": "LIXO - AREAS EXTERNAS",
       "op_tipo": "Limpeza",
-      "atividades": []
+      "atividades": [
+        {
+          "modelo": "C01 - COLETA DE LIXO DAS RUAS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "C02 - COLETA DE LIXO NO CONTEINER",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "RESERVA DO ALTO - TORRE 01 - ANDORINHA",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "BLOCO 01 - ANDORINHA - LIMPEZA DOS HALLS",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "HIGIENIZACAO DO BEBEDOURO",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DE BOSQUE",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "QUADRA 1",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO DE FESTA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "RESERVA DO ALTO - TORRE 02 - COTOVIA",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "BLOCO 02 - COTOVIA - LIMPEZA DOS HALLS",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESCRITORIO/ADM",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DAS ESCADARIAS DA PORTARIA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO CENTRAL",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "RESERVA DO ALTO - TORRE 03 - GAIVOTA",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "BLOCO 03 - GAIVOTA - LIMPEZA DOS HALLS",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "CHURRASQUEIA F. 01",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "HIGIENIZACAO DO BEBEDOURO",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO DE FESTA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALAO DE JOGOS",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "RESERVA DO ALTO - TORRE 04 - ROCHINOL",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "ACADEMIA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BLOCO 04 - ROCHINOL - LIMPEZA DOS HALLS",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "BRINQUEDOTECA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "CHURRASQUEIA F. 02",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESCRITORIO/ADM",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        }
+      ]
     }
   ]
 }

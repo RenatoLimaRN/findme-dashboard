@@ -1,7 +1,7 @@
 {
-  "_local": "MANSÃO DO BUTANTÃ",
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo, dias e vezes.",
-  "local": "MANSÃO DO BUTANTÃ",
+  "_local": "MANSAO DO BUTANTA",
+  "_instrucao": "Atividades convertidas dos prints de Mansao do Butanta Limpeza - LIDER, TORRE A, TORRE B e TORRE C. Cada entrada tem: modelo, dias e vezes.",
+  "local": "MANSAO DO BUTANTA",
   "postos": [
     {
       "posto": "Limpeza - LIDER",
@@ -9,83 +9,37 @@
       "atividades": [
         {
           "modelo": "01 - CHURRASQUEIRA",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "02 - PISCINA",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "03 - CACHORRODROMO",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "04 - PARQUINHO",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "05 - QUIOSQUE CENTRAL",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
-          "modelo": "A01 - LIMPEZA DOS HALLS SERVIÇO - TORRE A",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "modelo": "A01 - LIMPEZA DOS HALLS SERVICO - TORRE A",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
           "modelo": "A02 - LIMPEZA DOS HALLS SOCIAL - TORRE A",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         }
       ]
@@ -95,97 +49,48 @@
       "op_tipo": "Limpeza",
       "atividades": [
         {
-          "modelo": "A01 - LIMPEZA DOS HALLS SERVIÇO - TORRE A",
-          "dias": [
-            "Seg",
-            "Qua",
-            "Sex"
-          ],
+          "modelo": "A01 - LIMPEZA DOS HALLS SERVICO - TORRE A",
+          "dias": ["Seg", "Qua", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "A02 - LIMPEZA DOS HALLS SOCIAL - TORRE A",
-          "dias": [
-            "Ter",
-            "Qui"
-          ],
+          "dias": ["Ter", "Qui"],
           "vezes": 1
         },
         {
           "modelo": "A03 - BANHEIROS - TORRE A",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
-          "modelo": "A04 - ENTRADA DE SERVIÇO - TORRE A",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "modelo": "A04 - ENTRADA DE SERVICO - TORRE A",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "A05 - ENTRADA SOCIAL - TORRE A",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "A06 - GARAGEM - TORRE A",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
-          "modelo": "A07- PORTARIA - TORRE A",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "modelo": "A07 - PORTARIA - TORRE A",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
-          "modelo": "A08 - SALÃO DE FESTA - TORRE A",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "modelo": "A08 - SALAO DE FESTA - TORRE A",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
-          "modelo": "A09 - SALÃO DE TRANCA - TORRE A",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "modelo": "A09 - SALAO DE TRANCA - TORRE A",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         }
       ]
@@ -196,98 +101,43 @@
       "atividades": [
         {
           "modelo": "B01 - LIMPEZA DOS HALLS SOCIAL - TORRE B",
-          "dias": [
-            "Ter",
-            "Qui"
-          ],
+          "dias": ["Ter", "Qui"],
           "vezes": 1
         },
         {
-          "modelo": "B02 - LIMPEZA DOS HALLS SERVIÇO - TORRE B",
-          "dias": [
-            "Seg",
-            "Qua",
-            "Sex"
-          ],
+          "modelo": "B02 - LIMPEZA DOS HALLS SERVICO - TORRE B",
+          "dias": ["Seg", "Qua", "Sex"],
           "vezes": 1
         },
         {
-          "modelo": "B03 - ENTRADA DE SERVIÇO - TORRE B",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "modelo": "B03 - ENTRADA DE SERVICO - TORRE B",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "B04 - ENTRADA SOCIAL - TORRE B",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "B05 - GARAGEM - TORRE B",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
-          "modelo": "B06 - SALÃO DE FESTA - TORRE B",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "modelo": "B06 - SALAO DE FESTA - TORRE B",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "B07 - SALAS DE JOGOS - TORRE B",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui"
-          ],
-          "vezes": 1
-        },
-        {
-          "modelo": "B07 - SALAS DE JOGOS - TORRE B",
-          "dias": [
-            "Sex"
-          ],
-          "vezes": 2
-        },
-        {
-          "modelo": "B08 - ZELADORIA - TORRE B",
-          "dias": [
-            "Ter",
-            "Qua",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "B08 - ZELADORIA - TORRE B",
-          "dias": [
-            "Seg",
-            "Qui"
-          ],
-          "vezes": 2
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
         }
       ]
     },
@@ -296,86 +146,43 @@
       "op_tipo": "Limpeza",
       "atividades": [
         {
-          "modelo": "C01 - LIMPEZA DOS HALLS SERVIÇO - TORRE C",
-          "dias": [
-            "Seg",
-            "Qua",
-            "Sex"
-          ],
+          "modelo": "C01 - LIMPEZA DOS HALLS SERVICO - TORRE C",
+          "dias": ["Seg", "Qua", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "C02 - LIMPEZA DOS HALLS SOCIAL - TORRE C",
-          "dias": [
-            "Ter",
-            "Qui"
-          ],
+          "dias": ["Ter", "Qui"],
           "vezes": 1
         },
         {
           "modelo": "C03 - ACADEMIA - TORRE C",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "C04 - BANHEIROS - TORRE C",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "C05 - BRINQUEDOTECA - TORRE C",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "C06 - GARAGEM - TORRE C",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
-          "modelo": "C07 - SALÃO DE FESTA - TORRE C",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "modelo": "C07 - SALAO DE FESTA - TORRE C",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
           "modelo": "C08 - VESTIARIO - TORRE C",
-          "dias": [
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex"
-          ],
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         }
       ]

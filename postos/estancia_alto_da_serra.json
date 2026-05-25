@@ -1,11 +1,5 @@
 {
   "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
   "local": "ESTANCIA ALTO DA SERRA",
-  "postos": [
-    {
-      "posto": "Limpeza",
-      "op_tipo": "Limpeza",
-      "atividades": []
-    }
-  ]
+  "postos": []
 }

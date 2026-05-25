@@ -1,11 +1,111 @@
 {
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
-  "local": "CONDOMÍNIO ALTA VISTA",
+  "_local": "CONDOMINIO ALTA VISTA",
+  "_instrucao": "Atividades convertidas dos prints de Atividades avulsas de LIMPEZA TORRE 01 e TORRE 02 - ALTA VISTA. Cada entrada tem: modelo, dias e vezes.",
+  "local": "CONDOMINIO ALTA VISTA",
   "postos": [
     {
-      "posto": "Limpeza",
+      "posto": "LIMPEZA TORRE 01 - ALTA VISTA",
       "op_tipo": "Limpeza",
-      "atividades": []
+      "atividades": [
+        {
+          "modelo": "02 - LIMPEZA DA ACADEMIA",
+          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "03 - LIMPEZA DO SALAO DE FESTAS",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "04 - LIMPEZA DO HALL DE ENTRADA - TORRE 01",
+          "dias": ["Dom", "Ter", "Qua", "Qui", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "05 - - LIMPEZA DA BRINQUEDOTECA",
+          "dias": [
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "06 - LIMPEZA DO SALAO DE JOGOS",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "08 - LIMPEZA PORTARIA",
+          "dias": ["Dom", "Qui"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS ELEVADORES - TORRE 01",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS DOS ANDARES - TORRE 01",
+          "dias": ["Seg", "Qua", "Sex"],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "LIMPEZA TORRE 02 - ALTA VISTA",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "02 - LIMPEZA DA ACADEMIA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "03 - LIMPEZA DO SALAO DE FESTAS",
+          "dias": [
+            "Ter"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "05 - - LIMPEZA DA BRINQUEDOTECA",
+          "dias": [
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "06 - LIMPEZA DO SALAO DE JOGOS",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "07 - LIMPEZA DO HALL DE ENTRADA - TORRE 02",
+          "dias": ["Dom", "Ter", "Qui", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "08 - LIMPEZA PORTARIA",
+          "dias": ["Dom", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS ELEVADORES - TORRE 02",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS DOS ANDARES - TORRE 02",
+          "dias": ["Seg", "Qua", "Sex"],
+          "vezes": 1
+        }
+      ]
     }
   ]
 }

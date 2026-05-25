@@ -1,270 +1,209 @@
 {
-  "_local": "VARANDA POMPÉIA",
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo, dias e vezes.",
-  "local": "VARANDA POMPÉIA",
+  "_local": "VARANDA POMPEIA",
+  "_instrucao": "Atividades convertidas dos prints de VARANDA POMPEIA - LIMPEZA. Cada entrada tem: modelo, dias e vezes.",
+  "local": "VARANDA POMPEIA",
   "postos": [
     {
-      "posto": "Limpeza - Areas Comuns",
+      "posto": "VARANDA POMPEIA - LIMPEZA - AREAS COMUNS",
       "op_tipo": "Limpeza",
       "atividades": [
         {
           "modelo": "HALLS - TORRE A",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
           "modelo": "HALLS - TORRE B",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         }
       ]
     },
     {
-      "posto": "Limpeza - Lixeiras",
+      "posto": "VARANDA POMPEIA - LIMPEZA - LIXEIRAS",
       "op_tipo": "Limpeza",
       "atividades": [
         {
           "modelo": "LIXEIRAS",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         }
       ]
     },
     {
-      "posto": "Limpeza - Torres A",
+      "posto": "VARANDA POMPEIA - LIMPEZA - TORRES A",
       "op_tipo": "Limpeza",
       "atividades": [
         {
           "modelo": "ACADEMIA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
-          "modelo": "ADMINISTRAÇÃO",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "modelo": "ADMINISTRACAO",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
           "modelo": "ATIVIDADES EXTRA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
           "modelo": "BRINQUEDOTECA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
           "modelo": "CHURRASQUEIRA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
           "modelo": "COPA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
-          "modelo": "ESPAÇO GOURMET",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "modelo": "ESPACO GOURMET",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
-          "modelo": "ESPAÇO MULHER",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "modelo": "ESPACO MULHER",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
-          "modelo": "HALL TÉRREO - TORRE A",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "modelo": "HALL TERREO - TORRE A",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
         },
         {
           "modelo": "PLAYGROUND",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
           "modelo": "PORTARIA P1 - CIMA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
           "modelo": "PORTARIA P2 - BAIXO",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
           "modelo": "SALA DO ZELADOR",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
-          "modelo": "SALÃO DE FESTA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "modelo": "SALAO DE FESTA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
-          "modelo": "SALÃO DE JOGOS",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
-          "vezes": 1
+          "modelo": "SALAO DE JOGOS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         },
         {
           "modelo": "SAUNA",
-          "dias": [
-            "Dom",
-            "Seg",
-            "Ter",
-            "Qua",
-            "Qui",
-            "Sex",
-            "Sab"
-          ],
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        }
+      ]
+    },
+    {
+      "posto": "VARANDA POMPEIA - LIMPEZA - TORRES B",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "ACADEMIA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "ADMINISTRACAO",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "ATIVIDADES EXTRA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "BRINQUEDOTECA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "CHURRASQUEIRA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "COPA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "ESPACO GOURMET",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "ESPACO MULHER",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "HALL TERREO - TORRE B",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
           "vezes": 1
+        },
+        {
+          "modelo": "PLAYGROUND",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "PORTARIA P1 - CIMA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "PORTARIA P2 - BAIXO",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "QUADRA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "SALA DO ZELADOR",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "SALAO DE FESTA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "SALAO DE JOGOS",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
+        },
+        {
+          "modelo": "SAUNA",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 0
         }
       ]
     }

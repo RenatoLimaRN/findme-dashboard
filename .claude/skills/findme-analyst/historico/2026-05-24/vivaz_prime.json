@@ -2,8 +2,8 @@
   "data": "2026-05-24",
   "local": "CONDOMÍNIO VIVAZ PRIME",
   "ok": 0,
-  "parcial": 0,
-  "nao_feita": 3,
+  "parcial": 1,
+  "nao_feita": 2,
   "total": 3,
   "esperadas_total": 6,
   "feitas_das_esperadas": 0,
@@ -19,7 +19,7 @@
   "top_falhas_modelos": [
     {
       "modelo": "TAREFA - PISCINA",
-      "nao_feita": 3
+      "nao_feita": 2
     }
   ],
   "pct_cumprimento": 0.0,

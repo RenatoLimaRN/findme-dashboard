@@ -1,8 +1,8 @@
 {
   "data": "2026-05-24",
   "local": "PANAMBY",
-  "ok": 2,
-  "parcial": 1,
+  "ok": 3,
+  "parcial": 0,
   "nao_feita": 1,
   "total": 4,
   "top_falhas_modelos": [
@@ -11,7 +11,7 @@
       "nao_feita": 1
     }
   ],
-  "pct_cumprimento": 50.0,
+  "pct_cumprimento": 75.0,
   "dados_inconclusivos": false,
   "slug": "panamby"
 }

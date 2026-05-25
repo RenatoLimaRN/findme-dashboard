@@ -1,17 +1,17 @@
 {
   "data": "2026-05-24",
   "local": "GTM CENOGRAFIA LTDA",
-  "ok": 3,
+  "ok": 4,
   "parcial": 0,
-  "nao_feita": 2,
+  "nao_feita": 1,
   "total": 5,
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - GTM",
-      "nao_feita": 2
+      "nao_feita": 1
     }
   ],
-  "pct_cumprimento": 60.0,
+  "pct_cumprimento": 80.0,
   "dados_inconclusivos": false,
   "slug": "gtm_cenografia_ltda"
 }

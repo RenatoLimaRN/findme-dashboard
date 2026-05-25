@@ -1,9 +1,9 @@
 {
   "data": "2026-05-24",
   "local": "RESERVA DO ALTO",
-  "ok": 0,
-  "parcial": 0,
-  "nao_feita": 11,
+  "ok": 5,
+  "parcial": 2,
+  "nao_feita": 4,
   "total": 11,
   "esperadas_total": 3,
   "feitas_das_esperadas": 0,
@@ -15,14 +15,6 @@
   ],
   "top_falhas_modelos": [
     {
-      "modelo": "RONDA - DIURNO - AREAS COMUM",
-      "nao_feita": 2
-    },
-    {
-      "modelo": "RONDA -  NAS RUAS RUAS",
-      "nao_feita": 2
-    },
-    {
       "modelo": "C01 - COLETA DE LIXO DAS RUAS",
       "nao_feita": 1
     },
@@ -33,9 +25,13 @@
     {
       "modelo": "ESCRITORIO/ADM",
       "nao_feita": 1
+    },
+    {
+      "modelo": "RONDA - DIURNO - AREAS COMUM",
+      "nao_feita": 1
     }
   ],
-  "pct_cumprimento": 0.0,
-  "dados_inconclusivos": true,
+  "pct_cumprimento": 45.5,
+  "dados_inconclusivos": false,
   "slug": "reserva_do_alto"
 }

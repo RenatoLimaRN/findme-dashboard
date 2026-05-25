@@ -5,10 +5,17 @@
   "parcial": 0,
   "nao_feita": 2,
   "total": 3,
-  "esperadas_total": 0,
+  "esperadas_total": 6,
   "feitas_das_esperadas": 0,
-  "perdidas_das_esperadas": 0,
-  "modelos_perdidos_hoje": [],
+  "perdidas_das_esperadas": 6,
+  "modelos_perdidos_hoje": [
+    "AREAS COMUNS - RONDA",
+    "TAREFA - FILIPETA GARAGEM - RONDA",
+    "TORRE 1 - RONDA",
+    "TORRE 2 - RONDA",
+    "TORRE 3 - RONDA",
+    "TORRE 4 - RONDA"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "TAREFA - PISCINA",

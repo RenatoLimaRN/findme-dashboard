@@ -3,12 +3,20 @@
   "local": "CONDOMÍNIO ATUA MOOCA",
   "ok": 0,
   "parcial": 4,
-  "nao_feita": 4,
-  "total": 8,
+  "nao_feita": 5,
+  "total": 9,
+  "esperadas_total": 1,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 0,
+  "modelos_perdidos_hoje": [],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - AREAS COMUNS /GARAGEM",
       "nao_feita": 3
+    },
+    {
+      "modelo": "RONDA NO HALLS",
+      "nao_feita": 1
     },
     {
       "modelo": "AREAS COMUNS",

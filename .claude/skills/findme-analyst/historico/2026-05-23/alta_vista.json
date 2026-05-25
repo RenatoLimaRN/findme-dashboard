@@ -5,6 +5,19 @@
   "parcial": 0,
   "nao_feita": 6,
   "total": 6,
+  "esperadas_total": 8,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 8,
+  "modelos_perdidos_hoje": [
+    "02 - LIMPEZA DA ACADEMIA",
+    "04 - LIMPEZA DO HALL DE ENTRADA - TORRE 01",
+    "05 - - LIMPEZA DA BRINQUEDOTECA",
+    "02 - LIMPEZA DA ACADEMIA",
+    "05 - - LIMPEZA DA BRINQUEDOTECA",
+    "07 - LIMPEZA DO HALL DE ENTRADA - TORRE 02",
+    "08 - LIMPEZA PORTARIA",
+    "LIMPEZA DOS ELEVADORES - TORRE 02"
+  ],
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - Áreas Comuns",

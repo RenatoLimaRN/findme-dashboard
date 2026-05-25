@@ -17,6 +17,7 @@ logs/
 
 # Workspaces temporários (regenerados a cada análise)
 .claude/skills/findme-analyst-workspace/
+workspace_teste/
 
 # Relatórios gerados (cada execução regenera; histórico de snapshots fica)
 relatorios/

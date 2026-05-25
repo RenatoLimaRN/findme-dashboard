@@ -5,6 +5,14 @@
   "parcial": 0,
   "nao_feita": 0,
   "total": 4,
+  "esperadas_total": 5,
+  "feitas_das_esperadas": 2,
+  "perdidas_das_esperadas": 3,
+  "modelos_perdidos_hoje": [
+    "ELEVADORES",
+    "ESPACO PET",
+    "SALAO SOCIAL"
+  ],
   "top_falhas_modelos": [],
   "pct_cumprimento": 100.0,
   "dados_inconclusivos": false,

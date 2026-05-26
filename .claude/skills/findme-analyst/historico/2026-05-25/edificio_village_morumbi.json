@@ -1,0 +1,19 @@
+{
+  "data": "2026-05-25",
+  "local": "CONDOMÍNIO EDIFÍCIO VILLAGE MORUMBI",
+  "ok": 9,
+  "parcial": 2,
+  "nao_feita": 0,
+  "total": 11,
+  "esperadas_total": 6,
+  "feitas_das_esperadas": 4,
+  "perdidas_das_esperadas": 2,
+  "modelos_perdidos_hoje": [
+    "ELEVADORES",
+    "LIMPEZA HALLS"
+  ],
+  "top_falhas_modelos": [],
+  "pct_cumprimento": 81.8,
+  "dados_inconclusivos": false,
+  "slug": "edificio_village_morumbi"
+}

@@ -1,0 +1,46 @@
+{
+  "data": "2026-05-25",
+  "local": "RESERVA DO ALTO",
+  "ok": 7,
+  "parcial": 2,
+  "nao_feita": 19,
+  "total": 28,
+  "esperadas_total": 20,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 19,
+  "modelos_perdidos_hoje": [
+    "C01 - COLETA DE LIXO DAS RUAS",
+    "C02 - COLETA DE LIXO NO CONTEINER",
+    "HIGIENIZACAO DO BEBEDOURO",
+    "LIMPEZA DE BOSQUE",
+    "QUADRA 1",
+    "SALAO DE FESTA",
+    "BLOCO 02 - COTOVIA - LIMPEZA DOS HALLS",
+    "LIMPEZA DAS ESCADARIAS DA PORTARIA"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "HIGIENIZACAO DO BEBEDOURO",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "SALAO DE FESTA",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "C01 - COLETA DE LIXO DAS RUAS",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "C02 - COLETA DE LIXO NO CONTEINER",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "LIMPEZA DE BOSQUE",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 25.0,
+  "dados_inconclusivos": false,
+  "slug": "reserva_do_alto"
+}

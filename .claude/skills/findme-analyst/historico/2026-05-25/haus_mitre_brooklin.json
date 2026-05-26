@@ -1,0 +1,17 @@
+{
+  "data": "2026-05-25",
+  "local": "HAUS MITRE BROOKLIN",
+  "ok": 6,
+  "parcial": 1,
+  "nao_feita": 1,
+  "total": 8,
+  "top_falhas_modelos": [
+    {
+      "modelo": "Ronda 2 - GERAL - Haus Mitre",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 75.0,
+  "dados_inconclusivos": false,
+  "slug": "haus_mitre_brooklin"
+}

@@ -1,0 +1,17 @@
+{
+  "data": "2026-05-25",
+  "local": "PLATINA PATRIANI",
+  "ok": 2,
+  "parcial": 0,
+  "nao_feita": 1,
+  "total": 3,
+  "top_falhas_modelos": [
+    {
+      "modelo": "Ronda Patriani Geral",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 66.7,
+  "dados_inconclusivos": false,
+  "slug": "platina_patriani"
+}

@@ -1,0 +1,37 @@
+{
+  "data": "2026-05-25",
+  "local": "EDIFICIO GUADELUPE",
+  "ok": 16,
+  "parcial": 1,
+  "nao_feita": 7,
+  "total": 24,
+  "esperadas_total": 11,
+  "feitas_das_esperadas": 10,
+  "perdidas_das_esperadas": 0,
+  "modelos_perdidos_hoje": [],
+  "top_falhas_modelos": [
+    {
+      "modelo": "ALERTA - GUADELUPE",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "BICICLETARIO / DEPOSITO DE MATERIAIS",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "BRIGADA DE GAS - LADO IMPAR",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "BRIGADA DE GAS - LADO PAR",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "CASA DE BOMBAS DE AGUA",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 66.7,
+  "dados_inconclusivos": false,
+  "slug": "edificio_guadelupe"
+}

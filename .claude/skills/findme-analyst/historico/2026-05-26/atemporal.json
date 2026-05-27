@@ -1,0 +1,25 @@
+{
+  "data": "2026-05-26",
+  "local": "CONDOMINIO ATEMPORAL",
+  "ok": 0,
+  "parcial": 0,
+  "nao_feita": 3,
+  "total": 3,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA AREAS COMUNS",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "RONDA PÉRIMETRO",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "RONDA GERAL",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "atemporal"
+}

@@ -1,0 +1,17 @@
+{
+  "data": "2026-05-26",
+  "local": "OUTLET ATIBAIA",
+  "ok": 9,
+  "parcial": 0,
+  "nao_feita": 1,
+  "total": 10,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA - PRÉDIO GAVIÕES",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 90.0,
+  "dados_inconclusivos": false,
+  "slug": "outlet_atibaia"
+}

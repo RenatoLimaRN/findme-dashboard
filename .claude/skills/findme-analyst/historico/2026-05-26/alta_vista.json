@@ -1,0 +1,30 @@
+{
+  "data": "2026-05-26",
+  "local": "CONDOMÍNIO ALTA VISTA",
+  "ok": 0,
+  "parcial": 1,
+  "nao_feita": 5,
+  "total": 6,
+  "esperadas_total": 8,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 8,
+  "modelos_perdidos_hoje": [
+    "02 - LIMPEZA DA ACADEMIA",
+    "03 - LIMPEZA DO SALAO DE FESTAS",
+    "04 - LIMPEZA DO HALL DE ENTRADA - TORRE 01",
+    "LIMPEZA DOS ELEVADORES - TORRE 01",
+    "02 - LIMPEZA DA ACADEMIA",
+    "03 - LIMPEZA DO SALAO DE FESTAS",
+    "07 - LIMPEZA DO HALL DE ENTRADA - TORRE 02",
+    "LIMPEZA DOS ELEVADORES - TORRE 02"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA - Áreas Comuns",
+      "nao_feita": 5
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "alta_vista"
+}

@@ -1,0 +1,25 @@
+{
+  "data": "2026-05-26",
+  "local": "CONDOMÍNIO VIVAZ PRIME",
+  "ok": 8,
+  "parcial": 1,
+  "nao_feita": 0,
+  "total": 9,
+  "esperadas_total": 19,
+  "feitas_das_esperadas": 4,
+  "perdidas_das_esperadas": 14,
+  "modelos_perdidos_hoje": [
+    "01 - ACADEMIA - LIMPEZA",
+    "02 - BRINQUEDOTECA - LIMPEZA",
+    "03 - BANHEIROS - LIMPEZA",
+    "04 - CHURRASQUEIRA - LIMPEZA",
+    "05 - COWORKING - LIMPEZA",
+    "06 - COPA - LIMPEZA",
+    "07 - HALL DA TORRE 1 - LIMPEZA",
+    "08 - HALL DA TORRE 2 - LIMPEZA"
+  ],
+  "top_falhas_modelos": [],
+  "pct_cumprimento": 88.9,
+  "dados_inconclusivos": false,
+  "slug": "vivaz_prime"
+}

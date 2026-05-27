@@ -1,0 +1,20 @@
+[Unit]
+Description=Dispara findme-diario.service às 07:30 BRT todo dia
+Documentation=https://github.com/RenatoLimaRN/findme-dashboard/blob/main/vps/README.md
+
+[Timer]
+# 07:30 horário de Brasília (UTC-3) = 10:30 UTC.
+# OnCalendar usa hora LOCAL do servidor por padrão — pra evitar confusão,
+# fixamos UTC explicitamente. Ajuste se preferir o fuso local.
+OnCalendar=*-*-* 10:30:00 UTC
+
+# Se o VPS estava desligado quando deveria rodar, dispara assim que ligar.
+Persistent=true
+
+# Atrasa de 0 a 5 min aleatoriamente — útil se um dia tiver vários servidores.
+RandomizedDelaySec=0
+
+Unit=findme-diario.service
+
+[Install]
+WantedBy=timers.target

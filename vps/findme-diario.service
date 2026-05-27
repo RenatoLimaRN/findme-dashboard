@@ -1,0 +1,40 @@
+[Unit]
+Description=FindMe — análise diária (D-1) + git push de snapshots
+Documentation=https://github.com/RenatoLimaRN/findme-dashboard/blob/main/vps/README.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# Ajuste estas 3 variáveis pra refletir o usuário e caminho no SEU VPS.
+# Recomenda-se rodar como usuário dedicado (NÃO root).
+User=findme
+Group=findme
+WorkingDirectory=/home/findme/findme-dashboard
+
+# Variáveis pro wrapper. PYTHON_BIN aponta pro venv se você usar um.
+Environment="FINDME_REPO=/home/findme/findme-dashboard"
+Environment="PYTHON_BIN=/home/findme/findme-dashboard/.venv/bin/python"
+Environment="HOME=/home/findme"
+
+# Timeout generoso. Se a análise demorar mais que isso, algo está errado.
+TimeoutStartSec=20min
+
+# Comando principal.
+ExecStart=/usr/bin/bash /home/findme/findme-dashboard/vps/run_diario.sh
+
+# Limita exposição. Hardening básico.
+NoNewPrivileges=yes
+PrivateTmp=yes
+ProtectSystem=strict
+ReadWritePaths=/home/findme/findme-dashboard
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectControlGroups=yes
+
+# Captura saída no journald (visível via `journalctl -u findme-diario`).
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

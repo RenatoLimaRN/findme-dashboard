@@ -52,6 +52,10 @@ BALDE = {
     "perdida": "nao_feita",
     "nao iniciada": "nao_feita",
     "não iniciada": "nao_feita",
+    # avulsa esperada no postos/ que o FindMe nem criou (rotulada pelo gerador)
+    "esperada — não registrada": "nao_feita",
+    "esperada - não registrada": "nao_feita",
+    "esperada - nao registrada": "nao_feita",
 }
 
 

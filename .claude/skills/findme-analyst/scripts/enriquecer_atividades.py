@@ -314,7 +314,8 @@ def enriquecer(xlsx_path, dados):
             current_header = ri
             em_secao_config = False
             counts[current_header] = {
-                "feitas": 0, "parciais": 0, "perdidas": 0, "esperadas_faltam": 0,
+                "feitas": 0, "parciais": 0, "nao_iniciadas": 0, "perdidas": 0,
+                "esperadas_faltam": 0,
                 "local": re.split(r"[—\-]", v1s.replace(ICONE_GRUPO, ""), maxsplit=1)[0].strip(),
             }
             continue
@@ -326,25 +327,35 @@ def enriquecer(xlsx_path, dados):
         if not DATE_RE.match(v1s):
             continue
         v5 = ws.cell(row=ri, column=5).value
+        v5s = str(v5 or "").strip().lower()
         bucket = _bucket(str(v5) if v5 else "")
         if bucket == "ok":
             counts[current_header]["feitas"] += 1
         elif bucket == "parcial":
             counts[current_header]["parciais"] += 1
         elif bucket == "nao_feita":
-            counts[current_header]["perdidas"] += 1
+            # quebra real: Perdida ≠ Não iniciada
+            if v5s == "perdida":
+                counts[current_header]["perdidas"] += 1
+            else:
+                counts[current_header]["nao_iniciadas"] += 1
         elif bucket == "esperada_falta":
             counts[current_header]["esperadas_faltam"] += 1
 
     for header_row, info in counts.items():
-        f, p, pe, ef = info["feitas"], info["parciais"], info["perdidas"], info["esperadas_faltam"]
-        total = f + p + pe
+        f, p = info["feitas"], info["parciais"]
+        ni, pe, ef = info["nao_iniciadas"], info["perdidas"], info["esperadas_faltam"]
+        total = f + p + ni + pe
         pct = (100.0 * f / total) if total else 0.0
-        novo = (f"  📍  {info['local']}   —   ✓ {f} OK   ⚠ {p} Parcial   "
-                f"✗ {pe} Não Feitas")
+        partes = [f"✓ {f} Feitas", f"⚠ {p} Parciais"]
+        if ni:
+            partes.append(f"✗ {ni} Não iniciadas")
+        if pe:
+            partes.append(f"⊘ {pe} Perdidas")
         if ef:
-            novo += f"   ⨯ {ef} Esperadas-não-registradas"
-        novo += f"   |   {pct:.1f}% cumprimento"
+            partes.append(f"❌ {ef} Esperadas-não-registradas")
+        novo = (f"  📍  {info['local']}   —   " + "   ".join(partes)
+                + f"   |   {pct:.1f}% cumprimento")
         # Info do cruzamento — se o local tem postos/*.json configurado, mostra
         # quantas atividades estavam esperadas pro dia e quantas foram feitas
         info_cruz = cruz.get(_slug(info["local"]))

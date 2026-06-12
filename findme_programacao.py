@@ -91,14 +91,28 @@ def login(email: str, password: str) -> str:
     return token
 
 
-def api_get(token: str, path: str):
-    r = requests.get(
-        f"{BASE_DASHBOARD}{path}",
-        headers={"Authorization": f"Bearer {token}"},
-        timeout=30,
-    )
-    r.raise_for_status()
-    return r.json()
+def api_get(token: str, path: str, tentativas: int = 3):
+    """GET com retry — a API do dashboard oscila e estoura timeouts curtos."""
+    import time
+    ultima_exc = None
+    for i in range(tentativas):
+        try:
+            r = requests.get(
+                f"{BASE_DASHBOARD}{path}",
+                headers={"Authorization": f"Bearer {token}"},
+                timeout=90,
+            )
+            r.raise_for_status()
+            return r.json()
+        except (requests.exceptions.Timeout,
+                requests.exceptions.ConnectionError) as e:
+            ultima_exc = e
+            if i < tentativas - 1:
+                espera = 5 * (i + 1)
+                print(f"      ⚠  API lenta ({type(e).__name__}), "
+                      f"tentando de novo em {espera}s...")
+                time.sleep(espera)
+    raise ultima_exc
 
 
 def fetch_rotinas(token: str, filt: dict, verbose: bool = True) -> tuple:
@@ -392,14 +406,27 @@ def injetar_avulsas_config(dados: dict, avulsas_cfg: list,
     d_ini = datetime.strptime(start, "%Y-%m-%d")
     d_fim = datetime.strptime(end,   "%Y-%m-%d")
 
-    # Índice rápido: (local_lower, posto_lower, modelo_lower, data_dd/mm/yyyy) → count
+    def _norm_txt(s: str) -> str:
+        """lower + sem acentos + espaços colapsados — o postos/*.json costuma
+        vir sem acento ('CONDOMINIO') e a API devolve com ('CONDOMÍNIO');
+        sem normalizar, a avulsa feita nunca casa e vira falso 'não feita'
+        num local fantasma duplicado."""
+        s = unicodedata.normalize("NFD", s or "")
+        s = "".join(ch for ch in s if unicodedata.category(ch) != "Mn")
+        return re.sub(r"\s+", " ", s).strip().lower()
+
+    # Nome real (da API) por nome normalizado — pra injetar no grupo certo
+    locais_reais = {_norm_txt(nome): nome for nome in dados["por_local"]}
+
+    # Índice rápido: (local_norm, modelo_norm, data_dd/mm/yyyy) → count.
+    # Posto fica de fora de propósito: o nome do posto no postos/*.json
+    # raramente bate letra a letra com o station da API.
     from collections import Counter
     existentes = Counter()
     for rec in dados["records"]:
         chave = (
-            rec["local"].lower().strip(),
-            rec["posto"].lower().strip(),
-            rec["modelo"].lower().strip(),
+            _norm_txt(rec["local"]),
+            _norm_txt(rec["modelo"]),
             rec["data"],
         )
         existentes[chave] += 1
@@ -412,7 +439,9 @@ def injetar_avulsas_config(dados: dict, avulsas_cfg: list,
         date_str   = d.strftime("%d/%m/%Y")
 
         for cfg_local in avulsas_cfg:
-            local_nome = cfg_local["local"]
+            # injeta no grupo do local REAL da API (com acento), se existir
+            local_nome = locais_reais.get(
+                _norm_txt(cfg_local["local"]), cfg_local["local"])
 
             for cfg_posto in cfg_local.get("postos", []):
                 posto_nome = cfg_posto["posto"]
@@ -423,13 +452,18 @@ def injetar_avulsas_config(dados: dict, avulsas_cfg: list,
                         continue
                     modelo = ativ["modelo"]
                     vezes  = ativ.get("vezes", 1)
+                    if not isinstance(vezes, int) or vezes <= 0:
+                        continue  # vezes=0 → sob demanda, não cobra
 
-                    chave = (local_nome.lower().strip(),
-                             posto_nome.lower().strip(),
-                             modelo.lower().strip(),
+                    chave = (_norm_txt(local_nome),
+                             _norm_txt(modelo),
                              date_str)
-                    ja_feitas = existentes.get(chave, 0)
-                    faltam    = vezes - ja_feitas
+                    # consome o crédito: a mesma execução não pode satisfazer
+                    # duas expectativas do mesmo modelo no mesmo dia
+                    ja_feitas = min(vezes, existentes.get(chave, 0))
+                    if ja_feitas:
+                        existentes[chave] -= ja_feitas
+                    faltam = vezes - ja_feitas
 
                     for _ in range(faltam):
                         rec = {
@@ -440,8 +474,10 @@ def injetar_avulsas_config(dados: dict, avulsas_cfg: list,
                             "op_tipo":       op_tipo,
                             "modelo":        modelo,
                             "avulsa":        True,
-                            "status_int":    0,
-                            "status_label":  "Não iniciada",
+                            # esperada no postos/*.json mas o FindMe nem criou —
+                            # diferente de "Não iniciada" (criada e não executada)
+                            "status_int":    -1,
+                            "status_label":  "Esperada — Não Registrada",
                             "status_class":  "Não Feita",
                             "data":          date_str,
                             "hora":          "-",
@@ -578,8 +614,23 @@ def cor_eficiencia(pct: float):
     return C_LRED, C_RED
 
 
-def status_fill(status_class: str):
-    """Retorna (fill_hex, font_hex) baseado na classe de status."""
+def status_fill(status_label: str, status_class: str = ""):
+    """Retorna (fill_hex, font_hex) pelo rótulo real do status.
+
+    Distingue "Perdida" de "Não iniciada" e destaca
+    "Esperada — Não Registrada" (avulsa do postos/ que o sistema nem criou),
+    em vez de pintar tudo como um "Não Feita" genérico.
+    """
+    por_label = {
+        "Completa":                  (C_LGREEN, C_GREEN),
+        "Incompleta":                (C_YELLOW, "7F6000"),
+        "Incompleta c/ Justif.":     (C_YELLOW, "7F6000"),
+        "Não iniciada":              (C_LRED,   C_RED),
+        "Perdida":                   ("F4A7A3", "7B1F1C"),
+        "Esperada — Não Registrada": ("E57373", "FFFFFF"),
+    }
+    if status_label in por_label:
+        return por_label[status_label]
     return {
         "OK":        (C_LGREEN, C_GREEN),
         "Parcial":   (C_YELLOW, "7F6000"),
@@ -653,6 +704,67 @@ def build_capa(wb, dados: dict, start: str, end: str):
     ws.row_dimensions[5].height = 18
     ws.row_dimensions[6].height = 12
 
+    # ── Programadas × Avulsas, status a status ───────────────────────────────
+    def contar(recs: list) -> dict:
+        n = {"feitas": 0, "parciais": 0, "nao_iniciadas": 0,
+             "perdidas": 0, "esperadas_nr": 0}
+        for r in recs:
+            lbl = r["status_label"]
+            if lbl == "Completa":
+                n["feitas"] += 1
+            elif lbl.startswith("Incompleta"):
+                n["parciais"] += 1
+            elif lbl == "Perdida":
+                n["perdidas"] += 1
+            elif lbl == "Esperada — Não Registrada":
+                n["esperadas_nr"] += 1
+            else:
+                n["nao_iniciadas"] += 1
+        return n
+
+    prog_recs = [r for r in records if not r["avulsa"]]
+    avu_recs  = [r for r in records if r["avulsa"]]
+
+    merge(ws, 7, 1, 7, NCOLS_CAPA)
+    c = cel(ws, 7, 1, "📋  PROGRAMADAS × AVULSAS — visão por status", fill=C_DARK2)
+    c.font = Font(name="Arial", bold=True, size=11, color=C_WHITE)
+    c.alignment = Alignment(horizontal="left", vertical="center", indent=1)
+    ws.row_dimensions[7].height = 22
+
+    hdrs = ["Origem", "✓ Feitas", "⚠ Parciais", "✗ Não iniciadas",
+            "⊘ Perdidas", "❌ Esp. não registr.", "Total", "% Efic."]
+    hfills = [C_DARK, C_GREEN, C_ORANGE, C_RED, "7B1F1C", "B71C1C", C_BLUE2, C_DARK]
+    for col, (h, hf) in enumerate(zip(hdrs, hfills), 1):
+        c = cel(ws, 8, col, h, fill=hf)
+        c.font = mk_font(bold=True, size=9)
+        c.alignment = Alignment(horizontal="center", vertical="center")
+    ws.row_dimensions[8].height = 18
+
+    for i, (nome_origem, recs) in enumerate(
+            [("Programadas", prog_recs), ("Avulsas", avu_recs)]):
+        n = contar(recs)
+        total = len(recs)
+        pct = pct_eficiencia(n["feitas"], n["parciais"], total)
+        row = 9 + i
+        esp_nr = n["esperadas_nr"] if nome_origem == "Avulsas" else "—"
+        vals = [nome_origem, n["feitas"], n["parciais"], n["nao_iniciadas"],
+                n["perdidas"], esp_nr, total, f"{pct}%"]
+        bg = C_GRAY if i % 2 == 0 else C_WHITE
+        for col, val in enumerate(vals, 1):
+            c = cel(ws, row, col, val, fill=bg)
+            c.font = Font(name="Arial", size=10, color="000000",
+                          bold=(col in (1, 8)))
+            c.alignment = Alignment(
+                horizontal="left" if col == 1 else "center",
+                vertical="center", indent=1 if col == 1 else 0)
+        fc, ft = cor_eficiencia(pct)
+        c8 = ws.cell(row=row, column=8)
+        c8.fill = mk_fill(fc)
+        c8.font = Font(name="Arial", bold=True, size=10, color=ft)
+        ws.row_dimensions[row].height = 18
+
+    ws.row_dimensions[11].height = 12
+
     # ── Tabela de Postos ─────────────────────────────────────────────────────
     def tabela_postos(row_start: int, titulo: str, locais: list,
                       cor_titulo: str) -> int:
@@ -704,7 +816,7 @@ def build_capa(wb, dados: dict, start: str, end: str):
     otimos   = [(n, d) for n, d in reversed(locais_sorted) if d["pct"] >= 90]
     todos    = list(reversed(locais_sorted))
 
-    row_cur = 7
+    row_cur = 12  # depois da tabela Programadas × Avulsas
 
     if criticos:
         row_cur = tabela_postos(
@@ -846,12 +958,25 @@ def build_atividades(wb, dados: dict, start: str, end: str,
         n_avulsas = sum(1 for r in recs if r["avulsa"])
         n_prog    = len(recs) - n_avulsas
 
+        # Quebra real por status (não amassa Perdida com Não iniciada)
+        n_ni   = sum(1 for r in recs if r["status_label"] == "Não iniciada")
+        n_perd = sum(1 for r in recs if r["status_label"] == "Perdida")
+        n_enr  = sum(1 for r in recs
+                     if r["status_label"] == "Esperada — Não Registrada")
+
         # Separador de local
         merge(ws, row_cur, 1, row_cur, NCOLS_ATI)
-        resumo = (f"  📍  {local_nome}   —   "
-                  f"✓ {d['ok']} OK   ⚠ {d['parcial']} Parcial   "
-                  f"✗ {d['nao_feita']} Não Feitas   |   {d['pct']}% eficiência"
-                  + (f"   |   🔔 {n_avulsas} avulsa(s)" if n_avulsas else ""))
+        partes = [f"✓ {d['ok']} Feitas", f"⚠ {d['parcial']} Parciais"]
+        if n_ni:
+            partes.append(f"✗ {n_ni} Não iniciadas")
+        if n_perd:
+            partes.append(f"⊘ {n_perd} Perdidas")
+        if n_enr:
+            partes.append(f"❌ {n_enr} Esperadas não registradas")
+        resumo = (f"  📍  {local_nome}   —   " + "   ".join(partes)
+                  + f"   |   {d['pct']}% eficiência"
+                  + f"   |   {n_prog} programada(s)"
+                  + (f" + 🔔 {n_avulsas} avulsa(s)" if n_avulsas else ""))
         c = cel(ws, row_cur, 1, resumo, fill=C_BLUE2)
         c.font = Font(name="Arial", bold=True, size=10, color=C_WHITE)
         c.alignment = Alignment(horizontal="left", vertical="center")
@@ -860,7 +985,7 @@ def build_atividades(wb, dados: dict, start: str, end: str,
 
         for i, rec in enumerate(recs):
             sc     = rec["status_class"]
-            sf, st = status_fill(sc)
+            sf, st = status_fill(rec["status_label"], sc)
             is_avulsa = rec["avulsa"]
 
             # Avulsas têm fundo levemente diferente para destacar
@@ -1442,9 +1567,12 @@ def main():
                     "op_tipo":       OP_TYPE.get(station.get("operation_type", 0), "N/C"),
                     "modelo":        (row.get("patrol") or {}).get("name", "-"),
                     "avulsa":        True,
-                    "status_int":    0,
-                    "status_label":  "Nao iniciada",
-                    "status_class":  "Nao Feita",
+                    # veio do endpoint missed-single-activities → é Perdida
+                    # (antes: "Nao iniciada" sem acento, que nem casava com
+                    # o mapa de cores e aparecia sem destaque)
+                    "status_int":    5,
+                    "status_label":  "Perdida",
+                    "status_class":  "Não Feita",
                     "data":          data_fmt(dt_prog),
                     "hora":          hora_fmt(dt_prog),
                     "turno":         turno(dt_prog),

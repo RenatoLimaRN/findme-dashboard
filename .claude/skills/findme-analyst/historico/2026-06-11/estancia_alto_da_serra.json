@@ -1,0 +1,17 @@
+{
+  "data": "2026-06-11",
+  "local": "ESTANCIA ALTO DA SERRA",
+  "ok": 12,
+  "parcial": 1,
+  "nao_feita": 4,
+  "total": 17,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDAS",
+      "nao_feita": 4
+    }
+  ],
+  "pct_cumprimento": 70.6,
+  "dados_inconclusivos": false,
+  "slug": "estancia_alto_da_serra"
+}

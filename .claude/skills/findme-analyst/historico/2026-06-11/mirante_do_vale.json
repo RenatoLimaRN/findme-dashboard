@@ -1,0 +1,17 @@
+{
+  "data": "2026-06-11",
+  "local": "MIRANTE DO VALE",
+  "ok": 0,
+  "parcial": 0,
+  "nao_feita": 2,
+  "total": 2,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA NOTURNA - MIRANTE",
+      "nao_feita": 2
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "mirante_do_vale"
+}

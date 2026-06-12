@@ -1,0 +1,17 @@
+{
+  "data": "2026-06-11",
+  "local": "MAURIZIO",
+  "ok": 7,
+  "parcial": 1,
+  "nao_feita": 1,
+  "total": 9,
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 77.8,
+  "dados_inconclusivos": false,
+  "slug": "maurizio"
+}

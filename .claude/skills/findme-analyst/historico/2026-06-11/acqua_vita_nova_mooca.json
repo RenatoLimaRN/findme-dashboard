@@ -1,0 +1,46 @@
+{
+  "data": "2026-06-11",
+  "local": "CONDOMÍNIO ACQUA VITA NOVA MOOCA",
+  "ok": 8,
+  "parcial": 2,
+  "nao_feita": 25,
+  "total": 35,
+  "esperadas_total": 28,
+  "feitas_das_esperadas": 6,
+  "perdidas_das_esperadas": 21,
+  "modelos_perdidos_hoje": [
+    "B04 - ACADEMIA - TORRE 02",
+    "D03 - COPA/SALA DE MANUTENCAO - TORRE 4",
+    "D04 - HOME OFFICE - TORRE 4",
+    "L03 - QUADRA",
+    "L04 - VARRICAO DA RUA EM GERAL",
+    "L05 - PISTA DE ATLETISMO",
+    "LIMPEZA - LAVACAO GERAL DA AREA EXTERNA EM GERAL",
+    "B01 - HALL DE ENTRADA - TORRE 2"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "RONDA GERAL",
+      "nao_feita": 3
+    },
+    {
+      "modelo": "B04 - ACADEMIA - TORRE 02",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "D03 - COPA/SALA DE MANUTENCAO - TORRE 4",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "D04 - HOME OFFICE - TORRE 4",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "L03 - QUADRA",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 22.9,
+  "dados_inconclusivos": false,
+  "slug": "acqua_vita_nova_mooca"
+}

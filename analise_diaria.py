@@ -428,7 +428,7 @@ def carregar_email_config() -> dict:
     return json.loads(fp.read_text(encoding="utf-8"))
 
 
-def enviar_email(cfg: dict, assunto: str, html: str, anexo: Path) -> None:
+def enviar_email(cfg: dict, assunto: str, html: str, anexo) -> None:
     msg = MIMEMultipart()
     msg["Subject"] = assunto
     from_name = cfg.get("from_name") or "FindMe Analyst"
@@ -437,14 +437,25 @@ def enviar_email(cfg: dict, assunto: str, html: str, anexo: Path) -> None:
     msg["To"] = ", ".join(destinos)
     msg.attach(MIMEText(html, "html", "utf-8"))
 
-    if anexo and anexo.exists():
-        with open(anexo, "rb") as f:
-            part = MIMEBase("application",
-                            "vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+    # anexo pode ser um Path único ou uma lista de Paths (PDF + Excel)
+    anexos = anexo if isinstance(anexo, (list, tuple)) else [anexo]
+    mimes = {
+        ".pdf": ("application", "pdf"),
+        ".xlsx": ("application",
+                  "vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
+    }
+    for a in anexos:
+        if not a or not Path(a).exists():
+            continue
+        a = Path(a)
+        maintype, subtype = mimes.get(a.suffix.lower(),
+                                      ("application", "octet-stream"))
+        with open(a, "rb") as f:
+            part = MIMEBase(maintype, subtype)
             part.set_payload(f.read())
         encoders.encode_base64(part)
         part.add_header("Content-Disposition",
-                        f'attachment; filename="{anexo.name}"')
+                        f'attachment; filename="{a.name}"')
         msg.attach(part)
 
     host = cfg.get("smtp_host", "smtp.gmail.com")
@@ -545,6 +556,18 @@ def main():
             except Exception as e:
                 log(f"  WARNING: aprender_postos exception: {e}")
 
+        # PDF resumo de 1 página (anexado junto com o Excel)
+        pdf_path = None
+        try:
+            log("  gerando PDF resumo...")
+            import gerar_pdf_resumo
+            pdf_path = xlsx.parent / f"RESUMO_{data_alvo}.pdf"
+            gerar_pdf_resumo.gerar(dados, data_alvo, pdf_path)
+            log(f"  -> {pdf_path.name}")
+        except Exception as e:
+            log(f"  WARNING: PDF resumo falhou: {e}")
+            pdf_path = None
+
         if args.sem_email:
             log("OK (--sem-email, pulando envio)")
             return 0
@@ -553,7 +576,8 @@ def main():
         cfg = carregar_email_config()
         html = montar_html(data_alvo, dados)
         d_br = datetime.fromisoformat(data_alvo).strftime("%d/%m/%Y")
-        enviar_email(cfg, f"FindMe — Fechamento {d_br}", html, xlsx)
+        anexos = [p for p in (pdf_path, xlsx) if p]
+        enviar_email(cfg, f"FindMe — Fechamento {d_br}", html, anexos)
         destinos = cfg["to"] if isinstance(cfg["to"], list) else [cfg["to"]]
         log(f"  -> enviado para: {', '.join(destinos)}")
         log("CONCLUÍDO COM SUCESSO")

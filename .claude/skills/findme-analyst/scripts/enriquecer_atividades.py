@@ -399,10 +399,10 @@ def enriquecer(xlsx_path, dados):
     #    O usuário quer UMA aba só, com menos cor.
     if "Resumo por Posto" in wb.sheetnames:
         del wb["Resumo por Posto"]
-    _criar_aba_unificada(wb, dados)          # cria "Atividades — por local" (temp)
+    _criar_aba_unificada(wb, dados)          # lê a bruta e cria "Atividades — exec"
     if "Atividades" in wb.sheetnames:
-        del wb["Atividades"]                 # remove a bruta linha-a-linha
-    wb["Atividades — por local"].title = "Atividades"
+        del wb["Atividades"]                 # remove a bruta original
+    wb["Atividades — exec"].title = "Atividades"
     _mover_aba_apos_capa(wb, "Atividades")
 
     wb.save(xlsx_path)
@@ -526,34 +526,80 @@ def _classificar_linhas_local(agg, cruz):
     return rows
 
 
-def _status_render(r):
-    """Mapeia uma linha classificada → (chave_status, rótulo) pra pílula."""
-    if r["tag"].startswith("❌"):
-        return "nao_registrada", "não registrada"
-    sk = r["status_key"]
-    if sk == "feita":
-        return "feita", "feita"
-    if sk == "parcial":
-        return "parcial", "parcial"
-    return "nao_feita", "não feita"
+# status (rótulo cru da aba bruta) -> (chave de cor, rótulo curto)
+STATUS_EXEC = {
+    "completa":                  ("feita", "feita"),
+    "incompleta":                ("parcial", "parcial"),
+    "incompleta c/ justif.":     ("parcial", "parcial"),
+    "incompleta c/ justificativa": ("parcial", "parcial"),
+    "perdida":                   ("nao_feita", "perdida"),
+    "nao iniciada":              ("nao_feita", "não feita"),
+    "não iniciada":              ("nao_feita", "não feita"),
+    "esperada não registrada":   ("nao_registrada", "não registrada"),
+    "esperada - não registrada": ("nao_registrada", "não registrada"),
+}
+
+
+def _hhmm_para_min(h):
+    """'06:30' -> 390; '—'/'-'/'' -> None (pra ordenar e separar esperadas)."""
+    s = str(h or "").strip()
+    if ":" not in s:
+        return None
+    try:
+        hh, mm = s.split(":")[:2]
+        return int(hh) * 60 + int(mm)
+    except (ValueError, TypeError):
+        return None
 
 
 def _criar_aba_unificada(wb, dados):
-    """Cria a aba unificada (Resumo + Atividades numa só).
+    """Recria a aba 'Atividades' como UMA linha por execução (com horário).
 
-    Por local: atividades vindas do SISTEMA mas não cadastradas aparecem no
-    topo (destaque creme, "será aprendida"); abaixo, as do CADASTRO com seu
-    status. Cor só na coluna Status — o resto fica branco/zebra pra não poluir.
+    Lê a aba bruta 'Atividades' (que o findme_programacao gera com Data/Hora/
+    Modelo/Status/Duração/Justificativa por execução, e que o enriquecer já
+    completou com as linhas [ESPERADA — NÃO REGISTRADA]) e reescreve numa aba
+    enxuta: Hora | Modelo | Status | Duração | Justificativa. Cor só no Status.
+    Por local: execuções reais ordenadas por horário; esperadas-não-registradas
+    (sem horário) no fim.
     """
-    name = "Atividades — por local"
+    src = wb["Atividades"]  # aba bruta já processada pelas etapas 1-8
+
+    # ── 1) ler a aba bruta agrupando por local ────────────────────────────────
+    # colunas da bruta: 1=Data 2=Hora 4=Tipo/Modelo 5=Status 8=Duração 11=Justif
+    locais = []
+    atual = None
+    for ri in range(2, src.max_row + 1):
+        v1 = src.cell(row=ri, column=1).value
+        s1 = str(v1 or "").strip()
+        if ICONE_GRUPO in s1:
+            nome = s1.replace(ICONE_GRUPO, "").strip()
+            nome = re.split(r"\s{2,}|—", nome, maxsplit=1)[0].strip()
+            atual = {"nome": nome, "linhas": []}
+            locais.append(atual)
+            continue
+        if ICONE_CONFIG in s1 or "Atividades configuradas" in s1:
+            continue
+        if atual is None or not DATE_RE.match(s1):
+            continue
+        modelo = str(src.cell(row=ri, column=4).value or "").strip()
+        modelo = re.sub(r"^\[AVULSA\]\s*", "", modelo)
+        modelo = re.sub(r"^" + re.escape(TAG_ESPERADA) + r"\s*", "", modelo).strip()
+        atual["linhas"].append({
+            "hora": str(src.cell(row=ri, column=2).value or "").strip(),
+            "modelo": modelo,
+            "status": str(src.cell(row=ri, column=5).value or "").strip(),
+            "duracao": str(src.cell(row=ri, column=8).value or "").strip(),
+            "justif": str(src.cell(row=ri, column=11).value or "").strip(),
+        })
+
+    # ── 2) criar a aba nova ───────────────────────────────────────────────────
+    name = "Atividades — exec"
     if name in wb.sheetnames:
         del wb[name]
     ws = wb.create_sheet(name)
-
-    headers = ["Origem", "Posto", "Modelo", "Esp.", "Feito", "Status", "Justificativa"]
-    widths = [13, 18, 40, 6, 7, 16, 50]
-    C_ORIGEM, C_POSTO, C_MODELO, C_ESP, C_FEITO, C_STATUS, C_JUST = range(1, 8)
-
+    headers = ["Hora", "Modelo", "Status", "Duração", "Justificativa"]
+    widths = [8, 46, 16, 11, 52]
+    C_HORA, C_MODELO, C_STATUS, C_DUR, C_JUST = range(1, 6)
     for ci, h in enumerate(headers, start=1):
         c = ws.cell(row=1, column=ci, value=h)
         c.font = Font(bold=True, color="FFFFFF", name="Calibri")
@@ -561,36 +607,24 @@ def _criar_aba_unificada(wb, dados):
         c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
     for i, w in enumerate(widths, start=1):
         ws.column_dimensions[get_column_letter(i)].width = w
-    ws.row_dimensions[1].height = 24
+    ws.row_dimensions[1].height = 22
     ws.freeze_panes = "A2"
 
-    cruz_idx = dados.get("cruzamento_por_local", {})
     row = 2
-
-    # locais ordenados por cumprimento ascendente (piores primeiro)
-    locais = []
-    for agg in dados.get("atividades_agg", []) or []:
-        total = agg.get("total", 0)
-        pct = (100.0 * agg.get("ok", 0) / total) if total else 0
-        locais.append((pct, agg))
-    locais.sort(key=lambda x: x[0])
-
-    for pct, agg in locais:
-        slug = agg.get("slug", "")
-        nome = agg.get("nome", slug)
-        linhas = _classificar_linhas_local(agg, cruz_idx.get(slug, {}))
+    for loc in locais:
+        linhas = loc["linhas"]
         if not linhas:
             continue
+        # execuções reais (com horário) ordenadas; esperadas (sem hora) no fim
+        reais = [l for l in linhas if _hhmm_para_min(l["hora"]) is not None]
+        esperadas = [l for l in linhas if _hhmm_para_min(l["hora"]) is None]
+        reais.sort(key=lambda l: _hhmm_para_min(l["hora"]))
+        ordenadas = reais + esperadas
 
-        # sistema (extras / sem cadastro) primeiro, cadastro depois
-        sistema = [r for r in linhas if r["tipo"] != "Programada"]
-        cadastro = [r for r in linhas if r["tipo"] == "Programada"]
-        ordenadas = sistema + cadastro
-
-        f = sum(1 for r in cadastro if r["status_key"] == "feita")
-        tot_cad = len(cadastro)
-        cab = (f"📍  {nome}    {f}/{tot_cad} cadastradas feitas"
-               + (f"    +{len(sistema)} do sistema" if sistema else ""))
+        feitas = sum(1 for l in linhas if l["status"].strip().lower() == "completa")
+        cab = (f"📍  {loc['nome']}    {len(reais)} atividade(s)"
+               + (f"   ·   {feitas} feita(s)" if reais else "")
+               + (f"   ·   {len(esperadas)} esperada(s) não registrada(s)" if esperadas else ""))
         cell = ws.cell(row=row, column=1, value=cab)
         ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=len(headers))
         cell.font = Font(bold=True, color="FFFFFF", size=11)
@@ -599,52 +633,30 @@ def _criar_aba_unificada(wb, dados):
         ws.row_dimensions[row].height = 20
         row += 1
 
-        for idx, r in enumerate(ordenadas):
-            eh_sistema = r["tipo"] != "Programada"
-            modelo = r["modelo"]
-            if eh_sistema:
-                origem = "⬆ sistema"
-                modelo = f"{modelo}  · nova, será aprendida"
-            else:
-                origem = "cadastro"
-
-            ws.cell(row=row, column=C_ORIGEM, value=origem)
-            ws.cell(row=row, column=C_POSTO, value=r["posto"])
-            ws.cell(row=row, column=C_MODELO, value=modelo)
-            ws.cell(row=row, column=C_ESP, value=r["esperado"])
-            ws.cell(row=row, column=C_FEITO, value=r["ok"])
-            sk, rotulo = _status_render(r)
+        for idx, l in enumerate(ordenadas):
+            sk, rotulo = STATUS_EXEC.get(l["status"].lower(), (None, l["status"] or "—"))
+            ws.cell(row=row, column=C_HORA, value=l["hora"] or "—")
+            ws.cell(row=row, column=C_MODELO, value=l["modelo"])
             ws.cell(row=row, column=C_STATUS, value=rotulo)
-            ws.cell(row=row, column=C_JUST,
-                    value=" | ".join(r["justifs"][:2]) if r["justifs"] else "")
+            ws.cell(row=row, column=C_DUR, value=l["duracao"] or "—")
+            ws.cell(row=row, column=C_JUST, value=l["justif"])
 
-            # fundo da LINHA: creme leve se sistema, zebra se cadastro
-            if eh_sistema:
-                linha_bg = PatternFill("solid", start_color=COR_LINHA_SISTEMA)
-            elif idx % 2:
-                linha_bg = PatternFill("solid", start_color=COR_ZEBRA)
-            else:
-                linha_bg = FILL_BRANCO
+            # zebra leve nas linhas (sem poluir)
+            linha_bg = PatternFill("solid", start_color=COR_ZEBRA) if idx % 2 else FILL_BRANCO
             for ci in range(1, len(headers) + 1):
                 ws.cell(row=row, column=ci).fill = linha_bg
 
-            # cor SÓ na célula de status (a pílula)
-            bg, fg = STATUS_CORES.get(sk, ("FFFFFF", "000000"))
-            cst = ws.cell(row=row, column=C_STATUS)
-            cst.fill = PatternFill("solid", start_color=bg)
-            cst.font = Font(bold=True, color=fg, size=9)
-            cst.alignment = Alignment(horizontal="center", vertical="center")
-
-            # alinhamentos / fontes do resto
-            ws.cell(row=row, column=C_ORIGEM).font = Font(
-                color=("9A3412" if eh_sistema else "888888"), size=9,
-                bold=eh_sistema)
-            for ci in (C_ESP, C_FEITO):
+            # cor SÓ na célula de status
+            if sk:
+                bg, fg = STATUS_CORES.get(sk, ("FFFFFF", "000000"))
+                cst = ws.cell(row=row, column=C_STATUS)
+                cst.fill = PatternFill("solid", start_color=bg)
+                cst.font = Font(bold=True, color=fg, size=9)
+            for ci in (C_HORA, C_STATUS, C_DUR):
                 ws.cell(row=row, column=ci).alignment = Alignment(
                     horizontal="center", vertical="center")
             ws.cell(row=row, column=C_JUST).alignment = Alignment(
                 wrap_text=True, vertical="top")
-            ws.cell(row=row, column=C_POSTO).font = Font(color="888888", size=9)
             row += 1
 
     if row > 2:

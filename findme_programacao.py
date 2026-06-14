@@ -1636,7 +1636,8 @@ def main():
     build_atividades(wb, dados, start, end,
                      todos_locais=todos_nomes,
                      modelos_historicos=modelos_historicos)
-    build_ranking(wb, dados, start, end)
+    # Ranking removido do GERAL — redundante com a Capa Executiva e com o
+    # PDF resumo. A função build_ranking segue definida caso queira reativar.
     build_grade(wb, dados, start, end)
 
     geral_name = f"GERAL_{start}_{end}.xlsx"

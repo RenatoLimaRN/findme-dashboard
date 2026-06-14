@@ -3,8 +3,8 @@
   "local": "CONDOMÍNIO ALTA VISTA",
   "ok": 0,
   "parcial": 1,
-  "nao_feita": 12,
-  "total": 13,
+  "nao_feita": 8,
+  "total": 9,
   "esperadas_total": 7,
   "feitas_das_esperadas": 0,
   "perdidas_das_esperadas": 7,
@@ -19,10 +19,6 @@
   ],
   "top_falhas_modelos": [
     {
-      "modelo": "RONDA - Áreas Comuns",
-      "nao_feita": 5
-    },
-    {
       "modelo": "02 - LIMPEZA DA ACADEMIA",
       "nao_feita": 2
     },
@@ -36,6 +32,10 @@
     },
     {
       "modelo": "LIMPEZA DOS ELEVADORES - TORRE 01",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "07 - LIMPEZA DO HALL DE ENTRADA - TORRE 02",
       "nao_feita": 1
     }
   ],

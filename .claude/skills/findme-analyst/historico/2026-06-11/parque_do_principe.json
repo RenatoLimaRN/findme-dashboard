@@ -3,24 +3,24 @@
   "local": "CONDOMÍNIO PARQUE DO PRÍNCIPE",
   "ok": 0,
   "parcial": 0,
-  "nao_feita": 8,
-  "total": 8,
+  "nao_feita": 5,
+  "total": 5,
   "top_falhas_modelos": [
     {
-      "modelo": "RONDA - NOTURONO",
+      "modelo": "ESTACIONAMENTOS",
       "nao_feita": 2
     },
     {
       "modelo": "RONDA SETORIAL A",
-      "nao_feita": 2
+      "nao_feita": 1
     },
     {
       "modelo": "RONDA SETORIAL B",
-      "nao_feita": 2
+      "nao_feita": 1
     },
     {
-      "modelo": "ESTACIONAMENTOS",
-      "nao_feita": 2
+      "modelo": "RONDA - NOTURONO",
+      "nao_feita": 1
     }
   ],
   "pct_cumprimento": 0.0,

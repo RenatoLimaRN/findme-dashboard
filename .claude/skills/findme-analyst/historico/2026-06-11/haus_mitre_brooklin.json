@@ -1,12 +1,12 @@
 {
   "data": "2026-06-11",
   "local": "HAUS MITRE BROOKLIN",
-  "ok": 7,
+  "ok": 5,
   "parcial": 1,
   "nao_feita": 0,
-  "total": 8,
+  "total": 6,
   "top_falhas_modelos": [],
-  "pct_cumprimento": 87.5,
+  "pct_cumprimento": 83.3,
   "dados_inconclusivos": false,
   "slug": "haus_mitre_brooklin"
 }

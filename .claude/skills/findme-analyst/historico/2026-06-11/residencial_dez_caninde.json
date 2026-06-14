@@ -2,11 +2,11 @@
   "data": "2026-06-11",
   "local": "CONDOMINIO RESIDENCIAL DEZ CANINDÉ",
   "ok": 2,
-  "parcial": 3,
+  "parcial": 2,
   "nao_feita": 0,
-  "total": 5,
+  "total": 4,
   "top_falhas_modelos": [],
-  "pct_cumprimento": 40.0,
+  "pct_cumprimento": 50.0,
   "dados_inconclusivos": false,
   "slug": "residencial_dez_caninde"
 }

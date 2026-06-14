@@ -1,17 +1,17 @@
 {
   "data": "2026-06-11",
   "local": "CONDOMÍNIO GREENFIELD",
-  "ok": 1,
-  "parcial": 8,
-  "nao_feita": 8,
-  "total": 17,
+  "ok": 0,
+  "parcial": 7,
+  "nao_feita": 4,
+  "total": 11,
   "top_falhas_modelos": [
     {
       "modelo": "RONDA - GREENFIELD",
-      "nao_feita": 8
+      "nao_feita": 4
     }
   ],
-  "pct_cumprimento": 5.9,
+  "pct_cumprimento": 0.0,
   "dados_inconclusivos": false,
   "slug": "greenfield"
 }

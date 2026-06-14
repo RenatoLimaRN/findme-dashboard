@@ -2,20 +2,20 @@
   "data": "2026-06-11",
   "local": "CONDOMÍNIO ATUA MOOCA",
   "ok": 0,
-  "parcial": 5,
+  "parcial": 1,
   "nao_feita": 3,
-  "total": 8,
+  "total": 4,
   "esperadas_total": 1,
   "feitas_das_esperadas": 0,
   "perdidas_das_esperadas": 0,
   "modelos_perdidos_hoje": [],
   "top_falhas_modelos": [
     {
-      "modelo": "AREAS COMUNS",
+      "modelo": "RONDA - AREAS COMUNS /GARAGEM",
       "nao_feita": 1
     },
     {
-      "modelo": "RONDA - AREAS COMUNS /GARAGEM",
+      "modelo": "AREAS COMUNS",
       "nao_feita": 1
     },
     {

@@ -1,16 +1,16 @@
 {
   "data": "2026-06-11",
   "local": "EDIFICIO GUADELUPE",
-  "ok": 20,
-  "parcial": 1,
+  "ok": 15,
+  "parcial": 0,
   "nao_feita": 0,
-  "total": 21,
+  "total": 15,
   "esperadas_total": 11,
   "feitas_das_esperadas": 11,
   "perdidas_das_esperadas": 0,
   "modelos_perdidos_hoje": [],
   "top_falhas_modelos": [],
-  "pct_cumprimento": 95.2,
+  "pct_cumprimento": 100.0,
   "dados_inconclusivos": false,
   "slug": "edificio_guadelupe"
 }

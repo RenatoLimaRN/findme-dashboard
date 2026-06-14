@@ -65,6 +65,21 @@ COR_PERDIDA        = "FFC7CE"
 COR_ESPERADA_FALTA = "E57373"
 FILL_BRANCO        = PatternFill(fill_type=None)
 
+# Paleta suave da aba unificada — cor SÓ na célula de Status (fundo, texto).
+# O resto da linha fica branco/cinza-claro pra não poluir.
+STATUS_CORES = {
+    "feita":          ("E6F4EA", "1E6B3C"),
+    "parcial":        ("FEF3D7", "7F6000"),
+    "nao_feita":      ("FDE8E8", "A12D2D"),
+    "nao_registrada": ("F0EEE9", "5F5E5A"),
+}
+STATUS_ROTULO = {
+    "feita": "feita", "parcial": "parcial",
+    "nao_feita": "não feita", "nao_registrada": "não registrada",
+}
+COR_LINHA_SISTEMA = "FFF7ED"   # creme leve — destaca atividade vinda do sistema
+COR_ZEBRA         = "FAFAF8"   # cinza-claro alternado nas linhas de cadastro
+
 
 def _slug(nome):
     s = unicodedata.normalize("NFD", nome or "")
@@ -379,19 +394,33 @@ def enriquecer(xlsx_path, dados):
             cell = ws.cell(row=ri, column=COL_FINAL)
             cell.alignment = Alignment(wrap_text=True, vertical="top")
 
-    # 9) Criar/recriar aba "Resumo por Posto" — visão consolidada por local
-    _criar_aba_resumo_posto(wb, dados)
+    # 9) Aba unificada "Atividades" (cruzamento limpo, cor só no status) e
+    #    remoção da aba bruta linha-a-linha + da antiga "Resumo por Posto".
+    #    O usuário quer UMA aba só, com menos cor.
+    if "Resumo por Posto" in wb.sheetnames:
+        del wb["Resumo por Posto"]
+    _criar_aba_unificada(wb, dados)          # cria "Atividades — por local" (temp)
+    if "Atividades" in wb.sheetnames:
+        del wb["Atividades"]                 # remove a bruta linha-a-linha
+    wb["Atividades — por local"].title = "Atividades"
+    _mover_aba_apos_capa(wb, "Atividades")
 
     wb.save(xlsx_path)
     return {
         "ok": True,
         "removidas_da_rodada_anterior": n_removidas,
         "grupos_processados": len(grupos),
-        "grupos_com_secao_configurada_nativa": sum(1 for g in grupos if g["tem_secao_configurada"]),
-        "esperadas_faltantes_inseridas": n_inseridas,
-        "linhas_finais": ws.max_row,
-        "aba_resumo_posto_criada": True,
+        "aba_unificada_criada": True,
     }
+
+
+def _mover_aba_apos_capa(wb, nome):
+    """Reposiciona a aba `nome` logo após 'Capa Executiva' (ou no início)."""
+    if nome not in wb.sheetnames:
+        return
+    alvo = wb.sheetnames.index("Capa Executiva") + 1 if "Capa Executiva" in wb.sheetnames else 0
+    atual = wb.sheetnames.index(nome)
+    wb.move_sheet(nome, offset=alvo - atual)
 
 
 # ─── Aba "Resumo por Posto" ──────────────────────────────────────────────────
@@ -497,100 +526,127 @@ def _classificar_linhas_local(agg, cruz):
     return rows
 
 
-def _criar_aba_resumo_posto(wb, dados):
-    """Cria/recria aba 'Resumo por Posto' — visão linha-a-linha de cada local
-    com Modelo / Esperado / OK / Parc / NF / Status / Justificativa."""
-    name = "Resumo por Posto"
+def _status_render(r):
+    """Mapeia uma linha classificada → (chave_status, rótulo) pra pílula."""
+    if r["tag"].startswith("❌"):
+        return "nao_registrada", "não registrada"
+    sk = r["status_key"]
+    if sk == "feita":
+        return "feita", "feita"
+    if sk == "parcial":
+        return "parcial", "parcial"
+    return "nao_feita", "não feita"
+
+
+def _criar_aba_unificada(wb, dados):
+    """Cria a aba unificada (Resumo + Atividades numa só).
+
+    Por local: atividades vindas do SISTEMA mas não cadastradas aparecem no
+    topo (destaque creme, "será aprendida"); abaixo, as do CADASTRO com seu
+    status. Cor só na coluna Status — o resto fica branco/zebra pra não poluir.
+    """
+    name = "Atividades — por local"
     if name in wb.sheetnames:
         del wb[name]
-    # Insere logo após Capa Executiva (índice 1)
-    pos = 1 if "Capa Executiva" in wb.sheetnames else 0
-    ws = wb.create_sheet(name, pos)
+    ws = wb.create_sheet(name)
 
-    headers = ["Local", "Posto", "Tipo", "Modelo", "Esp.", "OK", "Parc", "NF", "Status", "Justificativa"]
-    widths = [32, 18, 22, 35, 6, 5, 5, 5, 16, 55]
+    headers = ["Origem", "Posto", "Modelo", "Esp.", "Feito", "Status", "Justificativa"]
+    widths = [13, 18, 40, 6, 7, 16, 50]
+    C_ORIGEM, C_POSTO, C_MODELO, C_ESP, C_FEITO, C_STATUS, C_JUST = range(1, 8)
 
-    # Header row
     for ci, h in enumerate(headers, start=1):
         c = ws.cell(row=1, column=ci, value=h)
-        c.font = Font(bold=True, color=COR_TXT_CABLOCAL, name="Calibri")
+        c.font = Font(bold=True, color="FFFFFF", name="Calibri")
         c.fill = PatternFill("solid", start_color=COR_BG_HEADER)
         c.alignment = Alignment(horizontal="center", vertical="center", wrap_text=True)
     for i, w in enumerate(widths, start=1):
         ws.column_dimensions[get_column_letter(i)].width = w
-    ws.row_dimensions[1].height = 28
+    ws.row_dimensions[1].height = 24
     ws.freeze_panes = "A2"
-
-    thin = Side(style="thin", color="D6E4F0")
-    border = Border(left=thin, right=thin, top=thin, bottom=thin)
 
     cruz_idx = dados.get("cruzamento_por_local", {})
     row = 2
 
-    # Ordena os locais: cumprimento ascendente (críticos primeiro)
+    # locais ordenados por cumprimento ascendente (piores primeiro)
     locais = []
     for agg in dados.get("atividades_agg", []) or []:
         total = agg.get("total", 0)
-        ok = agg.get("ok", 0)
-        pct = (100.0 * ok / total) if total else 0
+        pct = (100.0 * agg.get("ok", 0) / total) if total else 0
         locais.append((pct, agg))
     locais.sort(key=lambda x: x[0])
 
     for pct, agg in locais:
         slug = agg.get("slug", "")
         nome = agg.get("nome", slug)
-        cruz = cruz_idx.get(slug, {})
-        linhas = _classificar_linhas_local(agg, cruz)
+        linhas = _classificar_linhas_local(agg, cruz_idx.get(slug, {}))
         if not linhas:
             continue
 
-        # Cabeçalho do local (mesclado)
-        cab_txt = f"📍 {nome}   —   {pct:.0f}% cumprimento   ({len(linhas)} atividade(s))"
-        cell = ws.cell(row=row, column=1, value=cab_txt)
+        # sistema (extras / sem cadastro) primeiro, cadastro depois
+        sistema = [r for r in linhas if r["tipo"] != "Programada"]
+        cadastro = [r for r in linhas if r["tipo"] == "Programada"]
+        ordenadas = sistema + cadastro
+
+        f = sum(1 for r in cadastro if r["status_key"] == "feita")
+        tot_cad = len(cadastro)
+        cab = (f"📍  {nome}    {f}/{tot_cad} cadastradas feitas"
+               + (f"    +{len(sistema)} do sistema" if sistema else ""))
+        cell = ws.cell(row=row, column=1, value=cab)
         ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=len(headers))
-        cell.font = Font(bold=True, color=COR_TXT_CABLOCAL, size=11)
+        cell.font = Font(bold=True, color="FFFFFF", size=11)
         cell.fill = PatternFill("solid", start_color=COR_BG_CABLOCAL)
         cell.alignment = Alignment(vertical="center", indent=1)
-        ws.row_dimensions[row].height = 22
+        ws.row_dimensions[row].height = 20
         row += 1
 
-        for r in linhas:
-            ws.cell(row=row, column=1, value="")  # local fica no cabeçalho mesclado
-            ws.cell(row=row, column=2, value=r["posto"])
-            ws.cell(row=row, column=3, value=r["tipo"])
-            ws.cell(row=row, column=4, value=r["modelo"])
-            ws.cell(row=row, column=5, value=r["esperado"])
-            ws.cell(row=row, column=6, value=r["ok"])
-            ws.cell(row=row, column=7, value=r["parc"])
-            ws.cell(row=row, column=8, value=r["nf"])
-            ws.cell(row=row, column=9, value=r["tag"])
-            ws.cell(row=row, column=10, value=" | ".join(r["justifs"][:3]) if r["justifs"] else "")
-
-            # Cor de fundo conforme status
-            sk = r["status_key"]
-            if sk == "feita":
-                fill_cor = COR_OK
-            elif sk == "parcial":
-                fill_cor = COR_PARCIAL
-            elif r["tag"].startswith("❌"):
-                fill_cor = COR_ESPERADA_FALTA
+        for idx, r in enumerate(ordenadas):
+            eh_sistema = r["tipo"] != "Programada"
+            modelo = r["modelo"]
+            if eh_sistema:
+                origem = "⬆ sistema"
+                modelo = f"{modelo}  · nova, será aprendida"
             else:
-                fill_cor = COR_PERDIDA
-            fill = PatternFill("solid", start_color=fill_cor)
-            for ci in range(1, len(headers) + 1):
-                c = ws.cell(row=row, column=ci)
-                c.fill = fill
-                c.border = border
-                if ci == 10:
-                    c.alignment = Alignment(wrap_text=True, vertical="top")
-                elif ci in (5, 6, 7, 8):
-                    c.alignment = Alignment(horizontal="center", vertical="center")
-                else:
-                    c.alignment = Alignment(vertical="center")
-            row += 1
-        row += 1  # linha em branco entre locais
+                origem = "cadastro"
 
-    # Autofilter
+            ws.cell(row=row, column=C_ORIGEM, value=origem)
+            ws.cell(row=row, column=C_POSTO, value=r["posto"])
+            ws.cell(row=row, column=C_MODELO, value=modelo)
+            ws.cell(row=row, column=C_ESP, value=r["esperado"])
+            ws.cell(row=row, column=C_FEITO, value=r["ok"])
+            sk, rotulo = _status_render(r)
+            ws.cell(row=row, column=C_STATUS, value=rotulo)
+            ws.cell(row=row, column=C_JUST,
+                    value=" | ".join(r["justifs"][:2]) if r["justifs"] else "")
+
+            # fundo da LINHA: creme leve se sistema, zebra se cadastro
+            if eh_sistema:
+                linha_bg = PatternFill("solid", start_color=COR_LINHA_SISTEMA)
+            elif idx % 2:
+                linha_bg = PatternFill("solid", start_color=COR_ZEBRA)
+            else:
+                linha_bg = FILL_BRANCO
+            for ci in range(1, len(headers) + 1):
+                ws.cell(row=row, column=ci).fill = linha_bg
+
+            # cor SÓ na célula de status (a pílula)
+            bg, fg = STATUS_CORES.get(sk, ("FFFFFF", "000000"))
+            cst = ws.cell(row=row, column=C_STATUS)
+            cst.fill = PatternFill("solid", start_color=bg)
+            cst.font = Font(bold=True, color=fg, size=9)
+            cst.alignment = Alignment(horizontal="center", vertical="center")
+
+            # alinhamentos / fontes do resto
+            ws.cell(row=row, column=C_ORIGEM).font = Font(
+                color=("9A3412" if eh_sistema else "888888"), size=9,
+                bold=eh_sistema)
+            for ci in (C_ESP, C_FEITO):
+                ws.cell(row=row, column=ci).alignment = Alignment(
+                    horizontal="center", vertical="center")
+            ws.cell(row=row, column=C_JUST).alignment = Alignment(
+                wrap_text=True, vertical="top")
+            ws.cell(row=row, column=C_POSTO).font = Font(color="888888", size=9)
+            row += 1
+
     if row > 2:
         ws.auto_filter.ref = f"A1:{get_column_letter(len(headers))}{row-1}"
 

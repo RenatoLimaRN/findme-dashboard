@@ -2,12 +2,12 @@
   "data": "2026-06-11",
   "local": "MANSÃO DO BUTANTÃ",
   "ok": 2,
-  "parcial": 0,
-  "nao_feita": 27,
-  "total": 29,
+  "parcial": 1,
+  "nao_feita": 32,
+  "total": 35,
   "esperadas_total": 29,
   "feitas_das_esperadas": 2,
-  "perdidas_das_esperadas": 27,
+  "perdidas_das_esperadas": 26,
   "modelos_perdidos_hoje": [
     "01 - CHURRASQUEIRA",
     "02 - PISCINA",
@@ -24,23 +24,23 @@
       "nao_feita": 2
     },
     {
-      "modelo": "01 - CHURRASQUEIRA",
-      "nao_feita": 1
+      "modelo": "B04 - ENTRADA SOCIAL - TORRE B",
+      "nao_feita": 2
     },
     {
-      "modelo": "02 - PISCINA",
-      "nao_feita": 1
+      "modelo": "B05 - GARAGEM - TORRE B",
+      "nao_feita": 2
     },
     {
-      "modelo": "03 - CACHORRODROMO",
-      "nao_feita": 1
+      "modelo": "B07 - SALAS DE JOGOS - TORRE B",
+      "nao_feita": 2
     },
     {
-      "modelo": "04 - PARQUINHO",
-      "nao_feita": 1
+      "modelo": "B08 - ZELADORIA - TORRE B",
+      "nao_feita": 2
     }
   ],
-  "pct_cumprimento": 6.9,
+  "pct_cumprimento": 5.7,
   "dados_inconclusivos": false,
   "slug": "mansao_do_butanta"
 }

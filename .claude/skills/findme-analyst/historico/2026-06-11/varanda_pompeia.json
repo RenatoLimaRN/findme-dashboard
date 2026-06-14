@@ -1,0 +1,42 @@
+{
+  "data": "2026-06-11",
+  "local": "VARANDA POMPÉIA",
+  "ok": 0,
+  "parcial": 0,
+  "nao_feita": 5,
+  "total": 5,
+  "esperadas_total": 4,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 4,
+  "modelos_perdidos_hoje": [
+    "HALLS - TORRE A",
+    "HALLS - TORRE B",
+    "HALL TERREO - TORRE A",
+    "HALL TERREO - TORRE B"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "(sem modelo)",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "[ESPERADA — NÃO REGISTRADA] HALLS - TORRE A  (VARANDA POMPEIA - LIMPEZA - AREAS COMUNS)",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "[ESPERADA — NÃO REGISTRADA] HALLS - TORRE B  (VARANDA POMPEIA - LIMPEZA - AREAS COMUNS)",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "[ESPERADA — NÃO REGISTRADA] HALL TERREO - TORRE A  (VARANDA POMPEIA - LIMPEZA - TORRES A)",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "[ESPERADA — NÃO REGISTRADA] HALL TERREO - TORRE B  (VARANDA POMPEIA - LIMPEZA - TORRES B)",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 0.0,
+  "dados_inconclusivos": false,
+  "slug": "varanda_pompeia"
+}

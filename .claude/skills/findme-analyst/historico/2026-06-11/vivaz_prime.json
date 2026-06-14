@@ -1,10 +1,10 @@
 {
   "data": "2026-06-11",
   "local": "CONDOMÍNIO VIVAZ PRIME",
-  "ok": 11,
-  "parcial": 0,
+  "ok": 12,
+  "parcial": 1,
   "nao_feita": 13,
-  "total": 24,
+  "total": 26,
   "esperadas_total": 19,
   "feitas_das_esperadas": 6,
   "perdidas_das_esperadas": 13,
@@ -40,7 +40,7 @@
       "nao_feita": 1
     }
   ],
-  "pct_cumprimento": 45.8,
+  "pct_cumprimento": 46.2,
   "dados_inconclusivos": false,
   "slug": "vivaz_prime"
 }

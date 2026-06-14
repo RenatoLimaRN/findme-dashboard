@@ -3,8 +3,8 @@
   "local": "RESERVA DO ALTO",
   "ok": 3,
   "parcial": 4,
-  "nao_feita": 21,
-  "total": 28,
+  "nao_feita": 26,
+  "total": 33,
   "esperadas_total": 20,
   "feitas_das_esperadas": 0,
   "perdidas_das_esperadas": 20,
@@ -20,27 +20,27 @@
   ],
   "top_falhas_modelos": [
     {
+      "modelo": "BLOCO 01 - ANDORINHA - LIMPEZA DOS HALLS",
+      "nao_feita": 2
+    },
+    {
       "modelo": "HIGIENIZACAO DO BEBEDOURO",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "LIMPEZA DE BOSQUE",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "QUADRA 1",
       "nao_feita": 2
     },
     {
       "modelo": "SALAO DE FESTA",
       "nao_feita": 2
-    },
-    {
-      "modelo": "C01 - COLETA DE LIXO DAS RUAS",
-      "nao_feita": 1
-    },
-    {
-      "modelo": "C02 - COLETA DE LIXO NO CONTEINER",
-      "nao_feita": 1
-    },
-    {
-      "modelo": "BLOCO 01 - ANDORINHA - LIMPEZA DOS HALLS",
-      "nao_feita": 1
     }
   ],
-  "pct_cumprimento": 10.7,
+  "pct_cumprimento": 9.1,
   "dados_inconclusivos": false,
   "slug": "reserva_do_alto"
 }

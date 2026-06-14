@@ -1,0 +1,42 @@
+{
+  "local": "VARANDA POMPÉIA",
+  "slug": "varanda_pompeia",
+  "observados": {
+    "[ESPERADA — NAO REGISTRADA] HALLS - TORRE A (VARANDA POMPEIA - LIMPEZA - AREAS COMUNS)": {
+      "_label": "[ESPERADA — NÃO REGISTRADA] HALLS - TORRE A  (VARANDA POMPEIA - LIMPEZA - AREAS COMUNS)",
+      "dias": {
+        "Qui": {
+          "qtd": 1,
+          "ultima": "2026-06-11"
+        }
+      }
+    },
+    "[ESPERADA — NAO REGISTRADA] HALLS - TORRE B (VARANDA POMPEIA - LIMPEZA - AREAS COMUNS)": {
+      "_label": "[ESPERADA — NÃO REGISTRADA] HALLS - TORRE B  (VARANDA POMPEIA - LIMPEZA - AREAS COMUNS)",
+      "dias": {
+        "Qui": {
+          "qtd": 1,
+          "ultima": "2026-06-11"
+        }
+      }
+    },
+    "[ESPERADA — NAO REGISTRADA] HALL TERREO - TORRE A (VARANDA POMPEIA - LIMPEZA - TORRES A)": {
+      "_label": "[ESPERADA — NÃO REGISTRADA] HALL TERREO - TORRE A  (VARANDA POMPEIA - LIMPEZA - TORRES A)",
+      "dias": {
+        "Qui": {
+          "qtd": 1,
+          "ultima": "2026-06-11"
+        }
+      }
+    },
+    "[ESPERADA — NAO REGISTRADA] HALL TERREO - TORRE B (VARANDA POMPEIA - LIMPEZA - TORRES B)": {
+      "_label": "[ESPERADA — NÃO REGISTRADA] HALL TERREO - TORRE B  (VARANDA POMPEIA - LIMPEZA - TORRES B)",
+      "dias": {
+        "Qui": {
+          "qtd": 1,
+          "ultima": "2026-06-11"
+        }
+      }
+    }
+  }
+}

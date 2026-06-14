@@ -1,6 +1,8 @@
 {
   "email": "rnl.lima.nascimento@gmail.com",
   "password": "",
+  "janela_inicio_hora": 6,
+  "janela_fim_hora": 5,
   "locations": [
     "e40c026-6bac-4422-85e3-3517984ba207",
     "0facbb47-5e30-4c6a-b23a-a3ed58914588",

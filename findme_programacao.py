@@ -1399,13 +1399,28 @@ def main():
     print()
     today     = date.today().isoformat()
     yesterday = (date.today() - timedelta(days=1)).isoformat()
-    # Padrão diário: dia anterior completo + hoje até 07:00
-    CUTOFF_HOUR = cfg.get("cutoff_hour", 7)   # configurável no config.json
-    start = ask_date("Data início", yesterday)
-    end   = ask_date("Data fim",    today)
-    print(f"  ℹ   Período: {start} 00:00 → {end} {CUTOFF_HOUR:02d}:00 "
-          f"(registros de {end} após {CUTOFF_HOUR:02d}:00 serão ignorados)\n"
-          if start != end else "")
+
+    # Janela operacional: o "dia D" vai de D às JANELA_INI horas até (D+1) às
+    # JANELA_FIM horas — turno que cruza a meia-noite (ex.: 06:00→05:00).
+    # Configurável no config.json.
+    JANELA_INI = int(cfg.get("janela_inicio_hora", 6))   # 06:00 do dia D
+    JANELA_FIM = int(cfg.get("janela_fim_hora", 5))       # 05:00 do dia D+1
+
+    dia_op = ask_date("Dia operacional (D)", yesterday)
+    d0 = datetime.strptime(dia_op, "%Y-%m-%d")
+    # start/end ficam = dia_op: usados pra nome de pasta/arquivo, títulos e
+    # injeção de avulsas (1 dia só). NÃO confundir com o período de BUSCA.
+    start = end = dia_op
+    # período de BUSCA na API precisa abranger D e D+1 (pra pegar a madrugada).
+    busca_ini = dia_op
+    busca_fim = (d0 + timedelta(days=1)).strftime("%Y-%m-%d")
+    # janela de filtro [D 06:00, (D+1) 05:00)
+    janela_ini_dt = d0.replace(hour=JANELA_INI, minute=0, second=0, microsecond=0)
+    janela_fim_dt = (d0 + timedelta(days=1)).replace(
+        hour=JANELA_FIM, minute=0, second=0, microsecond=0)
+    print(f"  ℹ   Dia operacional {dia_op}:  "
+          f"{d0.strftime('%d/%m')} {JANELA_INI:02d}:00 → "
+          f"{(d0 + timedelta(days=1)).strftime('%d/%m')} {JANELA_FIM:02d}:00\n")
     print()
 
     print("  🔐  Autenticando...")
@@ -1433,14 +1448,14 @@ def main():
         filt_loc = {
             "hiddenInactive": True,
             "locations": [loc["uuid"]],
-            "period": [start, end],
+            "period": [busca_ini, busca_fim],
         }
         parcial, teve_504 = fetch_rotinas(token, filt_loc)
 
         # Se falhou com 504 E nao trouxe nada, tenta busca dia a dia automaticamente
         if teve_504 and len(parcial) == 0:
             print(f"  \U0001f501  504 persistente — retentando {nome} dia a dia...")
-            parcial = fetch_rotinas_por_dia(token, filt_loc, start, end, nome)
+            parcial = fetch_rotinas_por_dia(token, filt_loc, busca_ini, busca_fim, nome)
 
         if len(parcial) == 0:
             locs_vazios.append(loc)
@@ -1450,26 +1465,20 @@ def main():
 
     print(f"\n  ✔   {len(rows_raw)} atividades no total.")
 
-    # Aplica corte de horário: atividades do dia final só até CUTOFF_HOUR
-    if start != end:
-        cutoff_dt = datetime.strptime(end, "%Y-%m-%d").replace(
-            hour=CUTOFF_HOUR, minute=0, second=0)
-        antes = len(rows_raw)
-        rows_raw = [
-            r for r in rows_raw
-            if not (
-                parse_dt(r.get("to_be_started_at") or r.get("started_at") or "")
-                is not None
-                and parse_dt(r.get("to_be_started_at") or r.get("started_at") or "")
-                >= cutoff_dt
-                and parse_dt(r.get("to_be_started_at") or r.get("started_at") or "")
-                .strftime("%Y-%m-%d") == end
-            )
-        ]
-        cortados = antes - len(rows_raw)
-        if cortados:
-            print(f"  ✂   {cortados} registro(s) de {end} após "
-                  f"{CUTOFF_HOUR:02d}:00 removido(s).")
+    # Filtro da janela operacional: mantém só atividades com horário
+    # programado dentro de [janela_ini_dt, janela_fim_dt). Registros sem data
+    # (None) são mantidos — costumam ser avulsas sem horário.
+    antes = len(rows_raw)
+    def _na_janela(r):
+        dt = parse_dt(r.get("to_be_started_at") or r.get("started_at") or "")
+        if dt is None:
+            return True
+        return janela_ini_dt <= dt < janela_fim_dt
+    rows_raw = [r for r in rows_raw if _na_janela(r)]
+    cortados = antes - len(rows_raw)
+    if cortados:
+        print(f"  ✂   {cortados} registro(s) fora da janela "
+              f"{JANELA_INI:02d}:00→{JANELA_FIM:02d}:00 removido(s).")
     print()
 
     if not rows_raw:
@@ -1516,7 +1525,7 @@ def main():
         filt_all = {
             "hiddenInactive": True,
             "locations": [l["uuid"] for l in selected],
-            "period": [start, end],
+            "period": [busca_ini, busca_fim],
         }
         r_miss = requests.post(
             f"{BASE_DASHBOARD}/reports/missed-single-activities",
@@ -1549,15 +1558,13 @@ def main():
                     dt_prog = parse_dt(row.get(campo_dt))
                     if dt_prog:
                         break
-                # Se ainda vazio, usa a data de inicio do periodo como referencia
+                # Se ainda vazio, usa o início da janela operacional
                 if dt_prog is None:
-                    dt_prog = datetime.strptime(start, "%Y-%m-%d")
+                    dt_prog = janela_ini_dt
 
-                # Respeita o corte de horario do dia final
-                if (start != end
-                        and dt_prog.strftime("%Y-%m-%d") == end
-                        and dt_prog.hour >= CUTOFF_HOUR):
-                    continue  # avulsa fora do periodo aceito
+                # Respeita a janela operacional [D 06:00, (D+1) 05:00)
+                if dt_prog is not None and not (janela_ini_dt <= dt_prog < janela_fim_dt):
+                    continue  # avulsa fora da janela
 
                 rec = {
                     "local":         local_nome,

@@ -556,10 +556,10 @@ def main():
             except Exception as e:
                 log(f"  WARNING: aprender_postos exception: {e}")
 
-        # PDF resumo de 1 página (anexado junto com o Excel)
+        # PDF resumo de 1 página do dia (anexado junto com o Excel)
         pdf_path = None
         try:
-            log("  gerando PDF resumo...")
+            log("  gerando PDF resumo do dia...")
             import gerar_pdf_resumo
             pdf_path = xlsx.parent / f"RESUMO_{data_alvo}.pdf"
             gerar_pdf_resumo.gerar(dados, data_alvo, pdf_path)
@@ -567,6 +567,19 @@ def main():
         except Exception as e:
             log(f"  WARNING: PDF resumo falhou: {e}")
             pdf_path = None
+
+        # PDF resumo de tendência dos últimos 3 dias (lê o histórico)
+        pdf3_path = None
+        try:
+            log("  gerando PDF resumo 3 dias...")
+            import gerar_pdf_3dias
+            pdf3_path = xlsx.parent / f"RESUMO_3DIAS_{data_alvo}.pdf"
+            gerar_pdf_3dias.gerar(SKILL_DIR / "historico", data_alvo, pdf3_path,
+                                  n_dias=3)
+            log(f"  -> {pdf3_path.name}")
+        except Exception as e:
+            log(f"  WARNING: PDF 3 dias falhou: {e}")
+            pdf3_path = None
 
         if args.sem_email:
             log("OK (--sem-email, pulando envio)")
@@ -576,7 +589,7 @@ def main():
         cfg = carregar_email_config()
         html = montar_html(data_alvo, dados)
         d_br = datetime.fromisoformat(data_alvo).strftime("%d/%m/%Y")
-        anexos = [p for p in (pdf_path, xlsx) if p]
+        anexos = [p for p in (pdf_path, pdf3_path, xlsx) if p]
         enviar_email(cfg, f"FindMe — Fechamento {d_br}", html, anexos)
         destinos = cfg["to"] if isinstance(cfg["to"], list) else [cfg["to"]]
         log(f"  -> enviado para: {', '.join(destinos)}")

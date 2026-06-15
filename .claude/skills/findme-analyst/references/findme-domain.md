@@ -27,9 +27,7 @@ justificativas nem checklists.
 | Aba | Conteúdo |
 |---|---|
 | `Capa Executiva` | KPIs gerais (% eficiência, locais monitorados, locais críticos, atividades não feitas) + tabela "LOCAIS CRÍTICOS" + tabela "TODOS OS LOCAIS". Colunas das tabelas: `#`, `Local / Posto`, `✓ OK`, `⚠ Parcial`, `✗ Não Feita`, `Total`, `% Efic.`, `Progresso`. |
-| `Atividades` | Log linha a linha. Colunas: `Data`, `Hora`, `Turno`, `Tipo / Modelo`, `Status`, `Iniciada`, `Finalizada`, `Duração`, `Pts OK`, `Pts Total`. Agrupada por local (linhas-cabeçalho começam com `📍`). |
-| `🏆 Ranking` | Indicadores gerais + TOP 5 melhores locais + TOP 5 que precisam de atenção. |
-| `Grade por Posto` | Grade semanal: `Local`, `Posto / Modelo`, `Dom`..`Sáb`. Pode vir vazia. |
+| `Atividades` | Log linha a linha, agrupado em condomínio → posto → atividades (linhas-cabeçalho de local começam com `📍`, de posto com `▸`). Colunas: `Data`, `Hora`, `Turno`, `Tipo / Modelo`, `Status`, `Iniciada`, `Finalizada`, `Duração`, `Pts OK`, `Pts Total`. |
 
 ### Relatório de KPIs (gerado pelo `findme_dashboard.py`)
 

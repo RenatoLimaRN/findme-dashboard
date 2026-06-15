@@ -581,15 +581,17 @@ def main():
             log(f"  WARNING: PDF 3 dias falhou: {e}")
             pdf3_path = None
 
-        # Textos por local (prontos pra copiar/colar no WhatsApp)
+        # PDF único com o resumo por local (estilo WhatsApp), anexado ao e-mail
+        zap_pdf = None
         try:
-            log("  gerando textos WhatsApp por local...")
-            import gerar_textos_whatsapp
-            zap_dir = xlsx.parent / "whatsapp"
-            gerados = gerar_textos_whatsapp.gerar(xlsx, data_alvo, zap_dir)
-            log(f"  -> {len(gerados)} texto(s) em {zap_dir.name}/")
+            log("  gerando PDF WhatsApp (resumo por local)...")
+            import gerar_pdf_whatsapp
+            zap_pdf = xlsx.parent / f"WHATSAPP_{data_alvo}.pdf"
+            gerar_pdf_whatsapp.gerar(xlsx, data_alvo, zap_pdf)
+            log(f"  -> {zap_pdf.name}")
         except Exception as e:
-            log(f"  WARNING: textos WhatsApp falharam: {e}")
+            log(f"  WARNING: PDF WhatsApp falhou: {e}")
+            zap_pdf = None
 
         if args.sem_email:
             log("OK (--sem-email, pulando envio)")
@@ -599,7 +601,7 @@ def main():
         cfg = carregar_email_config()
         html = montar_html(data_alvo, dados)
         d_br = datetime.fromisoformat(data_alvo).strftime("%d/%m/%Y")
-        anexos = [p for p in (pdf_path, pdf3_path, xlsx) if p]
+        anexos = [p for p in (pdf_path, pdf3_path, zap_pdf, xlsx) if p]
         enviar_email(cfg, f"FindMe — Fechamento {d_br}", html, anexos)
         destinos = cfg["to"] if isinstance(cfg["to"], list) else [cfg["to"]]
         log(f"  -> enviado para: {', '.join(destinos)}")

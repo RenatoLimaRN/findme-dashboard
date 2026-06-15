@@ -8,7 +8,7 @@ Uso:
 
 Lê config.json para credenciais e locais.
 Gera: relatorios/YYYY-MM-DD_YYYY-MM-DD/GERAL_YYYY-MM-DD_YYYY-MM-DD.xlsx
-         + um arquivo por posto em relatorios/YYYY-MM-DD_YYYY-MM-DD/postos/
+      (abas: Capa Executiva e Atividades — condomínio → posto → atividades)
 """
 
 import json
@@ -1642,8 +1642,6 @@ def main():
     # ── Pasta de saída relatorios/{start}_{end}/ ──────────────────────────────
     out_dir = os.path.join("relatorios", f"{start}_{end}")
     os.makedirs(out_dir, exist_ok=True)
-    postos_dir = os.path.join(out_dir, "postos")
-    os.makedirs(postos_dir, exist_ok=True)
 
     # ── Arquivo GERAL ──────────────────────────────────────────────────────────
     print("\n  📊  Gerando Excel GERAL...")
@@ -1670,52 +1668,18 @@ def main():
 
     print(f"  ✅  GERAL salvo: {geral_path}")
 
-    # ── Arquivos por POSTO ─────────────────────────────────────────────────────
-    print("\n  🔧  Gerando arquivos por posto...")
-    postos_gerados = 0
-    postos_erros   = 0
-
-    # Agrupa por nome de posto (un único arquivo por posto, unindo todos os locais)
-    postos_unicos = sorted({
-        r["posto"].strip()
-        for r in dados["records"]
-        if r["posto"] and r["posto"].strip() != "-"
-    })
-
-    for posto_nome in postos_unicos:
-        # Quais locais têm esse posto?
-        locais_do_posto = sorted({
-            r["local"] for r in dados["records"]
-            if r["posto"].strip().lower() == posto_nome.lower()
-        })
-        slug_posto = slugify(posto_nome)
-        fname = f"{slug_posto}.xlsx"
-        fpath = os.path.join(postos_dir, fname)
-        try:
-            wb_p = build_arquivo_posto(dados, posto_nome, start, end)
-            try:
-                wb_p.save(fpath)
-            except PermissionError:
-                ts = datetime.now().strftime("%H%M%S")
-                fpath = fpath.replace(".xlsx", f"_{ts}.xlsx")
-                wb_p.save(fpath)
-            locais_str = ", ".join(locais_do_posto)
-            print(f"       ✔  {posto_nome}  ({len(locais_do_posto)} local(is): {locais_str})")
-            postos_gerados += 1
-        except Exception as _ep:
-            print(f"       ⚠  {posto_nome} — erro: {_ep}")
-            postos_erros += 1
+    # ── Arquivos por POSTO: DESATIVADO ──────────────────────────────────────────
+    # A geração de uma planilha por posto (relatorios/<dia>/postos/) foi desativada
+    # — virou redundante depois que a aba "Atividades" do GERAL já mostra
+    # condomínio → posto → atividades. A função build_arquivo_posto segue definida
+    # caso queira reativar.
 
     print(f"\n{SEP}")
     print(f"  ✅  Relatórios gerados em:  relatorios/{start}_{end}/")
     print(f"      📄  GERAL:  {geral_name}")
-    print(f"      🔧  Postos: {postos_gerados} arquivo(s) em relatorios/{start}_{end}/postos/  {f'({postos_erros} erro(s))' if postos_erros else ''}")
     print(f"      Abas do GERAL:")
     print(f"        - Capa Executiva  -- KPIs + postos críticos/ótimos")
     print(f"        - Atividades      -- condomínio → posto → atividades (turno, duração, status)")
-    print(f"      Arquivos por posto (relatorios/{start}_{end}/postos/):")
-    print(f"        - Resumo          -- KPIs do posto (ok, parcial, não feitas, eficiência)")
-    print(f"        - Atividades      -- detalhe filtrado só para aquele posto")
     print(SEP + "\n")
 
 

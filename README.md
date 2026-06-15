@@ -81,7 +81,7 @@ findme-dashboard/
 ├── relatorios/              ← saída (não versionada): um dir por período
 │   └── YYYY-MM-DD_YYYY-MM-DD/
 │       ├── GERAL_*.xlsx     ← relatório consolidado enriquecido
-│       └── postos/*.xlsx    ← um arquivo por posto
+│       └── WHATSAPP_*.pdf   ← resumo por local (estilo WhatsApp), anexado ao e-mail
 │
 ├── .claude/skills/findme-analyst/   ← skill de análise (Claude Code)
 │   ├── SKILL.md             ← instruções do skill

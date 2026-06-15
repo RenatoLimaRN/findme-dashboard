@@ -118,7 +118,9 @@ python findme_dashboard.py
 - `patrol.name` → modelo de atividade
 
 **Abas geradas:**
-- Resumo, Grade por Posto (visual: posto × dia × horário), Ronda, Limpeza, Portaria, Avulsas, Outras
+- Capa Executiva (KPIs + locais críticos/ótimos) e Atividades (condomínio → posto → atividades)
+- Ronda/Grade/Ranking e planilhas por posto foram removidas (redundantes; funções seguem definidas no código)
+- Resumo por local agora sai como PDF único (WHATSAPP_<data>.pdf), anexado ao e-mail
 
 ---
 

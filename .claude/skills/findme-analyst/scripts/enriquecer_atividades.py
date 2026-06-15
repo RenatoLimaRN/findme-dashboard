@@ -734,15 +734,26 @@ def _criar_aba_unificada(wb, dados):
                         naoreg += 1
                 blocos.append((p, linhas_p, feit, naoreg))
 
-            # extras: execuções de modelos que não estão em nenhum posto do cadastro
-            extras = []
+            # extras: execuções de modelos fora do cadastro (tipicamente RONDA).
+            # Agrupa pelo posto/estação REAL do sistema — igual aos locais só de
+            # ronda mostram "X - RONDA" — em vez de jogar tudo num balde "Outras".
+            # Sem estação no sistema, cai em "Outras (sistema, fora do cadastro)".
+            extras_por_posto, ordem_ex = {}, []
             for mn, ls in execs_por_modelo.items():
-                if mn not in modelos_cad:
-                    extras.extend(ls)
-            if extras:
-                extras.sort(key=_dt_key)
-                feit_ex = sum(1 for x in extras if x["status"].strip().lower() == "completa")
-                blocos.append(("Outras (sistema, fora do cadastro)", extras, feit_ex, 0))
+                if mn in modelos_cad:
+                    continue
+                for x in ls:
+                    pe = (x.get("posto") or "").strip()
+                    if not pe or pe == "—":
+                        pe = "Outras (sistema, fora do cadastro)"
+                    if pe not in extras_por_posto:
+                        extras_por_posto[pe] = []
+                        ordem_ex.append(pe)
+                    extras_por_posto[pe].append(x)
+            for pe in ordem_ex:
+                ls_e = sorted(extras_por_posto[pe], key=_dt_key)
+                feit_ex = sum(1 for x in ls_e if x["status"].strip().lower() == "completa")
+                blocos.append((pe, ls_e, feit_ex, 0))
 
             tot_feit = sum(1 for ls in execs_por_modelo.values() for x in ls
                            if x["status"].strip().lower() == "completa")

@@ -633,87 +633,152 @@ def _criar_aba_unificada(wb, dados):
             return None
         return d + timedelta(minutes=m)
 
-    def _ordena_postos(linhas):
-        """Agrupa linhas por posto, preservando a ordem de 1ª aparição.
-        Cada posto vem com suas execuções em ordem cronológica + esperadas no fim."""
-        ordem, grupos = [], {}
-        for l in linhas:
-            p = l.get("posto", "—")
-            if p not in grupos:
-                grupos[p] = []
-                ordem.append(p)
-        for l in linhas:
-            grupos[l.get("posto", "—")].append(l)
-        out = []
-        for p in ordem:
-            reais = [l for l in grupos[p] if _dt_key(l) is not None]
-            esp = [l for l in grupos[p] if _dt_key(l) is None]
-            reais.sort(key=_dt_key)
-            out.append((p, reais + esp, reais, esp))
-        return out
+    def _esp_linha(modelo):
+        """linha sintética 'esperada não registrada' (sem horário)."""
+        return {"data": "", "hora": "", "modelo": modelo,
+                "status": "Esperada não registrada", "duracao": "", "justif": ""}
 
-    row = 2
+    def _render(l, idx):
+        sk, rotulo = STATUS_EXEC.get(l["status"].lower(), (None, l["status"] or "—"))
+        dk = _dt_key(l)
+        ws.cell(row=row[0], column=C_HORA, value=dk.strftime("%d/%m %H:%M") if dk else "—")
+        ws.cell(row=row[0], column=C_MODELO, value=l["modelo"])
+        ws.cell(row=row[0], column=C_STATUS, value=rotulo)
+        ws.cell(row=row[0], column=C_DUR, value=l.get("duracao") or "—")
+        ws.cell(row=row[0], column=C_JUST, value=l.get("justif", ""))
+        linha_bg = PatternFill("solid", start_color=COR_ZEBRA) if idx % 2 else FILL_BRANCO
+        for ci in range(1, len(headers) + 1):
+            ws.cell(row=row[0], column=ci).fill = linha_bg
+        if sk:
+            bg, fg = STATUS_CORES.get(sk, ("FFFFFF", "000000"))
+            cst = ws.cell(row=row[0], column=C_STATUS)
+            cst.fill = PatternFill("solid", start_color=bg)
+            cst.font = Font(bold=True, color=fg, size=9)
+        for ci in (C_HORA, C_STATUS, C_DUR):
+            ws.cell(row=row[0], column=ci).alignment = Alignment(
+                horizontal="center", vertical="center")
+        ws.cell(row=row[0], column=C_JUST).alignment = Alignment(wrap_text=True, vertical="top")
+        row[0] += 1
+
+    def _cab_local(nome, n_ativ, n_feit, n_naoreg):
+        cab = f"📍  {nome}    {n_ativ} atividade(s)"
+        if n_ativ:
+            cab += f"   ·   {n_feit} feita(s)"
+        if n_naoreg:
+            cab += f"   ·   {n_naoreg} não registrada(s)"
+        cell = ws.cell(row=row[0], column=1, value=cab)
+        ws.merge_cells(start_row=row[0], start_column=1, end_row=row[0], end_column=len(headers))
+        cell.font = Font(bold=True, color="FFFFFF", size=11)
+        cell.fill = PatternFill("solid", start_color=COR_BG_CABLOCAL)
+        cell.alignment = Alignment(vertical="center", indent=1)
+        ws.row_dimensions[row[0]].height = 20
+        row[0] += 1
+
+    def _cab_posto(posto, n_ativ, n_feit, n_naoreg):
+        sub = f"    ▸ {posto}    {n_ativ} ativ."
+        if n_ativ:
+            sub += f" · {n_feit} feita(s)"
+        if n_naoreg:
+            sub += f" · {n_naoreg} não registrada(s)"
+        scell = ws.cell(row=row[0], column=1, value=sub)
+        ws.merge_cells(start_row=row[0], start_column=1, end_row=row[0], end_column=len(headers))
+        scell.font = Font(bold=True, color="1F4E79", size=9)
+        scell.fill = PatternFill("solid", start_color="DCE6F1")
+        scell.alignment = Alignment(vertical="center", indent=1)
+        ws.row_dimensions[row[0]].height = 16
+        row[0] += 1
+
+    cruz = dados.get("cruzamento_por_local", {})
+    row = [2]  # lista p/ mutar dentro das closures
     for loc in locais:
         linhas = loc["linhas"]
         if not linhas:
             continue
+        cz = cruz.get(_slug(loc["nome"]), {})
+        esperadas = cz.get("esperadas_detalhe", []) or []
 
-        # cabeçalho do LOCAL (📍) — resumo do condomínio inteiro
-        reais_loc = [l for l in linhas if _dt_key(l) is not None]
-        esp_loc = [l for l in linhas if _dt_key(l) is None]
-        feitas_loc = sum(1 for l in linhas if l["status"].strip().lower() == "completa")
-        cab = (f"📍  {loc['nome']}    {len(reais_loc)} atividade(s)"
-               + (f"   ·   {feitas_loc} feita(s)" if reais_loc else "")
-               + (f"   ·   {len(esp_loc)} esperada(s) não registrada(s)" if esp_loc else ""))
-        cell = ws.cell(row=row, column=1, value=cab)
-        ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=len(headers))
-        cell.font = Font(bold=True, color="FFFFFF", size=11)
-        cell.fill = PatternFill("solid", start_color=COR_BG_CABLOCAL)
-        cell.alignment = Alignment(vertical="center", indent=1)
-        ws.row_dimensions[row].height = 20
-        row += 1
+        # execuções reais (com horário) indexadas por modelo normalizado
+        execs_por_modelo = {}
+        for l in linhas:
+            if _dt_key(l) is not None:
+                execs_por_modelo.setdefault(_norm_modelo(l["modelo"]), []).append(l)
+        reais_unicas = sum(len(v) for v in execs_por_modelo.values())
 
-        # dentro do local, um subgrupo por POSTO
-        for posto, itens, reais_p, esp_p in _ordena_postos(linhas):
-            feitas_p = sum(1 for l in itens if l["status"].strip().lower() == "completa")
-            sub = (f"    ▸ {posto}    {len(reais_p)} ativ."
-                   + (f" · {feitas_p} feita(s)" if reais_p else "")
-                   + (f" · {len(esp_p)} não registrada(s)" if esp_p else ""))
-            scell = ws.cell(row=row, column=1, value=sub)
-            ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=len(headers))
-            scell.font = Font(bold=True, color="1F4E79", size=9)
-            scell.fill = PatternFill("solid", start_color="DCE6F1")
-            scell.alignment = Alignment(vertical="center", indent=1)
-            ws.row_dimensions[row].height = 16
-            row += 1
+        if esperadas:
+            # estrutura = postos do CADASTRO; casa execuções por modelo
+            # (uma atividade cadastrada em LIDER e na torre aparece nos dois,
+            #  herdando o status da execução — é o que o usuário quer ver).
+            postos_ordem, postos = [], {}
+            for e in esperadas:
+                p = e.get("posto") or "—"
+                if p not in postos:
+                    postos[p] = []
+                    postos_ordem.append(p)
+                postos[p].append(e)
 
-            for idx, l in enumerate(itens):
-                sk, rotulo = STATUS_EXEC.get(l["status"].lower(), (None, l["status"] or "—"))
-                dk = _dt_key(l)
-                quando = dk.strftime("%d/%m %H:%M") if dk else "—"
-                ws.cell(row=row, column=C_HORA, value=quando)
-                ws.cell(row=row, column=C_MODELO, value=l["modelo"])
-                ws.cell(row=row, column=C_STATUS, value=rotulo)
-                ws.cell(row=row, column=C_DUR, value=l["duracao"] or "—")
-                ws.cell(row=row, column=C_JUST, value=l["justif"])
+            blocos = []          # (posto, linhas, n_feit, n_naoreg)
+            modelos_cad = set()
+            for p in postos_ordem:
+                linhas_p, feit, naoreg = [], 0, 0
+                for e in postos[p]:
+                    mn = _norm_modelo(e["modelo"])
+                    modelos_cad.add(mn)
+                    execs = sorted(execs_por_modelo.get(mn, []), key=_dt_key)
+                    if execs:
+                        for ex in execs:
+                            linhas_p.append(ex)
+                            if ex["status"].strip().lower() == "completa":
+                                feit += 1
+                    else:
+                        linhas_p.append(_esp_linha(e["modelo"]))
+                        naoreg += 1
+                blocos.append((p, linhas_p, feit, naoreg))
 
-                linha_bg = PatternFill("solid", start_color=COR_ZEBRA) if idx % 2 else FILL_BRANCO
-                for ci in range(1, len(headers) + 1):
-                    ws.cell(row=row, column=ci).fill = linha_bg
-                if sk:
-                    bg, fg = STATUS_CORES.get(sk, ("FFFFFF", "000000"))
-                    cst = ws.cell(row=row, column=C_STATUS)
-                    cst.fill = PatternFill("solid", start_color=bg)
-                    cst.font = Font(bold=True, color=fg, size=9)
-                for ci in (C_HORA, C_STATUS, C_DUR):
-                    ws.cell(row=row, column=ci).alignment = Alignment(
-                        horizontal="center", vertical="center")
-                ws.cell(row=row, column=C_JUST).alignment = Alignment(
-                    wrap_text=True, vertical="top")
-                row += 1
+            # extras: execuções de modelos que não estão em nenhum posto do cadastro
+            extras = []
+            for mn, ls in execs_por_modelo.items():
+                if mn not in modelos_cad:
+                    extras.extend(ls)
+            if extras:
+                extras.sort(key=_dt_key)
+                feit_ex = sum(1 for x in extras if x["status"].strip().lower() == "completa")
+                blocos.append(("Outras (sistema, fora do cadastro)", extras, feit_ex, 0))
 
-    if row > 2:
-        ws.auto_filter.ref = f"A1:{get_column_letter(len(headers))}{row-1}"
+            tot_feit = sum(1 for ls in execs_por_modelo.values() for x in ls
+                           if x["status"].strip().lower() == "completa")
+            tot_naoreg = sum(b[3] for b in blocos)
+            _cab_local(loc["nome"], reais_unicas, tot_feit, tot_naoreg)
+            for posto, linhas_p, feit, naoreg in blocos:
+                if not linhas_p:
+                    continue
+                n_ativ_p = sum(1 for x in linhas_p if _dt_key(x) is not None)
+                _cab_posto(posto, n_ativ_p, feit, naoreg)
+                for idx, l in enumerate(linhas_p):
+                    _render(l, idx)
+        else:
+            # FALLBACK: local sem cadastro -> agrupa pelo posto real (station)
+            esp_loc = [l for l in linhas if _dt_key(l) is None]
+            _cab_local(loc["nome"], reais_unicas,
+                       sum(1 for ls in execs_por_modelo.values() for x in ls
+                           if x["status"].strip().lower() == "completa"),
+                       len(esp_loc))
+            ordem, grupos = [], {}
+            for l in linhas:
+                p = l.get("posto", "—")
+                if p not in grupos:
+                    grupos[p] = []
+                    ordem.append(p)
+                grupos[p].append(l)
+            for p in ordem:
+                reais = sorted([l for l in grupos[p] if _dt_key(l) is not None], key=_dt_key)
+                esp = [l for l in grupos[p] if _dt_key(l) is None]
+                feit = sum(1 for l in reais if l["status"].strip().lower() == "completa")
+                _cab_posto(p, len(reais), feit, len(esp))
+                for idx, l in enumerate(reais + esp):
+                    _render(l, idx)
+
+    if row[0] > 2:
+        ws.auto_filter.ref = f"A1:{get_column_letter(len(headers))}{row[0]-1}"
 
 
 def main():

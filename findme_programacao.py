@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 FindMe — Relatório de Atividades por Posto
-Gera Excel com Capa Executiva, Atividades detalhadas, Ranking e Grade.
+Gera Excel com Capa Executiva e Atividades (condomínio → posto → atividades).
 
 Uso:
     python findme_programacao.py
@@ -1709,13 +1709,11 @@ def main():
     print(f"\n{SEP}")
     print(f"  ✅  Relatórios gerados em:  relatorios/{start}_{end}/")
     print(f"      📄  GERAL:  {geral_name}")
-    print(f"      🔧  Postos: {postos_gerados} arquivo(s) em postos/  {f'({postos_erros} erro(s))' if postos_erros else ''}")
+    print(f"      🔧  Postos: {postos_gerados} arquivo(s) em relatorios/{start}_{end}/postos/  {f'({postos_erros} erro(s))' if postos_erros else ''}")
     print(f"      Abas do GERAL:")
     print(f"        - Capa Executiva  -- KPIs + postos críticos/ótimos")
-    print(f"        - Atividades      -- detalhe por local (turno, duração, status)")
-    print(f"        - Ranking         -- top 5 melhores/piores + ranking completo")
-    print(f"        - Grade por Posto -- visual: posto x dia x horário")
-    print(f"      Abas de cada posto:")
+    print(f"        - Atividades      -- condomínio → posto → atividades (turno, duração, status)")
+    print(f"      Arquivos por posto (relatorios/{start}_{end}/postos/):")
     print(f"        - Resumo          -- KPIs do posto (ok, parcial, não feitas, eficiência)")
     print(f"        - Atividades      -- detalhe filtrado só para aquele posto")
     print(SEP + "\n")

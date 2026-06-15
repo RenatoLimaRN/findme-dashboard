@@ -3,41 +3,41 @@
   "local": "LIVING NEAR PACAEMBU",
   "ok": 0,
   "parcial": 0,
-  "nao_feita": 45,
-  "total": 45,
-  "esperadas_total": 45,
+  "nao_feita": 21,
+  "total": 21,
+  "esperadas_total": 21,
   "feitas_das_esperadas": 0,
-  "perdidas_das_esperadas": 45,
+  "perdidas_das_esperadas": 21,
   "modelos_perdidos_hoje": [
-    "ACADEMIA",
-    "BICICLETARIO",
     "BRINQUEDOTECA",
-    "ESPACO GOURMET",
-    "ESPACO PET",
-    "LIMPEZA DOS HALLS - HALL GARAGEM",
+    "ESPAÇO GOURMET",
     "LIMPEZA DOS HALLS - LADO A",
-    "LIMPEZA DOS HALLS - LADO B"
+    "LIMPEZA DOS HALLS - TERREO LADO A",
+    "PISCINA",
+    "BICICLETARIO",
+    "CHURRASQUEIRA",
+    "HOME OFFICE"
   ],
   "top_falhas_modelos": [
     {
-      "modelo": "ACADEMIA",
-      "nao_feita": 3
-    },
-    {
-      "modelo": "BICICLETARIO",
-      "nao_feita": 3
+      "modelo": "PISCINA",
+      "nao_feita": 2
     },
     {
       "modelo": "BRINQUEDOTECA",
-      "nao_feita": 3
+      "nao_feita": 1
     },
     {
-      "modelo": "ESPACO GOURMET",
-      "nao_feita": 3
+      "modelo": "ESPAÇO GOURMET",
+      "nao_feita": 1
     },
     {
-      "modelo": "ESPACO PET",
-      "nao_feita": 3
+      "modelo": "LIMPEZA DOS HALLS - LADO A",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "LIMPEZA DOS HALLS - TERREO LADO A",
+      "nao_feita": 1
     }
   ],
   "pct_cumprimento": 0.0,

@@ -3,10 +3,21 @@
   "local": "MAURIZIO",
   "ok": 5,
   "parcial": 1,
-  "nao_feita": 0,
-  "total": 6,
-  "top_falhas_modelos": [],
-  "pct_cumprimento": 83.3,
+  "nao_feita": 1,
+  "total": 7,
+  "esperadas_total": 1,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 1,
+  "modelos_perdidos_hoje": [
+    "ATIVIDADES"
+  ],
+  "top_falhas_modelos": [
+    {
+      "modelo": "ATIVIDADES",
+      "nao_feita": 1
+    }
+  ],
+  "pct_cumprimento": 71.4,
   "dados_inconclusivos": false,
   "slug": "maurizio"
 }

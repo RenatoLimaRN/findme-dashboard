@@ -3,27 +3,44 @@
   "local": "CONDOMÍNIO PARQUE DO PRÍNCIPE",
   "ok": 0,
   "parcial": 0,
-  "nao_feita": 5,
-  "total": 5,
+  "nao_feita": 45,
+  "total": 45,
+  "esperadas_total": 40,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 40,
+  "modelos_perdidos_hoje": [
+    "Z - ELEVADOR TORRE ÁUSTRIA",
+    "Z - ELEVADOR TORRE BÉLGICA",
+    "Z - ELEVADOR TORRE CANADÁ",
+    "Z - ELEVADOR TORRE DINAMARCA",
+    "Z - ELEVADOR TORRE ESPANHA",
+    "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE ÁUSTRIA",
+    "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE BÉLGICA",
+    "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE CANADÁ"
+  ],
   "top_falhas_modelos": [
+    {
+      "modelo": "Z - LIMPEZA DA QUADRA EXTERNA",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "Z -  LIMPEZA DO REFEITÓRIO",
+      "nao_feita": 2
+    },
+    {
+      "modelo": "Z - LIMPEZA DOS CORREDORES EXTERNOS",
+      "nao_feita": 2
+    },
     {
       "modelo": "ESTACIONAMENTOS",
       "nao_feita": 2
     },
     {
-      "modelo": "RONDA SETORIAL A",
-      "nao_feita": 1
-    },
-    {
-      "modelo": "RONDA SETORIAL B",
-      "nao_feita": 1
-    },
-    {
-      "modelo": "RONDA - NOTURONO",
+      "modelo": "Z - ELEVADOR TORRE ÁUSTRIA",
       "nao_feita": 1
     }
   ],
   "pct_cumprimento": 0.0,
-  "dados_inconclusivos": false,
+  "dados_inconclusivos": true,
   "slug": "parque_do_principe"
 }

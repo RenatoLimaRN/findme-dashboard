@@ -3,36 +3,32 @@
   "local": "VARANDA POMPÉIA",
   "ok": 0,
   "parcial": 0,
-  "nao_feita": 5,
-  "total": 5,
+  "nao_feita": 4,
+  "total": 4,
   "esperadas_total": 4,
   "feitas_das_esperadas": 0,
   "perdidas_das_esperadas": 4,
   "modelos_perdidos_hoje": [
+    "HALL TÉRREO - TORRE A",
+    "HALL TÉRREO - TORRE B",
     "HALLS - TORRE A",
-    "HALLS - TORRE B",
-    "HALL TERREO - TORRE A",
-    "HALL TERREO - TORRE B"
+    "HALLS - TORRE B"
   ],
   "top_falhas_modelos": [
     {
-      "modelo": "(sem modelo)",
+      "modelo": "HALL TÉRREO - TORRE A",
       "nao_feita": 1
     },
     {
-      "modelo": "[ESPERADA — NÃO REGISTRADA] HALLS - TORRE A  (VARANDA POMPEIA - LIMPEZA - AREAS COMUNS)",
+      "modelo": "HALL TÉRREO - TORRE B",
       "nao_feita": 1
     },
     {
-      "modelo": "[ESPERADA — NÃO REGISTRADA] HALLS - TORRE B  (VARANDA POMPEIA - LIMPEZA - AREAS COMUNS)",
+      "modelo": "HALLS - TORRE A",
       "nao_feita": 1
     },
     {
-      "modelo": "[ESPERADA — NÃO REGISTRADA] HALL TERREO - TORRE A  (VARANDA POMPEIA - LIMPEZA - TORRES A)",
-      "nao_feita": 1
-    },
-    {
-      "modelo": "[ESPERADA — NÃO REGISTRADA] HALL TERREO - TORRE B  (VARANDA POMPEIA - LIMPEZA - TORRES B)",
+      "modelo": "HALLS - TORRE B",
       "nao_feita": 1
     }
   ],

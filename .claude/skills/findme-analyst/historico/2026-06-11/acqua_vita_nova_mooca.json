@@ -10,12 +10,12 @@
   "perdidas_das_esperadas": 21,
   "modelos_perdidos_hoje": [
     "B04 - ACADEMIA - TORRE 02",
-    "D03 - COPA/SALA DE MANUTENCAO - TORRE 4",
+    "D03 - COPA/SALA DE MANUTENÇÃO - TORRE 4",
     "D04 - HOME OFFICE - TORRE 4",
     "L03 - QUADRA",
-    "L04 - VARRICAO DA RUA EM GERAL",
+    "L04 - VARRIÇÃO DA RUA EM GERAL",
     "L05 - PISTA DE ATLETISMO",
-    "LIMPEZA - LAVACAO GERAL DA AREA EXTERNA EM GERAL",
+    "LIMPEZA - LAVAÇÃO GERAL DA ÁREA EXTERNA EM GERAL",
     "B01 - HALL DE ENTRADA - TORRE 2"
   ],
   "top_falhas_modelos": [
@@ -24,7 +24,7 @@
       "nao_feita": 2
     },
     {
-      "modelo": "D03 - COPA/SALA DE MANUTENCAO - TORRE 4",
+      "modelo": "D03 - COPA/SALA DE MANUTENÇÃO - TORRE 4",
       "nao_feita": 2
     },
     {

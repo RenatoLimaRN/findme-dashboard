@@ -3,15 +3,44 @@
   "local": "MIRANTE DO VALE",
   "ok": 0,
   "parcial": 0,
-  "nao_feita": 1,
-  "total": 1,
+  "nao_feita": 16,
+  "total": 16,
+  "esperadas_total": 15,
+  "feitas_das_esperadas": 0,
+  "perdidas_das_esperadas": 15,
+  "modelos_perdidos_hoje": [
+    "Limpeza - Administração",
+    "Limpeza - Banheiro Fem. - 1º andar",
+    "Limpeza - Banheiro Fem. - 2º andar",
+    "Limpeza - Banheiro Fem. - 3º andar",
+    "Limpeza - Banheiro Masc. - 1º andar",
+    "Limpeza - Banheiro Masc. - 2º andar",
+    "Limpeza - Banheiro Masc. - 3º andar",
+    "Limpeza - Banheiros - 36º andar"
+  ],
   "top_falhas_modelos": [
     {
-      "modelo": "RONDA NOTURNA - MIRANTE",
+      "modelo": "Limpeza - Administração",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "Limpeza - Banheiro Fem. - 1º andar",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "Limpeza - Banheiro Fem. - 2º andar",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "Limpeza - Banheiro Fem. - 3º andar",
+      "nao_feita": 1
+    },
+    {
+      "modelo": "Limpeza - Banheiro Masc. - 1º andar",
       "nao_feita": 1
     }
   ],
   "pct_cumprimento": 0.0,
-  "dados_inconclusivos": false,
+  "dados_inconclusivos": true,
   "slug": "mirante_do_vale"
 }

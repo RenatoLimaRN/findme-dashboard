@@ -27,7 +27,7 @@ import sys
 import json
 import re
 import unicodedata
-from datetime import date
+from datetime import date, datetime, timedelta
 from pathlib import Path
 
 try:
@@ -585,6 +585,7 @@ def _criar_aba_unificada(wb, dados):
         modelo = re.sub(r"^\[AVULSA\]\s*", "", modelo)
         modelo = re.sub(r"^" + re.escape(TAG_ESPERADA) + r"\s*", "", modelo).strip()
         atual["linhas"].append({
+            "data": s1,  # col1 = data (DD/MM/YYYY)
             "hora": str(src.cell(row=ri, column=2).value or "").strip(),
             "modelo": modelo,
             "status": str(src.cell(row=ri, column=5).value or "").strip(),
@@ -597,8 +598,8 @@ def _criar_aba_unificada(wb, dados):
     if name in wb.sheetnames:
         del wb[name]
     ws = wb.create_sheet(name)
-    headers = ["Hora", "Modelo", "Status", "Duração", "Justificativa"]
-    widths = [8, 46, 16, 11, 52]
+    headers = ["Quando", "Modelo", "Status", "Duração", "Justificativa"]
+    widths = [14, 44, 16, 11, 52]
     C_HORA, C_MODELO, C_STATUS, C_DUR, C_JUST = range(1, 6)
     for ci, h in enumerate(headers, start=1):
         c = ws.cell(row=1, column=ci, value=h)
@@ -610,15 +611,27 @@ def _criar_aba_unificada(wb, dados):
     ws.row_dimensions[1].height = 22
     ws.freeze_panes = "A2"
 
+    def _dt_key(l):
+        """datetime real (data+hora) pra ordenar o plantão cronologicamente —
+        a madrugada do dia seguinte fica DEPOIS da noite do dia base."""
+        m = _hhmm_para_min(l["hora"])
+        if m is None:
+            return None
+        try:
+            d = datetime.strptime(l["data"], "%d/%m/%Y")
+        except (ValueError, TypeError):
+            return None
+        return d + timedelta(minutes=m)
+
     row = 2
     for loc in locais:
         linhas = loc["linhas"]
         if not linhas:
             continue
-        # execuções reais (com horário) ordenadas; esperadas (sem hora) no fim
-        reais = [l for l in linhas if _hhmm_para_min(l["hora"]) is not None]
-        esperadas = [l for l in linhas if _hhmm_para_min(l["hora"]) is None]
-        reais.sort(key=lambda l: _hhmm_para_min(l["hora"]))
+        # execuções reais (com data+hora) em ordem cronológica; esperadas no fim
+        reais = [l for l in linhas if _dt_key(l) is not None]
+        esperadas = [l for l in linhas if _dt_key(l) is None]
+        reais.sort(key=_dt_key)
         ordenadas = reais + esperadas
 
         feitas = sum(1 for l in linhas if l["status"].strip().lower() == "completa")
@@ -635,7 +648,10 @@ def _criar_aba_unificada(wb, dados):
 
         for idx, l in enumerate(ordenadas):
             sk, rotulo = STATUS_EXEC.get(l["status"].lower(), (None, l["status"] or "—"))
-            ws.cell(row=row, column=C_HORA, value=l["hora"] or "—")
+            # "DD/MM HH:MM" pra deixar claro quando cruza a meia-noite do plantão
+            dk = _dt_key(l)
+            quando = dk.strftime("%d/%m %H:%M") if dk else "—"
+            ws.cell(row=row, column=C_HORA, value=quando)
             ws.cell(row=row, column=C_MODELO, value=l["modelo"])
             ws.cell(row=row, column=C_STATUS, value=rotulo)
             ws.cell(row=row, column=C_DUR, value=l["duracao"] or "—")

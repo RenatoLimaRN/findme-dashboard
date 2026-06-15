@@ -39,28 +39,38 @@ def _slug(nome: str) -> str:
     return re.sub(r"[^A-Za-z0-9]+", "_", s.lower()).strip("_") or "local"
 
 
+ICONE_POSTO = "▸"
+
+
 def _coletar(xlsx_path) -> list:
-    """Lê a aba Atividades -> [{nome, linhas:[(quando, modelo, status)]}]."""
+    """Lê a aba Atividades -> [{nome, postos:[{posto, linhas:[(quando,modelo,status)]}]}]."""
     wb = load_workbook(xlsx_path, read_only=True)
     if "Atividades" not in wb.sheetnames:
         wb.close()
         return []
     ws = wb["Atividades"]
-    locais, atual = [], None
+    locais, atual, posto_atual = [], None, None
     for row in ws.iter_rows(min_row=2, max_col=3):
         v1 = str(row[0].value or "")
         if ICONE_GRUPO in v1:
             nome = re.split(r"\s{2,}", v1.replace(ICONE_GRUPO, "").strip())[0].strip()
-            atual = {"nome": nome, "linhas": []}
+            atual = {"nome": nome, "postos": []}
+            posto_atual = None
             locais.append(atual)
             continue
-        if atual is None:
+        if ICONE_POSTO in v1:
+            nome_p = re.split(r"\s{2,}", v1.replace(ICONE_POSTO, "").strip())[0].strip()
+            posto_atual = {"posto": nome_p, "linhas": []}
+            if atual is not None:
+                atual["postos"].append(posto_atual)
+            continue
+        if atual is None or posto_atual is None:
             continue
         quando = v1.strip()
         modelo = str(row[1].value or "").strip()
         status = str(row[2].value or "").strip()
         if modelo:
-            atual["linhas"].append((quando, modelo, status))
+            posto_atual["linhas"].append((quando, modelo, status))
     wb.close()
     return locais
 
@@ -70,26 +80,29 @@ def _texto_local(loc: dict, data_alvo: str) -> str:
     d1 = d0 + timedelta(days=1)
     plantao = f"{d0.strftime('%d/%m')} 06h → {d1.strftime('%d/%m')} 05h"
 
-    reais = [x for x in loc["linhas"] if "/" in x[0]]          # têm DD/MM HH:MM
-    esperadas = [x for x in loc["linhas"] if "/" not in x[0]]  # sem horário
-    feitas = sum(1 for _, _, s in reais if s.lower() == "feita")
+    todas = [x for p in loc["postos"] for x in p["linhas"]]
+    reais_tot = [x for x in todas if "/" in x[0]]
+    feitas_tot = sum(1 for _, _, s in reais_tot if s.lower() == "feita")
 
     L = [f"*FINDME — {loc['nome']}*",
          f"_Plantão {plantao}_",
          "",
-         f"{feitas} de {len(reais)} atividades feitas"]
+         f"{feitas_tot} de {len(reais_tot)} atividades feitas"]
 
-    if reais:
+    for p in loc["postos"]:
+        reais = [x for x in p["linhas"] if "/" in x[0]]
+        esperadas = [x for x in p["linhas"] if "/" not in x[0]]
+        if not reais and not esperadas:
+            continue
         L.append("")
+        L.append(f"*▸ {p['posto']}*")
         for quando, modelo, status in reais:
             e = EMOJI.get(status.lower(), "•")
             L.append(f"{e} {quando}  {modelo}")
-
-    if esperadas:
-        L.append("")
-        L.append(f"⬜ *Esperadas não registradas ({len(esperadas)}):*")
-        for _, modelo, _ in esperadas:
-            L.append(f"• {modelo}")
+        if esperadas:
+            L.append(f"⬜ _não registradas ({len(esperadas)}):_")
+            for _, modelo, _ in esperadas:
+                L.append(f"• {modelo}")
 
     return "\n".join(L)
 
@@ -100,7 +113,7 @@ def gerar(xlsx_path, data_alvo: str, saida_dir) -> list:
     locais = _coletar(xlsx_path)
     gerados = []
     for loc in locais:
-        if not loc["linhas"]:
+        if not loc.get("postos"):
             continue
         texto = _texto_local(loc, data_alvo)
         caminho = saida_dir / f"{_slug(loc['nome'])}.txt"

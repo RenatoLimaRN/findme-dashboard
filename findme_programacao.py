@@ -1020,11 +1020,15 @@ def build_atividades(wb, dados: dict, start: str, end: str,
                     vertical="center",
                     indent=1 if col in (3, 4, 11) else 0,
                 )
+            # Coluna 12 = posto (station). Usada pelo enriquecedor pra agrupar
+            # por posto dentro do local. Fica oculta na aba final.
+            cp = cel(ws, row_cur, 12, rec.get("posto", "—"), fill=row_bg)
+            cp.font = Font(name="Arial", size=8, color="999999")
             ws.row_dimensions[row_cur].height = 15
             row_cur += 1
 
     # Larguras
-    widths = [12, 8, 22, 34, 22, 10, 10, 20, 8, 8, 38]
+    widths = [12, 8, 22, 34, 22, 10, 10, 20, 8, 8, 38, 22]
     for i, w in enumerate(widths, 1):
         ws.column_dimensions[get_column_letter(i)].width = w
 

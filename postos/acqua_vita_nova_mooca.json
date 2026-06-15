@@ -307,6 +307,22 @@
           "vezes": 1
         }
       ]
+    },
+    {
+      "posto": "ACQUA - RONDA",
+      "op_tipo": "Vigilante",
+      "atividades": [
+        {
+          "modelo": "RONDA GERAL",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        },
+        {
+          "modelo": "RONDA - SEM O BARRILETE",
+          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "vezes": 1
+        }
+      ]
     }
   ]
 }

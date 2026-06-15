@@ -275,6 +275,8 @@ def enriquecer(xlsx_path, dados):
                 tag += f"  ({posto})"
             ws.cell(row=r, column=4, value=tag)
             ws.cell(row=r, column=5, value="Esperada não registrada")
+            if posto:
+                ws.cell(row=r, column=12, value=posto)  # col posto p/ agrupar
         n_inseridas += len(faltantes)
 
     # 5) Re-aplicar merge A:K em TODAS as linhas com 📍 (fix do openpyxl)
@@ -598,6 +600,7 @@ def _criar_aba_unificada(wb, dados):
             "status": str(src.cell(row=ri, column=5).value or "").strip(),
             "duracao": str(src.cell(row=ri, column=8).value or "").strip(),
             "justif": str(src.cell(row=ri, column=11).value or "").strip(),
+            "posto": str(src.cell(row=ri, column=12).value or "").strip() or "—",
         })
 
     # ── 2) criar a aba nova ───────────────────────────────────────────────────
@@ -630,21 +633,38 @@ def _criar_aba_unificada(wb, dados):
             return None
         return d + timedelta(minutes=m)
 
+    def _ordena_postos(linhas):
+        """Agrupa linhas por posto, preservando a ordem de 1ª aparição.
+        Cada posto vem com suas execuções em ordem cronológica + esperadas no fim."""
+        ordem, grupos = [], {}
+        for l in linhas:
+            p = l.get("posto", "—")
+            if p not in grupos:
+                grupos[p] = []
+                ordem.append(p)
+        for l in linhas:
+            grupos[l.get("posto", "—")].append(l)
+        out = []
+        for p in ordem:
+            reais = [l for l in grupos[p] if _dt_key(l) is not None]
+            esp = [l for l in grupos[p] if _dt_key(l) is None]
+            reais.sort(key=_dt_key)
+            out.append((p, reais + esp, reais, esp))
+        return out
+
     row = 2
     for loc in locais:
         linhas = loc["linhas"]
         if not linhas:
             continue
-        # execuções reais (com data+hora) em ordem cronológica; esperadas no fim
-        reais = [l for l in linhas if _dt_key(l) is not None]
-        esperadas = [l for l in linhas if _dt_key(l) is None]
-        reais.sort(key=_dt_key)
-        ordenadas = reais + esperadas
 
-        feitas = sum(1 for l in linhas if l["status"].strip().lower() == "completa")
-        cab = (f"📍  {loc['nome']}    {len(reais)} atividade(s)"
-               + (f"   ·   {feitas} feita(s)" if reais else "")
-               + (f"   ·   {len(esperadas)} esperada(s) não registrada(s)" if esperadas else ""))
+        # cabeçalho do LOCAL (📍) — resumo do condomínio inteiro
+        reais_loc = [l for l in linhas if _dt_key(l) is not None]
+        esp_loc = [l for l in linhas if _dt_key(l) is None]
+        feitas_loc = sum(1 for l in linhas if l["status"].strip().lower() == "completa")
+        cab = (f"📍  {loc['nome']}    {len(reais_loc)} atividade(s)"
+               + (f"   ·   {feitas_loc} feita(s)" if reais_loc else "")
+               + (f"   ·   {len(esp_loc)} esperada(s) não registrada(s)" if esp_loc else ""))
         cell = ws.cell(row=row, column=1, value=cab)
         ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=len(headers))
         cell.font = Font(bold=True, color="FFFFFF", size=11)
@@ -653,34 +673,44 @@ def _criar_aba_unificada(wb, dados):
         ws.row_dimensions[row].height = 20
         row += 1
 
-        for idx, l in enumerate(ordenadas):
-            sk, rotulo = STATUS_EXEC.get(l["status"].lower(), (None, l["status"] or "—"))
-            # "DD/MM HH:MM" pra deixar claro quando cruza a meia-noite do plantão
-            dk = _dt_key(l)
-            quando = dk.strftime("%d/%m %H:%M") if dk else "—"
-            ws.cell(row=row, column=C_HORA, value=quando)
-            ws.cell(row=row, column=C_MODELO, value=l["modelo"])
-            ws.cell(row=row, column=C_STATUS, value=rotulo)
-            ws.cell(row=row, column=C_DUR, value=l["duracao"] or "—")
-            ws.cell(row=row, column=C_JUST, value=l["justif"])
-
-            # zebra leve nas linhas (sem poluir)
-            linha_bg = PatternFill("solid", start_color=COR_ZEBRA) if idx % 2 else FILL_BRANCO
-            for ci in range(1, len(headers) + 1):
-                ws.cell(row=row, column=ci).fill = linha_bg
-
-            # cor SÓ na célula de status
-            if sk:
-                bg, fg = STATUS_CORES.get(sk, ("FFFFFF", "000000"))
-                cst = ws.cell(row=row, column=C_STATUS)
-                cst.fill = PatternFill("solid", start_color=bg)
-                cst.font = Font(bold=True, color=fg, size=9)
-            for ci in (C_HORA, C_STATUS, C_DUR):
-                ws.cell(row=row, column=ci).alignment = Alignment(
-                    horizontal="center", vertical="center")
-            ws.cell(row=row, column=C_JUST).alignment = Alignment(
-                wrap_text=True, vertical="top")
+        # dentro do local, um subgrupo por POSTO
+        for posto, itens, reais_p, esp_p in _ordena_postos(linhas):
+            feitas_p = sum(1 for l in itens if l["status"].strip().lower() == "completa")
+            sub = (f"    ▸ {posto}    {len(reais_p)} ativ."
+                   + (f" · {feitas_p} feita(s)" if reais_p else "")
+                   + (f" · {len(esp_p)} não registrada(s)" if esp_p else ""))
+            scell = ws.cell(row=row, column=1, value=sub)
+            ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=len(headers))
+            scell.font = Font(bold=True, color="1F4E79", size=9)
+            scell.fill = PatternFill("solid", start_color="DCE6F1")
+            scell.alignment = Alignment(vertical="center", indent=1)
+            ws.row_dimensions[row].height = 16
             row += 1
+
+            for idx, l in enumerate(itens):
+                sk, rotulo = STATUS_EXEC.get(l["status"].lower(), (None, l["status"] or "—"))
+                dk = _dt_key(l)
+                quando = dk.strftime("%d/%m %H:%M") if dk else "—"
+                ws.cell(row=row, column=C_HORA, value=quando)
+                ws.cell(row=row, column=C_MODELO, value=l["modelo"])
+                ws.cell(row=row, column=C_STATUS, value=rotulo)
+                ws.cell(row=row, column=C_DUR, value=l["duracao"] or "—")
+                ws.cell(row=row, column=C_JUST, value=l["justif"])
+
+                linha_bg = PatternFill("solid", start_color=COR_ZEBRA) if idx % 2 else FILL_BRANCO
+                for ci in range(1, len(headers) + 1):
+                    ws.cell(row=row, column=ci).fill = linha_bg
+                if sk:
+                    bg, fg = STATUS_CORES.get(sk, ("FFFFFF", "000000"))
+                    cst = ws.cell(row=row, column=C_STATUS)
+                    cst.fill = PatternFill("solid", start_color=bg)
+                    cst.font = Font(bold=True, color=fg, size=9)
+                for ci in (C_HORA, C_STATUS, C_DUR):
+                    ws.cell(row=row, column=ci).alignment = Alignment(
+                        horizontal="center", vertical="center")
+                ws.cell(row=row, column=C_JUST).alignment = Alignment(
+                    wrap_text=True, vertical="top")
+                row += 1
 
     if row > 2:
         ws.auto_filter.ref = f"A1:{get_column_letter(len(headers))}{row-1}"

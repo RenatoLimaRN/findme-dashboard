@@ -19,6 +19,9 @@ logs/
 .claude/skills/findme-analyst-workspace/
 workspace_teste/
 
+# Doc da VM — contém IP público e caminho da chave (não publicar)
+vps/CONFIGURACAO-VM-FINDME.md
+
 # Relatórios gerados (cada execução regenera; histórico de snapshots fica)
 relatorios/
 

@@ -581,6 +581,16 @@ def main():
             log(f"  WARNING: PDF 3 dias falhou: {e}")
             pdf3_path = None
 
+        # Textos por local (prontos pra copiar/colar no WhatsApp)
+        try:
+            log("  gerando textos WhatsApp por local...")
+            import gerar_textos_whatsapp
+            zap_dir = xlsx.parent / "whatsapp"
+            gerados = gerar_textos_whatsapp.gerar(xlsx, data_alvo, zap_dir)
+            log(f"  -> {len(gerados)} texto(s) em {zap_dir.name}/")
+        except Exception as e:
+            log(f"  WARNING: textos WhatsApp falharam: {e}")
+
         if args.sem_email:
             log("OK (--sem-email, pulando envio)")
             return 0

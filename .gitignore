@@ -22,6 +22,11 @@ workspace_teste/
 # Doc da VM — contém IP público e caminho da chave (não publicar)
 vps/CONFIGURACAO-VM-FINDME.md
 
+# Credenciais / chaves SSH — NUNCA commitar
+.secrets/
+*.key
+*.pem
+
 # Relatórios gerados (cada execução regenera; histórico de snapshots fica)
 relatorios/
 

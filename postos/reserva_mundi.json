@@ -1,5 +1,24 @@
 {
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
   "local": "CONDOMÍNIO RESERVA MUNDI",
-  "postos": []
+  "postos": [
+    {
+      "posto": "RESERVA MUNDI - LIMPEZA TORRE A",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "LIMPEZA DO HALL DE ENTRADA TORRE A",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        }
+      ]
+    }
+  ]
 }

@@ -1,11 +1,206 @@
 {
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
   "local": "MIRANTE DO VALE",
   "postos": [
     {
-      "posto": "Limpeza",
+      "posto": "MIRANTE DO VALE - Limpeza",
       "op_tipo": "Limpeza",
-      "atividades": []
+      "atividades": [
+        {
+          "modelo": "Limpeza - Administração",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Banheiro Fem. - 1º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Banheiro Fem. - 2º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Banheiro Fem. - 3º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Banheiro Masc. - 1º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Banheiro Masc. - 2º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Banheiro Masc. - 3º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Banheiros - 36º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Banheiros - 39º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Banheiros - 40º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Entrada do Cond. inicio pela Brigadeiro Tobias",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Escadas de emergência do 7º ao 3º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Galeria - 1º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Galeria - 2º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Limpeza - Galeria - 3º andar",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        }
+      ]
     }
   ]
 }

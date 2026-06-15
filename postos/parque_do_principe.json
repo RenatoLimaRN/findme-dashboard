@@ -1,11 +1,646 @@
 {
-  "_instrucao": "Edite as atividades deste local. Cada entrada tem: modelo (nome exato como aparece no relatório FindMe), dias (subset de ['Dom','Seg','Ter','Qua','Qui','Sex','Sab']) e vezes (quantas vezes por dia). Remova este _instrucao quando terminar.",
   "local": "CONDOMÍNIO PARQUE DO PRÍNCIPE",
   "postos": [
     {
-      "posto": "Limpeza",
+      "posto": "LIMPEZA - CONDOMÍNIO PARQUE DO PRÍNCIPE - CELSO",
       "op_tipo": "Limpeza",
-      "atividades": []
+      "atividades": [
+        {
+          "modelo": "Z - ELEVADOR TORRE ÁUSTRIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - ELEVADOR TORRE BÉLGICA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - ELEVADOR TORRE CANADÁ",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - ELEVADOR TORRE DINAMARCA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - ELEVADOR TORRE ESPANHA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE ÁUSTRIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE BÉLGICA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE CANADÁ",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE DINAMARCA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE ESPANHA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS  - ÁUSTRIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS - BÉLGICA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS - CANADÁ",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS - DINAMARCA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS - ESPANHA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA ÁREA EXTERNAS (CALÇADAS E LIXEIRAS) - CELSO QUIRINO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DA QUADRA EXTERNA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z -  LIMPEZA DO REFEITÓRIO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DOS CORREDORES EXTERNOS",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA VESTIÁRIOS E DML  -  CELSO QUIRINO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z – Limpeza das Garagens e Subsolos – Áustria quinzenal.”",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DAS GARAGENS E SUBSOLOS - BÉLGICA QUINZENAL",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DAS GARAGENS E SUBSOLOS - CANADÁ QUINZENAL",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DAS GARAGENS E SUBSOLOS - DINAMARCA QUINZENAL",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DAS GARAGENS E SUBSOLOS - ESPANHA QUINZENAL",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DO SALÃO DE FESTA",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "LIMPEZA - CONDOMÍNIO PARQUE DO PRÍNCIPE - POLITÉCNICA",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "Z - ELEVADOR TORRE GRÉCIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - ELEVADOR TORRE HOLANDA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - ELEVADOR TORRE ITÁLIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - ELEVADOR TORRE JAMAICA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE FRANÇA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE GRÉCIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE HOLANDA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE ITÁLIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS DOS ANDARES E ESCADARIAS - TORRE JAMAICA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS - FRANÇA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS - GRÉCIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS - HOLANDA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS - ITÁLIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - HALLS TÉRREOS - JAMAICA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA ÁREA EXTERNAS (CALÇADAS E LIXEIRAS) - POLITÉCNICA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DA QUADRA EXTERNA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z -  LIMPEZA DO REFEITÓRIO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DOS CORREDORES EXTERNOS",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA VESTIÁRIOS E DML - POLITÉCNICA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DAS GARAGENS E SUBSOLOS - FRANÇA QUINZENAL",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DAS GARAGENS E SUBSOLOS - GRÉCIA QUINZENAL",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DAS GARAGENS E SUBSOLOS - HOLANDA QUINZENAL",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DAS GARAGENS E SUBSOLOS - ITÁLIA QUINZENAL",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DAS GARAGENS E SUBSOLOS - JAMAICA QUINZENAL",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "Z - LIMPEZA DO SALÃO DE FESTA",
+          "dias": [
+            "Dom"
+          ],
+          "vezes": 1
+        }
+      ]
+    },
+    {
+      "posto": "RONDA - CONDOMÍNIO PARQUE DO PRÍNCIPE",
+      "op_tipo": "Vigilante",
+      "atividades": [
+        {
+          "modelo": "RONDA - DIURNO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 0
+        }
+      ]
+    },
+    {
+      "posto": "LIMPEZA - CONDOMÍNIO PARQUE DO PRÍNCIPE - RETIRADA LIXO",
+      "op_tipo": "Limpeza",
+      "atividades": [
+        {
+          "modelo": "Z - LIXEIRA CONDOMINIAL CELSO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        }
+      ]
     }
   ]
 }

@@ -1,55 +1,110 @@
 {
-  "_local": "CONDOMINIO EDIFICIO VILLAGE MORUMBI",
-  "_instrucao": "Atividades convertidas do print de VILLAGE MORUMBI - LIMPEZA. Cada entrada tem: modelo, dias e vezes.",
-  "local": "CONDOMINIO EDIFICIO VILLAGE MORUMBI",
+  "local": "CONDOMÍNIO EDIFÍCIO VILLAGE MORUMBI",
   "postos": [
     {
       "posto": "VILLAGE MORUMBI - LIMPEZA",
       "op_tipo": "Limpeza",
       "atividades": [
         {
-          "modelo": "ACADEMIA",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
-          "vezes": 1
-        },
-        {
-          "modelo": "AREAS EXTERNAS",
-          "dias": ["Ter", "Qui"],
-          "vezes": 1
-        },
-        {
           "modelo": "ATIVIDADES EXTRA",
-          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
           "vezes": 0
         },
         {
           "modelo": "ELEVADORES",
-          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
           "vezes": 1
         },
         {
-          "modelo": "ESPACO PET",
-          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "modelo": "ESPAÇO PET",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
           "vezes": 1
         },
         {
           "modelo": "HALL DE ENTRADA",
-          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
-          "vezes": 1
-        },
-        {
-          "modelo": "LIMPEZA HALLS",
-          "dias": ["Seg", "Qua", "Sex"],
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
           "vezes": 1
         },
         {
           "modelo": "PORTARIA",
-          "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"],
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
           "vezes": 1
         },
         {
-          "modelo": "SALAO SOCIAL",
-          "dias": ["Ter", "Sex", "Sab"],
+          "modelo": "ACADEMIA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA HALLS",
+          "dias": [
+            "Seg",
+            "Qua",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "ÁREAS EXTERNAS",
+          "dias": [
+            "Ter",
+            "Qui"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALÃO SOCIAL",
+          "dias": [
+            "Ter",
+            "Sex",
+            "Sab"
+          ],
           "vezes": 1
         }
       ]

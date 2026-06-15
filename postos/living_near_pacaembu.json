@@ -5,39 +5,291 @@
       "posto": "LIVING NEAR PACAEMBU - LIMPEZA - 01",
       "op_tipo": "Limpeza",
       "atividades": [
-        {"modelo": "BRINQUEDOTECA", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "ESPAÇO GOURMET", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "LIMPEZA DOS HALLS - LADO A", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "LIMPEZA DOS HALLS - TERREO LADO A", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "PISCINA", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1}
+        {
+          "modelo": "BRINQUEDOTECA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "ESPAÇO GOURMET",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - LADO A",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - TERREO LADO A",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PISCINA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        }
       ]
     },
     {
       "posto": "LIVING NEAR PACAEMBU - LIMPEZA - 02",
       "op_tipo": "Limpeza",
       "atividades": [
-        {"modelo": "BICICLETARIO", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "CHURRASQUEIRA", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "HOME OFFICE", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "LIMPEZA DOS HALLS - LADO B", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "LIMPEZA DOS HALLS - TERREO LADO B", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "SALÃO DE FESTA", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1}
+        {
+          "modelo": "BICICLETARIO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "CHURRASQUEIRA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "HOME OFFICE",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - LADO B",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - TERREO LADO B",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALÃO DE FESTA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        }
       ]
     },
     {
       "posto": "LIVING NEAR PACAEMBU - LIMPEZA - 03",
       "op_tipo": "Limpeza",
       "atividades": [
-        {"modelo": "ENTRADA DA AREA EXTERNAS", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "LIMPEZA DA CALÇADA - RUA", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "LIMPEZA DOS HALLS - HALL GARAGEM", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "LIMPEZA DOS VIDROS", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "LIXEIRAS", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "MERCADINHO", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "PISCINA", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "PISO BRANCO CHURRASQUEIRA", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "PLAYGROUND", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1},
-        {"modelo": "PORTARIA", "dias": ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"], "vezes": 1}
+        {
+          "modelo": "ENTRADA DA AREA EXTERNAS",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DA CALÇADA - RUA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS HALLS - HALL GARAGEM",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIMPEZA DOS VIDROS",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "LIXEIRAS",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "MERCADINHO",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PISCINA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PISO BRANCO CHURRAQUEIRA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PLAYGROUND",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PORTARIA",
+          "dias": [
+            "Dom",
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex",
+            "Sab"
+          ],
+          "vezes": 1
+        }
       ]
     }
   ]

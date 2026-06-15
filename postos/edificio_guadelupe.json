@@ -1,6 +1,4 @@
 {
-  "_local": "EDIFICIO GUADELUPE",
-  "_instrucao": "Atividades convertidas do print de Guadelupe Vistoria. Cada entrada tem: modelo, dias, vezes e, quando aplicavel, periodo.",
   "local": "EDIFICIO GUADELUPE",
   "postos": [
     {
@@ -8,8 +6,131 @@
       "op_tipo": "Limpeza",
       "atividades": [
         {
-          "modelo": "BICICLETARIO / DEPOSITO DE MATERIAIS",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "modelo": "BICICLETÁRIO / DEPÓSITO DE MATERIAIS",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "BRIGADA DE GÁS - LADO ÍMPAR",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "BRIGADA DE GÁS - LADO PAR",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "CASA DE BOMBAS DE ÁGUA",
+          "dias": [
+            "Seg"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "COPA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "ELEVADORES",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "HALL - LADO IMPAR",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "HALL - LADO PAR",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PÁTIO FUNDOS",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "PORTARIA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "SALÃO DE FESTA",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "SUBSOLO",
+          "dias": [
+            "Seg",
+            "Ter",
+            "Qua",
+            "Qui",
+            "Sex"
+          ],
           "vezes": 1
         },
         {
@@ -17,71 +138,6 @@
           "dias": [
             "Ter"
           ],
-          "vezes": 1,
-          "periodo": "quinzena"
-        },
-        {
-          "modelo": "BRIGADA DE GAS - LADO IMPAR",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
-          "vezes": 1
-        },
-        {
-          "modelo": "BRIGADA DE GAS - LADO PAR",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
-          "vezes": 1
-        },
-        {
-          "modelo": "CASA DE BOMBAS DE AGUA",
-          "dias": [
-            "Seg"
-          ],
-          "vezes": 1,
-          "periodo": "quinzena"
-        },
-        {
-          "modelo": "CASA DE MAQUINAS - IMPAR",
-          "dias": [
-            "Qua"
-          ],
-          "vezes": 1,
-          "periodo": "quinzena"
-        },
-        {
-          "modelo": "CASA DE MAQUINAS - PAR",
-          "dias": [
-            "Qua"
-          ],
-          "vezes": 1,
-          "periodo": "quinzena"
-        },
-        {
-          "modelo": "COPA",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
-          "vezes": 1
-        },
-        {
-          "modelo": "ELEVADORES",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
-          "vezes": 1
-        },
-        {
-          "modelo": "HALL - LADO IMPAR",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
-          "vezes": 1
-        },
-        {
-          "modelo": "HALL - LADO PAR",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
-          "vezes": 1
-        },
-        {
-          "modelo": "PATIO FUNDOS",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
-          "vezes": 1
-        },
-        {
-          "modelo": "PORTARIA",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
@@ -89,17 +145,20 @@
           "dias": [
             "Ter"
           ],
-          "vezes": 1,
-          "periodo": "quinzena"
-        },
-        {
-          "modelo": "SALAO DE FESTA",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
           "vezes": 1
         },
         {
-          "modelo": "SUBSOLO",
-          "dias": ["Seg", "Ter", "Qua", "Qui", "Sex"],
+          "modelo": "CASA DE MÁQUINAS - IMPAR",
+          "dias": [
+            "Qua"
+          ],
+          "vezes": 1
+        },
+        {
+          "modelo": "CASA DE MÁQUINAS - PAR",
+          "dias": [
+            "Qua"
+          ],
           "vezes": 1
         }
       ]

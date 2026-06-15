@@ -244,8 +244,15 @@ def enriquecer(xlsx_path, dados):
             continue
         prox_header = grupos[i + 1]["header_row"] - 1 if i + 1 < len(grupos) else ws.max_row
         modelos_dados = _modelos_dados_no_grupo(ws, g["header_row"], prox_header)
-        faltantes = [e for e in c["esperadas_detalhe"]
-                     if _norm_modelo(e["modelo"]) not in modelos_dados]
+        # Só é "esperada não registrada" quando o sistema NEM CRIOU a atividade
+        # (total_no_dia == 0). Se apareceu (mesmo não feita/perdida), já está
+        # na aba como execução real — não duplicar. O fallback por texto
+        # (modelos_dados) cobre cruzamentos sem total_no_dia.
+        faltantes = [
+            e for e in c["esperadas_detalhe"]
+            if e.get("total_no_dia", 0) == 0
+            and _norm_modelo(e["modelo"]) not in modelos_dados
+        ]
         if faltantes:
             inserir_por_grupo[i] = faltantes
 

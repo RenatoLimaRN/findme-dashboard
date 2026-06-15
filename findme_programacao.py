@@ -1514,9 +1514,9 @@ def main():
     else:
         print("  ℹ   Nenhum arquivo encontrado em postos/ — avulsas config desabilitada.")
 
-    if avulsas_cfg:
-        n_cfg = injetar_avulsas_config(dados, avulsas_cfg, start, end)
-        print(f"  ✔   {n_cfg} avulsa(s) injetada(s) a partir de postos/.\n")
+    # injetar_avulsas_config roda DEPOIS de buscar as avulsas perdidas (abaixo),
+    # senão injeta como "esperada não registrada" avulsas que o missed-single
+    # vai trazer logo em seguida — gerando duplicata. Ver bloco após o missed.
 
     # Busca avulsas perdidas
     print("  \U0001f514  Buscando avulsas perdidas (API missed-single-activities)...")
@@ -1610,6 +1610,13 @@ def main():
             print(f"  \u26a0   missed-single-activities retornou {r_miss.status_code} - ignorando.\n")
     except Exception as e:
         print(f"  \u26a0   Erro ao buscar avulsas perdidas: {e} - ignorando.\n")
+
+    # Injeta as avulsas esperadas (postos/) que N\u00c3O apareceram em lugar nenhum \u2014
+    # nem nas rotinas, nem nas avulsas perdidas (missed). Roda aqui, depois do
+    # missed, pra n\u00e3o duplicar o que o missed j\u00e1 trouxe.
+    if avulsas_cfg:
+        n_cfg = injetar_avulsas_config(dados, avulsas_cfg, start, end)
+        print(f"  \u2714   {n_cfg} avulsa(s) esperada(s) n\u00e3o registrada(s) injetada(s).\n")
 
     # Busca modelos historicos para locais que ficaram completamente vazios
     modelos_historicos = {}

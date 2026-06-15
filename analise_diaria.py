@@ -428,12 +428,14 @@ def carregar_email_config() -> dict:
     return json.loads(fp.read_text(encoding="utf-8"))
 
 
-def enviar_email(cfg: dict, assunto: str, html: str, anexo) -> None:
+def enviar_email(cfg: dict, assunto: str, html: str, anexo, destinos=None) -> None:
     msg = MIMEMultipart()
     msg["Subject"] = assunto
     from_name = cfg.get("from_name") or "FindMe Analyst"
     msg["From"] = f"{from_name} <{cfg['user']}>"
-    destinos = cfg["to"] if isinstance(cfg["to"], list) else [cfg["to"]]
+    if destinos is None:
+        destinos = cfg["to"] if isinstance(cfg["to"], list) else [cfg["to"]]
+    destinos = destinos if isinstance(destinos, list) else [destinos]
     msg["To"] = ", ".join(destinos)
     msg.attach(MIMEText(html, "html", "utf-8"))
 
@@ -504,6 +506,9 @@ def main():
     p.add_argument("--data", help="YYYY-MM-DD (default: ontem)")
     p.add_argument("--sem-email", action="store_true",
                    help="Gera e enriquece, mas não envia e-mail.")
+    p.add_argument("--teste", action="store_true",
+                   help="Envia para o e-mail de teste (to_teste do config) em vez "
+                        "dos destinatários de produção. Assunto leva [TESTE].")
     p.add_argument("--pular-gerar", action="store_true",
                    help="Pula a geração (usa o relatorio que já existe).")
     p.add_argument("--sem-aprender", action="store_true",
@@ -602,8 +607,15 @@ def main():
         html = montar_html(data_alvo, dados)
         d_br = datetime.fromisoformat(data_alvo).strftime("%d/%m/%Y")
         anexos = [p for p in (pdf_path, pdf3_path, zap_pdf, xlsx) if p]
-        enviar_email(cfg, f"FindMe — Fechamento {d_br}", html, anexos)
-        destinos = cfg["to"] if isinstance(cfg["to"], list) else [cfg["to"]]
+        if args.teste:
+            dest = cfg.get("to_teste") or cfg["to"]
+            destinos = dest if isinstance(dest, list) else [dest]
+            assunto = f"[TESTE] FindMe — Fechamento {d_br}"
+            log(f"  modo TESTE — enviando só para o e-mail de teste")
+        else:
+            destinos = cfg["to"] if isinstance(cfg["to"], list) else [cfg["to"]]
+            assunto = f"FindMe — Fechamento {d_br}"
+        enviar_email(cfg, assunto, html, anexos, destinos=destinos)
         log(f"  -> enviado para: {', '.join(destinos)}")
         log("CONCLUÍDO COM SUCESSO")
         return 0
@@ -615,7 +627,9 @@ def main():
         try:
             cfg = carregar_email_config()
             err_html = f"<h1>FindMe — Erro na análise de {data_alvo}</h1><pre>{traceback.format_exc()}</pre>"
-            enviar_email(cfg, f"FindMe — ERRO {data_alvo}", err_html, None)
+            # erro técnico vai só pro admin (to_teste), não pros destinatários do relatório
+            admin = cfg.get("to_teste") or cfg.get("to")
+            enviar_email(cfg, f"FindMe — ERRO {data_alvo}", err_html, None, destinos=admin)
         except Exception:
             pass
         return 1

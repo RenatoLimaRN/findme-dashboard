@@ -500,6 +500,10 @@ def fetch_atividades_v2(session, v2_token: str, location_id, from_iso: str,
         colab = str(g(row, "Colaborador") or "").strip()
         cat = str(g(row, "Nome Justificativa") or "").strip()
         desc = str(g(row, "Descrição Justificativa") or "").strip()
+        if cat in ("-", "None"):
+            cat = ""
+        if desc in ("-", "None"):
+            desc = ""
         justs = ([{"justification_category_name": cat,
                    "justification_description": desc}] if (cat or desc) else [])
         raw.append({

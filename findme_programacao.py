@@ -1890,6 +1890,7 @@ def main():
     print(f"      Abas do GERAL:")
     print(f"        - Capa Executiva  -- KPIs + postos críticos/ótimos")
     print(f"        - Atividades      -- condomínio → posto → atividades (turno, duração, status)")
+    print(f"        - Semana (7 dias) -- heatmap de eficiência por posto nos últimos 7 dias")
     print(SEP + "\n")
 
 

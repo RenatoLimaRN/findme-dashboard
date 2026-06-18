@@ -409,6 +409,7 @@ def montar_html(data_alvo: str, dados: dict) -> str:
 
 <div class="muted">
 <p>Detalhe linha-a-linha na aba <b>Atividades</b> do arquivo anexado: cores por status (verde=Completa, amarelo=Parcial, vermelho=Não Feita, vermelho-escuro=Esperada não registrada). Cabeçalho de cada local mostra cumprimento % e avulsas esperadas feitas.</p>
+<p>A aba <b>Semana (7 dias)</b> traz o histórico de eficiência por posto nos últimos 7 dias (heatmap + média + tendência), pra ver quem está crônico.</p>
 </div>
 {avisos_html}
 {aprend_html}

@@ -414,6 +414,18 @@ def enriquecer(xlsx_path, dados):
     wb["Atividades — exec"].title = "Atividades"
     _mover_aba_apos_capa(wb, "Atividades")
 
+    # 10) Aba "Semana (7 dias)": heatmap de eficiência por local→posto nos últimos
+    #     7 dias (lê os GERALs diários anteriores). Tolerante a falha — nunca
+    #     impede de salvar o relatório do dia.
+    try:
+        _root = str(Path(xlsx_path).resolve().parent.parent.parent)
+        if _root not in sys.path:
+            sys.path.insert(0, _root)
+        import gerar_aba_semana
+        gerar_aba_semana.adicionar(wb, xlsx_path)
+    except Exception as _e:
+        print(f"[aba-semana] aviso: {_e}", file=sys.stderr)
+
     wb.save(xlsx_path)
     return {
         "ok": True,

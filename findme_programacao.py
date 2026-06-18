@@ -387,6 +387,150 @@ def extrair_justificativa(row: dict) -> str:
     return " | ".join(textos) if textos else "-"
 
 
+# ─── Extração v2 (relatório oficial FindMe) ──────────────────────────────────
+# A API antiga (dashboard-production /reports/routines/general) foi descontinuada
+# e passou a responder [] vazio pra qualquer período (jun/2026). Os dados reais
+# (status, justificativas, horários) vêm agora do report-service do v2.findme.id:
+#   GET production.api.findme.id/v3/report/activity/spread-sheet
+#       ?location_id=<numérico>&from=<ISO Z>&to=<ISO Z>&with_checkeds=false
+#   auth: header Authorization = valor do cookie _findme_v2_token (login v2).
+# Resposta: {data:{url}} -> baixa um .xlsx com colunas:
+#   ID, Nome, Iniciada às, Finalizada às, Atividade das, Prazo, Colaborador,
+#   Tipo (Programada/Avulsa), Status, Total checkins, Total checkins feitos,
+#   Nome Justificativa, Descrição Justificativa.
+V2_REPORT_BASE = "https://production.api.findme.id/v3/report"
+
+# Status (texto do v2) -> status_int interno (compatível com STATUS/classificar_status)
+STATUS_V2 = {
+    "concluída": 2, "concluida": 2,
+    "perdida": 5,
+    "incompleta": 1,
+    "em andamento": 1,
+    "não iniciada": 0, "nao iniciada": 0,
+}
+
+
+def _v2_dt_iso(s) -> str:
+    """'DD/MM/YYYY HH:MM[:SS]' (formato do Excel oficial) -> ISO p/ parse_dt."""
+    if s is None:
+        return ""
+    s = str(s).strip()
+    if not s or s.lower() == "none":
+        return ""
+    for fmt in ("%d/%m/%Y %H:%M:%S", "%d/%m/%Y %H:%M", "%d/%m/%Y"):
+        try:
+            return datetime.strptime(s, fmt).strftime("%Y-%m-%dT%H:%M:%S")
+        except ValueError:
+            pass
+    return ""
+
+
+def login_v2_report(email: str, password: str):
+    """Loga no v2.findme.id e devolve (session, token) — token é o cookie
+    _findme_v2_token usado como Authorization no report-service."""
+    import sincronizar_postos as sp  # lazy: evita import circular
+    s = requests.Session()
+    s.headers.update({"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"})
+    sp.login_v2(s, email, password)
+    tok = next((c.value for c in s.cookies if c.name == "_findme_v2_token"), None)
+    if not tok:
+        raise RuntimeError("login v2 não retornou o cookie _findme_v2_token")
+    return s, tok
+
+
+def fetch_atividades_v2(session, v2_token: str, location_id, from_iso: str,
+                        to_iso: str, nome_local: str = "-") -> tuple:
+    """Baixa o relatório oficial de atividades (v3/report) de um local e devolve
+    (rows, ok) — rows no MESMO formato da API antiga, pro processar() consumir.
+    Rondas (Programada) sem Colaborador herdam a rota dominante do local, pra
+    agruparem juntas em vez de cair em 'Outras'."""
+    import io
+    from collections import Counter
+    from openpyxl import load_workbook
+
+    url = (f"{V2_REPORT_BASE}/activity/spread-sheet"
+           f"?location_id={location_id}&from={from_iso}&to={to_iso}"
+           f"&with_checkeds=false")
+    xb = None
+    for tentativa in range(1, 4):
+        try:
+            r = session.get(url, headers={"Authorization": v2_token}, timeout=120)
+            r.raise_for_status()
+            durl = (r.json().get("data") or {}).get("url")
+            if not durl:
+                return [], False
+            xb = requests.get(durl, timeout=120).content
+            break
+        except Exception as e:
+            if tentativa == 3:
+                print(f"    ⚠  relatório v2 falhou ({nome_local}): {type(e).__name__}")
+                return [], False
+            import time
+            time.sleep(3)
+
+    wb = load_workbook(io.BytesIO(xb), read_only=True)
+    ws = wb["Atividades"] if "Atividades" in wb.sheetnames else wb[wb.sheetnames[0]]
+    vals = list(ws.iter_rows(values_only=True))
+    wb.close()
+    if not vals:
+        return [], True
+
+    hdr = [str(c or "").strip() for c in vals[0]]
+    idx = {h: i for i, h in enumerate(hdr)}
+
+    def g(row, col):
+        i = idx.get(col)
+        return row[i] if (i is not None and i < len(row)) else None
+
+    def _int(v):
+        try:
+            return int(float(v))
+        except (TypeError, ValueError):
+            return 0
+
+    raw = []
+    for row in vals[1:]:
+        if row is None:
+            continue
+        nome_at = g(row, "Nome")
+        if nome_at is None or not str(nome_at).strip():
+            continue
+        tipo = str(g(row, "Tipo") or "").strip()
+        status_str = str(g(row, "Status") or "").strip()
+        colab = str(g(row, "Colaborador") or "").strip()
+        cat = str(g(row, "Nome Justificativa") or "").strip()
+        desc = str(g(row, "Descrição Justificativa") or "").strip()
+        justs = ([{"justification_category_name": cat,
+                   "justification_description": desc}] if (cat or desc) else [])
+        raw.append({
+            "_tipo":  tipo,
+            "_colab": colab,
+            "location": {"name": nome_local},
+            "station":  {"name": colab, "operation_type": 0},
+            "patrol":   {"name": str(nome_at).strip()},
+            "single":   tipo.lower() == "avulsa",
+            "status":   STATUS_V2.get(status_str.lower(), 0),
+            "to_be_started_at":     _v2_dt_iso(g(row, "Atividade das")),
+            "to_be_finished_until": _v2_dt_iso(g(row, "Prazo")),
+            "started_at":           _v2_dt_iso(g(row, "Iniciada às")),
+            "finished_at":          _v2_dt_iso(g(row, "Finalizada às")),
+            "checkins_count": _int(g(row, "Total checkins")),
+            "checkins_done":  _int(g(row, "Total checkins feitos")),
+            "justifications": justs,
+        })
+
+    # rondas sem Colaborador (perdidas) herdam a rota dominante do local
+    cnt = Counter(r["_colab"] for r in raw
+                  if r["_tipo"].lower() != "avulsa" and r["_colab"])
+    rota = cnt.most_common(1)[0][0] if cnt else "Ronda"
+    for r in raw:
+        if r["_tipo"].lower() != "avulsa" and not r["_colab"]:
+            r["station"]["name"] = rota
+        r.pop("_tipo", None)
+        r.pop("_colab", None)
+    return raw, True
+
+
 # ─── Injeção de avulsas configuradas ─────────────────────────────────────────
 
 DIA_MAP = {"Dom": 6, "Seg": 0, "Ter": 1, "Qua": 2, "Qui": 3, "Sex": 4, "Sab": 5}
@@ -1443,24 +1587,33 @@ def main():
     print(f"  ✔   {len(selected)} local(is): "
           f"{', '.join(l['name'] for l in selected)}\n")
 
-    print("  \U0001f4cb  Buscando atividades por local...")
+    # Autentica no v2 (relatório oficial) e mapeia nome do local -> id numérico.
+    # A API antiga de rotinas foi descontinuada (retorna [] vazio); os dados reais
+    # vêm do report-service do v2 — ver fetch_atividades_v2().
+    import sincronizar_postos as _sp  # lazy: evita import circular
+    print("  🔐  Autenticando no v2 (relatório oficial)...")
+    v2_sess, v2_tok = login_v2_report(email, password)
+    v2_locais = _sp.listar_locais_v2(v2_sess)   # {nome_norm: (id_numerico, nome_orig)}
+    print(f"  ✔   v2 OK ({len(v2_locais)} locais na conta).\n")
+
+    # Janela de BUSCA no v2 em UTC: pede D 00:00 BRT → (D+2) 00:00 BRT (BRT = UTC-3,
+    # logo +03:00Z). O filtro _na_janela abaixo recorta pro plantão real.
+    from_iso = f"{busca_ini}T03:00:00.000Z"
+    to_iso   = f"{(d0 + timedelta(days=2)).strftime('%Y-%m-%d')}T03:00:00.000Z"
+
+    print("  \U0001f4cb  Buscando atividades por local (relatório oficial v3)...")
     rows_raw   = []
     locs_vazios = []   # locais que retornaram 0 registros (para buscar histórico depois)
     for i, loc in enumerate(selected, 1):
         nome = loc["name"]
         print(f"  [{i:02d}/{len(selected)}] {nome}")
-        filt_loc = {
-            "hiddenInactive": True,
-            "locations": [loc["uuid"]],
-            "period": [busca_ini, busca_fim],
-        }
-        parcial, teve_504 = fetch_rotinas(token, filt_loc)
-
-        # Se falhou com 504 E nao trouxe nada, tenta busca dia a dia automaticamente
-        if teve_504 and len(parcial) == 0:
-            print(f"  \U0001f501  504 persistente — retentando {nome} dia a dia...")
-            parcial = fetch_rotinas_por_dia(token, filt_loc, busca_ini, busca_fim, nome)
-
+        info = v2_locais.get(_sp._norm(nome))
+        if not info:
+            print(f"         ⚠ local não encontrado no v2 — pulando")
+            locs_vazios.append(loc)
+            continue
+        parcial, _ok = fetch_atividades_v2(v2_sess, v2_tok, info[0],
+                                           from_iso, to_iso, nome)
         if len(parcial) == 0:
             locs_vazios.append(loc)
 

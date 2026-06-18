@@ -400,20 +400,45 @@ def extrair_justificativa(row: dict) -> str:
 #   Nome Justificativa, Descrição Justificativa.
 V2_REPORT_BASE = "https://production.api.findme.id/v3/report"
 
-# Status (texto do v2) -> status_int interno (compatível com STATUS/classificar_status)
-STATUS_V2 = {
-    "concluída": 2, "concluida": 2,
-    "perdida": 5,
-    "incompleta": 1,
-    "em andamento": 1,
-    "não iniciada": 0, "nao iniciada": 0,
-}
+# Status (texto do v2) -> status_int interno (compatível com STATUS/classificar_status).
+# Match por SUBSTRING (não exato) pra aguentar variações de redação do FindMe
+# ("Incompleta c/ Justif.", "Concluída com atraso", etc.) sem virar "não feita"
+# silenciosamente. Texto desconhecido é logado (não engolido) em _status_v2_int.
+_STATUS_V2_DESCONHECIDOS = set()
+
+
+def _status_v2_int(status_str: str) -> int:
+    s = (status_str or "").strip().lower()
+    if not s or s == "none":
+        return 0
+    if s.startswith("conclu") or s in ("completa", "realizada", "finalizada"):
+        return 2
+    if "perdida" in s:
+        return 5
+    if "incompleta" in s and "justif" in s:
+        return 4
+    if "incompleta" in s:
+        return 1
+    if "andamento" in s:                       # "Em andamento"
+        return 1
+    if "iniciada" in s:                        # "Não iniciada"
+        return 0
+    if status_str not in _STATUS_V2_DESCONHECIDOS:
+        _STATUS_V2_DESCONHECIDOS.add(status_str)
+        print(f"    ⚠  status v2 desconhecido: {status_str!r} — tratando como 'não feita'")
+    return 0
 
 
 def _v2_dt_iso(s) -> str:
-    """'DD/MM/YYYY HH:MM[:SS]' (formato do Excel oficial) -> ISO p/ parse_dt."""
+    """'DD/MM/YYYY HH:MM[:SS]' (formato do Excel oficial) -> ISO p/ parse_dt.
+    Hoje o export traz strings, mas o openpyxl pode devolver datetime/date nativo
+    se a célula for formatada como data — trata os dois casos."""
     if s is None:
         return ""
+    if isinstance(s, datetime):                       # checar datetime ANTES de date
+        return s.strftime("%Y-%m-%dT%H:%M:%S")
+    if isinstance(s, date):
+        return s.strftime("%Y-%m-%dT00:00:00")
     s = str(s).strip()
     if not s or s.lower() == "none":
         return ""
@@ -459,7 +484,9 @@ def fetch_atividades_v2(session, v2_token: str, location_id, from_iso: str,
             durl = (r.json().get("data") or {}).get("url")
             if not durl:
                 return [], False
-            xb = requests.get(durl, timeout=120).content
+            dr = requests.get(durl, timeout=120)
+            dr.raise_for_status()          # S3 pode devolver 403 (url expirada)/5xx
+            xb = dr.content
             break
         except Exception as e:
             if tentativa == 3:
@@ -468,10 +495,16 @@ def fetch_atividades_v2(session, v2_token: str, location_id, from_iso: str,
             import time
             time.sleep(3)
 
-    wb = load_workbook(io.BytesIO(xb), read_only=True)
-    ws = wb["Atividades"] if "Atividades" in wb.sheetnames else wb[wb.sheetnames[0]]
-    vals = list(ws.iter_rows(values_only=True))
-    wb.close()
+    # parse do xlsx fora do retry: um corpo não-xlsx (erro S3/HTML) não pode
+    # derrubar o run inteiro — devolve vazio e o loop segue pro próximo local.
+    try:
+        wb = load_workbook(io.BytesIO(xb), read_only=True)
+        ws = wb["Atividades"] if "Atividades" in wb.sheetnames else wb[wb.sheetnames[0]]
+        vals = list(ws.iter_rows(values_only=True))
+        wb.close()
+    except Exception as e:
+        print(f"    ⚠  xlsx v2 inválido ({nome_local}): {type(e).__name__}")
+        return [], False
     if not vals:
         return [], True
 
@@ -506,6 +539,12 @@ def fetch_atividades_v2(session, v2_token: str, location_id, from_iso: str,
             desc = ""
         justs = ([{"justification_category_name": cat,
                    "justification_description": desc}] if (cat or desc) else [])
+        # data programada: normalmente "Atividade das"; se vier vazia (avulsa sem
+        # agendamento), cai pro Prazo/Iniciada pra não perder a data (a janela e
+        # o leitor da skill dependem dela).
+        sched = (_v2_dt_iso(g(row, "Atividade das"))
+                 or _v2_dt_iso(g(row, "Prazo"))
+                 or _v2_dt_iso(g(row, "Iniciada às")))
         raw.append({
             "_tipo":  tipo,
             "_colab": colab,
@@ -513,8 +552,8 @@ def fetch_atividades_v2(session, v2_token: str, location_id, from_iso: str,
             "station":  {"name": colab, "operation_type": 0},
             "patrol":   {"name": str(nome_at).strip()},
             "single":   tipo.lower() == "avulsa",
-            "status":   STATUS_V2.get(status_str.lower(), 0),
-            "to_be_started_at":     _v2_dt_iso(g(row, "Atividade das")),
+            "status":   _status_v2_int(status_str),
+            "to_be_started_at":     sched,
             "to_be_finished_until": _v2_dt_iso(g(row, "Prazo")),
             "started_at":           _v2_dt_iso(g(row, "Iniciada às")),
             "finished_at":          _v2_dt_iso(g(row, "Finalizada às")),
@@ -1608,21 +1647,35 @@ def main():
     print("  \U0001f4cb  Buscando atividades por local (relatório oficial v3)...")
     rows_raw   = []
     locs_vazios = []   # locais que retornaram 0 registros (para buscar histórico depois)
+    nao_casaram = []   # locais do config que não casaram com nenhum local do v2
+    falhas_fetch = []  # locais cujo fetch v2 deu erro (não é "vazio de verdade")
     for i, loc in enumerate(selected, 1):
         nome = loc["name"]
         print(f"  [{i:02d}/{len(selected)}] {nome}")
         info = v2_locais.get(_sp._norm(nome))
         if not info:
             print(f"         ⚠ local não encontrado no v2 — pulando")
+            nao_casaram.append(nome)
             locs_vazios.append(loc)
             continue
-        parcial, _ok = fetch_atividades_v2(v2_sess, v2_tok, info[0],
-                                           from_iso, to_iso, nome)
+        parcial, ok = fetch_atividades_v2(v2_sess, v2_tok, info[0],
+                                          from_iso, to_iso, nome)
+        if not ok:
+            falhas_fetch.append(nome)
         if len(parcial) == 0:
             locs_vazios.append(loc)
 
         rows_raw.extend(parcial)
         print(f"         → {len(parcial)} atividades (total: {len(rows_raw)})")
+
+    # Alerta agregado: locais que não casaram no v2 ou falharam no fetch saem
+    # do relatório (ou caem pra histórico) — não pode passar despercebido.
+    if nao_casaram:
+        print(f"\n  ⚠   {len(nao_casaram)} local(is) NÃO casaram no v2 (revisar nome): "
+              f"{', '.join(nao_casaram)}")
+    if falhas_fetch:
+        print(f"  ⚠   {len(falhas_fetch)} local(is) falharam no fetch v2 (erro/rede): "
+              f"{', '.join(falhas_fetch)}")
 
     print(f"\n  ✔   {len(rows_raw)} atividades no total.")
 

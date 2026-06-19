@@ -510,6 +510,8 @@ def main():
     p.add_argument("--teste", action="store_true",
                    help="Envia para o e-mail de teste (to_teste do config) em vez "
                         "dos destinatários de produção. Assunto leva [TESTE].")
+    p.add_argument("--to", help="Envia só para este e-mail (sobrescreve to/to_teste). "
+                                "Útil pra mandar um dia específico pra uma pessoa.")
     p.add_argument("--pular-gerar", action="store_true",
                    help="Pula a geração (usa o relatorio que já existe).")
     p.add_argument("--sem-aprender", action="store_true",
@@ -608,7 +610,11 @@ def main():
         html = montar_html(data_alvo, dados)
         d_br = datetime.fromisoformat(data_alvo).strftime("%d/%m/%Y")
         anexos = [p for p in (pdf_path, pdf3_path, zap_pdf, xlsx) if p]
-        if args.teste:
+        if args.to:
+            destinos = [args.to]
+            assunto = f"FindMe — Fechamento {d_br}"
+            log(f"  enviando só para: {args.to}")
+        elif args.teste:
             dest = cfg.get("to_teste") or cfg["to"]
             destinos = dest if isinstance(dest, list) else [dest]
             assunto = f"[TESTE] FindMe — Fechamento {d_br}"
